@@ -4,12 +4,12 @@
         Title="Log ind" Height="245" Width="309" WindowStartupLocation="CenterScreen"
         Icon="ojm.ico">
     <Grid>
-        <Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="Log ind" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="40" Width="274" Background="White" Foreground="Red" FontSize="16" FontWeight="Bold"/>
+        <Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="Log ind" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Height="40" Width="274" Background="White" Foreground="Red" FontSize="16" FontWeight="Bold"/>
         <TextBox Name="UsernameBox" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="10,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="274" FontSize="16" LostFocus="UsernameBox_LostFocus" KeyDown="UsernameBox_KeyDown"/>
-        <TextBox Name="UsernamePlaceholder" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="10,59,0,0" TextWrapping="Wrap" Text="Brugernavn" VerticalAlignment="Top" Width="274" Foreground="#FFBBBBBB" FontSize="16" GotFocus="UsernamePlaceholder_GotFocus"/>
+        <TextBox Name="UsernamePlaceholder" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="40" Margin="0,59,0,0" TextWrapping="Wrap" Text="Brugernavn" VerticalAlignment="Top" Width="274" Foreground="#FFBBBBBB" FontSize="16" GotFocus="UsernamePlaceholder_GotFocus"/>
         <PasswordBox Name="PasswordBox" PasswordChar="*"        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="10,108,0,0" VerticalAlignment="Top" FontSize="16" LostFocus="PasswordBox_LostFocus" KeyDown="PasswordBox_KeyDown" Width="274"/>
-        <TextBox Name="PasswordPlaceholder" IsReadOnly="True"   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="10,108,0,0" TextWrapping="Wrap" Text="Kodeord" VerticalAlignment="Top" Width="274" GotFocus="PasswordPlaceholder_GotFocus" FontSize="16" Foreground="#FFBBBBBB"/>
-        <Button Name="LoginButton" Content="Log ind" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top" Width="274" Height="40" FontSize="16" Click="LoginButton_Click" />
+        <TextBox Name="PasswordPlaceholder" IsReadOnly="True"   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="40" Margin="0,108,0,0" TextWrapping="Wrap" Text="Kodeord" VerticalAlignment="Top" Width="274" GotFocus="PasswordPlaceholder_GotFocus" FontSize="16" Foreground="#FFBBBBBB"/>
+        <Button Name="LoginButton" Content="Log ind" HorizontalAlignment="Center" Margin="0,157,0,0" VerticalAlignment="Top" Width="274" Height="40" FontSize="16" Click="LoginButton_Click" />
 
 
 
