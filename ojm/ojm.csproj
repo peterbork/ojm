@@ -71,6 +71,8 @@
     <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Controllers\DatabaseFacade.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Delivery.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
