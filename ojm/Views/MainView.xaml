@@ -30,22 +30,27 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Varelager">
+            <TabItem Name="TabVarelager" Header="Varelager" GotFocus="TabVarelager_GotFocus">
                 <Grid Background="#fff">
-                    <ListView HorizontalAlignment="Left" Height="541" VerticalAlignment="Top" Width="536" Margin="0,0,0,-0.183">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="91*"/>
+                        <ColumnDefinition Width="32*"/>
+                        <ColumnDefinition Width="666*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView Name="ListviewStorage" HorizontalAlignment="Left" Height="541" VerticalAlignment="Top" Width="536" MouseDoubleClick="ListviewStorage_MouseDoubleClick" Grid.ColumnSpan="3">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn/>
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Label Content="Produkt Navn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="563,30,0,0" Width="200"/>
-                    <TextBox Name="TextBoxProductName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="563,56,0,0"/>
-                    <Label Content="Antal på lager" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="563,84,0,0" Width="200"/>
-                    <TextBox Name="TextBoxInStock" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="563,110,0,0"/>
-                    <Button Name="BtnStoreageCancel" Content="Anuller" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="563,150,0,0"/>
-                    <Button Name="BtnAddProduct" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="688,150,0,0"/>
-                    <ListView HorizontalAlignment="Left" Height="351" VerticalAlignment="Top" Width="200" Margin="563,190,0,-0.183">
+                    <Label Content="Produktnavn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="439.848,30,0,0" Width="200" Grid.Column="2"/>
+                    <TextBox Name="TextBoxProductName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="439.848,56,0,0" Grid.Column="2"/>
+                    <Label Content="Antal på lager" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="439.848,84,0,0" Width="200" Grid.Column="2"/>
+                    <TextBox Name="TextBoxInStock" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="439.848,110,0,0" Grid.Column="2"/>
+                    <Button Name="BtnStoreageCancel" Content="Annuller" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="439.848,150,0,0" Grid.Column="2"/>
+                    <Button Name="BtnAddProduct" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="564.848,150,0,0" Grid.Column="2"/>
+                    <ListView HorizontalAlignment="Left" Height="351" VerticalAlignment="Top" Width="200" Margin="439.848,190,0,0" Grid.Column="2">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn/>

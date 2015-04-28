@@ -82,7 +82,7 @@ namespace ojm.Controllers {
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    Product product = new Product(int.Parse(reader["ID"].ToString()), reader["Name"].ToString(), int.Parse(reader["InStock"].ToString()));
+                    StorageItemsList.Add(new Product(int.Parse(reader["ID"].ToString()), reader["Name"].ToString(), int.Parse(reader["InStock"].ToString())));
                 }
                 reader.Close(); 
             }

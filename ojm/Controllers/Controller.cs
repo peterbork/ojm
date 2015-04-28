@@ -8,6 +8,8 @@ using ojm.Models;
 namespace ojm.Controllers {
     class Controller {
 
+        List<Product> products = new List<Product>();
+
         // CUSTOMER METHODS
         public void AddCustomer(string companyname, string cvr, string address, string email, string phonenumber, string contactperson) {
             
@@ -26,13 +28,24 @@ namespace ojm.Controllers {
         public List<string> GetStorageItems()
         {
             List<string> StorageItemsList = new List<string>();
+            products = DatabaseFacade.GetStorageItems();
 
-            foreach (Product product in DatabaseFacade.GetStorageItems())
+            foreach (Product product in products)
             {
-                StorageItemsList.Add(product.Name + " " + product.InStock)
+                StorageItemsList.Add(product.Name + "\t\tPå lager: " + product.InStock);
             }
 
             return StorageItemsList;
+        }
+
+        public Dictionary<string, string> GetStorageItem(int index)
+        {
+            Dictionary<string, string> storageItem = new Dictionary<string, string>();
+
+            storageItem.Add("Name", products[index].Name);
+            storageItem.Add("InStock", products[index].InStock + "");
+
+            return storageItem;
         }
         public void UpdateStorageItem(int id, string name, int instock)
         {
