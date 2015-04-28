@@ -19,13 +19,13 @@ namespace ojm.Controllers {
                 System.Windows.MessageBox.Show("Kunden blev oprettet", "OJM");
             }
             else {
-                System.Windows.MessageBox.Show("Kunden eksistere allerede", "OJM");
+                System.Windows.MessageBox.Show("Kunden eksisterer allerede", "OJM");
             }
            
         }
         public bool IsCustomerExsisting(string cvr) {
-            Models.Customer _customer = DatabaseFacade.GetCustomerFromCVR(cvr);
-            if (_customer.CVR != "") {
+            string _cvr = DatabaseFacade.GetCustomerFromCVR(cvr).CVR;
+            if (_cvr != null) {
                 return true;
             }
             else {
@@ -33,19 +33,14 @@ namespace ojm.Controllers {
             }
 
         }
+        public List<Models.Customer> GetCustomers() {
+            return DatabaseFacade.GetCustomers();
+        }
 
         // STORAGE METHODS
-        public List<string> GetStorageItems()
+        public List<Models.Product> GetStorageItems()
         {
-            List<string> StorageItemsList = new List<string>();
-            products = DatabaseFacade.GetStorageItems();
-
-            foreach (Product product in products)
-            {
-                StorageItemsList.Add(product.Name + "\t\tPå lager: " + product.InStock);
-            }
-
-            return StorageItemsList;
+            return DatabaseFacade.GetStorageItems();
         }
 
         public Dictionary<string, string> GetStorageItem(int index)

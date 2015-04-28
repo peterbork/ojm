@@ -23,7 +23,7 @@ namespace ojm.Controllers {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@CVR", cvr));
                 SqlDataReader reader = cmd.ExecuteReader();
-                
+
                 while (reader.Read()){
                     _customer = new Models.Customer((int)reader["ID"], (string)reader["CompanyName"], (string)reader["CVR"], (string)reader["Address"], (string)reader["Email"], (string)reader["Phonenumber"], (string)reader["ContactPerson"]);
                 }
@@ -61,6 +61,30 @@ namespace ojm.Controllers {
                 conn.Close();
                 conn.Dispose();
             }
+        }
+
+        public static List<Models.Customer> GetCustomers() {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            List<Models.Customer> _customerList = new List<Models.Customer>();
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("GetCustomers", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read()) {
+                    _customerList.Add(new Models.Customer((int)reader["ID"], (string)reader["CompanyName"], (string)reader["CVR"], (string)reader["Address"], (string)reader["Email"], (string)reader["Phonenumber"], (string)reader["ContactPerson"]));
+                }
+                reader.Close();
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+            return _customerList;
         }
 
 
