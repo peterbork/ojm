@@ -22,7 +22,7 @@ namespace ojm {
         Controller controller;
         int selectedProduct { get; set; }
         int SelectedCustomerIndex = -1;
-        Models.Customer SelectedCustomer;
+        int SelectedCustomerID;
         public MainView() {
             InitializeComponent();
             
@@ -52,7 +52,7 @@ namespace ojm {
         // Customer
         private void BtnAddCustomer_Click(object sender, RoutedEventArgs e) {
             if (SelectedCustomerIndex != -1) {
-                controller.UpdateCustomer(SelectedCustomer.ID, TextBoxCompanyName.Text, TextBoxCVR.Text, TextBoxAddress.Text, TextBoxEmail.Text, TextBoxPhonenumber.Text, TextBoxContactPerson.Text);
+                controller.UpdateCustomer(SelectedCustomerID, TextBoxCompanyName.Text, TextBoxCVR.Text, TextBoxAddress.Text, TextBoxEmail.Text, TextBoxPhonenumber.Text, TextBoxContactPerson.Text);
                 SelectedCustomerIndex = -1;
                 TextBoxCompanyName.Text = "";
                 TextBoxCVR.Text = "";
@@ -90,14 +90,15 @@ namespace ojm {
         private void ListviewCustomers_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
             BtnAddCustomer.Content = "Opdater";
             SelectedCustomerIndex = ListviewCustomers.SelectedIndex;
-            SelectedCustomer = DatabaseFacade.GetCustomers()[SelectedCustomerIndex];
             
-            TextBoxCompanyName.Text = SelectedCustomer.CompanyName;
-            TextBoxCVR.Text = SelectedCustomer.CVR;
-            TextBoxAddress.Text = SelectedCustomer.Address;
-            TextBoxEmail.Text = SelectedCustomer.Email;
-            TextBoxPhonenumber.Text = SelectedCustomer.Phonenumber;
-            TextBoxContactPerson.Text = SelectedCustomer.ContactPerson;
+            SelectedCustomerID = controller.GetIDFromCustomerModel(DatabaseFacade.GetCustomers()[SelectedCustomerIndex]);
+            // Should be optimized, way to many database connections
+            TextBoxCompanyName.Text = DatabaseFacade.GetCustomers()[SelectedCustomerIndex].CompanyName;
+            TextBoxCVR.Text = DatabaseFacade.GetCustomers()[SelectedCustomerIndex].CVR;
+            TextBoxAddress.Text = DatabaseFacade.GetCustomers()[SelectedCustomerIndex].Address;
+            TextBoxEmail.Text = DatabaseFacade.GetCustomers()[SelectedCustomerIndex].Email;
+            TextBoxPhonenumber.Text = DatabaseFacade.GetCustomers()[SelectedCustomerIndex].Phonenumber;
+            TextBoxContactPerson.Text = DatabaseFacade.GetCustomers()[SelectedCustomerIndex].ContactPerson;
             
             
         }
