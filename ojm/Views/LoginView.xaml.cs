@@ -67,5 +67,11 @@ namespace ojm.Views {
         private void LoginButton_MouseLeave(object sender, MouseEventArgs e) {
             LoginButton.Background = Brushes.Green;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            MainView MainView = new MainView();
+            MainView.Show();
+            this.Hide();
+        }
     }
 }
