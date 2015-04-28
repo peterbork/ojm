@@ -14,14 +14,24 @@ namespace ojm.Controllers {
         public void AddCustomer(string companyname, string cvr, string address, string email, string phonenumber, string contactperson) {
             
             Customer customer = new Customer(companyname, cvr, address, email, phonenumber, contactperson);
-
-            if (DatabaseFacade.IsCustomerExsisting(customer.CVR) != true) {
+            if (IsCustomerExsisting(customer.CVR) != true) {
                 DatabaseFacade.AddCustomer(customer);
                 System.Windows.MessageBox.Show("Kunden blev oprettet", "OJM");
             }
             else {
                 System.Windows.MessageBox.Show("Kunden eksistere allerede", "OJM");
             }
+           
+        }
+        public bool IsCustomerExsisting(string cvr) {
+            Models.Customer _customer = DatabaseFacade.GetCustomerFromCVR(cvr);
+            if (_customer.CVR != "") {
+                return true;
+            }
+            else {
+                return false;
+            }
+
         }
 
         // STORAGE METHODS
