@@ -20,12 +20,11 @@
                     <TextBox Name="TextBoxEmail" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="563,218,0,0"/>
                     <TextBox Name="TextBoxPhonenumber" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="563,272,0,0"/>
                     <TextBox Name="TextBoxContactPerson" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="563,326,0,0"/>
-                    <Button x:Name="CancelBtn" Content="Anuller" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="563,365,0,0"/>
-                    <Button x:Name="AddCustomerBtn" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="688,365,0,0"/>
+                    <Button Name="BtnCustomerCancel" Content="Anuller" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="563,365,0,0"/>
+                    <Button Name="BtnAddCustomer" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="688,365,0,0"/>
                     <Label Content="CVR" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="563,84,0,0" Width="200"/>
                     <Label Content="Adresse" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="563,138,0,0" Width="200"/>
                     <Label Content="E-mail" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="563,192,0,0" Width="200"/>
-                    <Label Content="Phonenumber" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="563,246,0,0" Width="200"/>
                     <Label Content="Kontakt Person" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="563,300,0,0" Width="200"/>
 
                 </Grid>
@@ -43,8 +42,8 @@
                     <TextBox Name="TextBoxProductName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="563,56,0,0"/>
                     <Label Content="Antal på lager" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="563,84,0,0" Width="200"/>
                     <TextBox Name="TextBoxInStock" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="563,110,0,0"/>
-                    <Button x:Name="CancelBtn_Copy" Content="Anuller" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="563,150,0,0"/>
-                    <Button x:Name="AddCustomerBtn_Copy" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="688,150,0,0"/>
+                    <Button Name="BtnStoreageCancel" Content="Anuller" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="563,150,0,0"/>
+                    <Button Name="BtnAddProduct" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="688,150,0,0"/>
                     <ListView HorizontalAlignment="Left" Height="351" VerticalAlignment="Top" Width="200" Margin="563,190,0,-0.183">
                         <ListView.View>
                             <GridView>
