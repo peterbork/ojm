@@ -38,6 +38,7 @@ namespace ojm {
         private void ListviewStorage_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             selectedProduct = ListviewStorage.SelectedIndex;
+            MessageBox.Show(ListviewStorage.SelectedIndex + "");
             
             Dictionary<string, string> storageItem = controller.GetStorageItem(selectedProduct);
 
