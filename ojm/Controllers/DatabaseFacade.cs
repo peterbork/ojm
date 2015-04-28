@@ -13,8 +13,9 @@ namespace ojm.Controllers {
         static string ConnectionString = "Server=ealdb1.eal.local;" + "Database=ejl26_db;" + "User Id=ejl26_usr;" + "Password=Baz1nga26";
 
         // CUSTOMER METHODS
-        public static bool IsCustomerExsisting(string cvr) {
-            List<int> _customerList = new List<int>();
+        public static Models.Customer GetCustomerFromCVR(string cvr) {
+            Models.Customer _customer = new Models.Customer();
+
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
@@ -24,7 +25,7 @@ namespace ojm.Controllers {
                 SqlDataReader reader = cmd.ExecuteReader();
                 
                 while (reader.Read()){
-                    _customerList.Add((int)reader["ID"]);
+                    _customer = new Models.Customer((int)reader["ID"], (string)reader["CompanyName"], (string)reader["CVR"], (string)reader["Address"], (string)reader["Email"], (string)reader["Phonenumber"], (string)reader["ContactPerson"]);
                 }
                 reader.Close();
 
@@ -36,12 +37,7 @@ namespace ojm.Controllers {
                 conn.Close();
                 conn.Dispose();
             }
-            if (_customerList.Count > 0) {
-                return true;
-            }
-            else {
-                return false;
-            }
+            return _customer;
         }
 
         public static void AddCustomer(Customer customer) {
