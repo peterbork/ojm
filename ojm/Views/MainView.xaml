@@ -26,6 +26,7 @@
                     <Label Content="Adresse" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="563,138,0,0" Width="200"/>
                     <Label Content="E-mail" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="563,192,0,0" Width="200"/>
                     <Label Content="Kontakt Person" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="563,300,0,0" Width="200"/>
+                    <Label Content="Phonenumber" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="563,246,0,0" Width="200"/>
 
                 </Grid>
             </TabItem>
