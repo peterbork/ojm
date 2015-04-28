@@ -63,6 +63,30 @@ namespace ojm.Controllers {
             }
         }
 
+        public static void UpdateCustomer(Customer customer) {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("UpdateCustomer", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@ID", customer.ID));
+                cmd.Parameters.Add(new SqlParameter("@CompanyName", customer.CompanyName));
+                cmd.Parameters.Add(new SqlParameter("@CVR", customer.CVR));
+                cmd.Parameters.Add(new SqlParameter("@Address", customer.Address));
+                cmd.Parameters.Add(new SqlParameter("@Email", customer.Email));
+                cmd.Parameters.Add(new SqlParameter("@Phonenumber", customer.Phonenumber));
+                cmd.Parameters.Add(new SqlParameter("@ContactPerson", customer.ContactPerson));
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+        }
+
         public static List<Models.Customer> GetCustomers() {
             SqlConnection conn = new SqlConnection(ConnectionString);
             List<Models.Customer> _customerList = new List<Models.Customer>();

@@ -21,7 +21,8 @@ namespace ojm {
     public partial class MainView : Window {
         Controller controller;
         int selectedProduct { get; set; }
-
+        int SelectedCustomerIndex = -1;
+        Models.Customer SelectedCustomer;
         public MainView() {
             InitializeComponent();
             
@@ -50,14 +51,29 @@ namespace ojm {
 
         // Customer
         private void BtnAddCustomer_Click(object sender, RoutedEventArgs e) {
-            controller.AddCustomer(TextBoxCompanyName.Text, TextBoxCVR.Text, TextBoxAddress.Text, TextBoxEmail.Text, TextBoxPhonenumber.Text, TextBoxContactPerson.Text);
-            TextBoxCompanyName.Text = "";
-            TextBoxCVR.Text = "";
-            TextBoxAddress.Text = "";
-            TextBoxEmail.Text = "";
-            TextBoxPhonenumber.Text = "";
-            TextBoxContactPerson.Text = "";
-            ListviewCustomers.ItemsSource = controller.GetCustomers();
+            if (SelectedCustomerIndex != -1) {
+                controller.UpdateCustomer(SelectedCustomer.ID, TextBoxCompanyName.Text, TextBoxCVR.Text, TextBoxAddress.Text, TextBoxEmail.Text, TextBoxPhonenumber.Text, TextBoxContactPerson.Text);
+                SelectedCustomerIndex = -1;
+                TextBoxCompanyName.Text = "";
+                TextBoxCVR.Text = "";
+                TextBoxAddress.Text = "";
+                TextBoxEmail.Text = "";
+                TextBoxPhonenumber.Text = "";
+                TextBoxContactPerson.Text = "";
+                ListviewCustomers.ItemsSource = controller.GetCustomers();
+                BtnAddCustomer.Content = "Tilføj";
+                MessageBox.Show("Kunden er blevet opdateret", "OJM");
+            }
+            else {
+                controller.AddCustomer(TextBoxCompanyName.Text, TextBoxCVR.Text, TextBoxAddress.Text, TextBoxEmail.Text, TextBoxPhonenumber.Text, TextBoxContactPerson.Text);
+                TextBoxCompanyName.Text = "";
+                TextBoxCVR.Text = "";
+                TextBoxAddress.Text = "";
+                TextBoxEmail.Text = "";
+                TextBoxPhonenumber.Text = "";
+                TextBoxContactPerson.Text = "";
+                ListviewCustomers.ItemsSource = controller.GetCustomers();
+            }
         }
 
         private void BtnCustomerCancel_Click(object sender, RoutedEventArgs e) {
@@ -68,11 +84,22 @@ namespace ojm {
             TextBoxPhonenumber.Text = "";
             TextBoxContactPerson.Text = "";
             BtnAddCustomer.Content = "Tilføj";
+           
         }
 
         private void ListviewCustomers_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
             BtnAddCustomer.Content = "Opdater";
-
+            SelectedCustomerIndex = ListviewCustomers.SelectedIndex;
+            SelectedCustomer = DatabaseFacade.GetCustomers()[SelectedCustomerIndex];
+            
+            TextBoxCompanyName.Text = SelectedCustomer.CompanyName;
+            TextBoxCVR.Text = SelectedCustomer.CVR;
+            TextBoxAddress.Text = SelectedCustomer.Address;
+            TextBoxEmail.Text = SelectedCustomer.Email;
+            TextBoxPhonenumber.Text = SelectedCustomer.Phonenumber;
+            TextBoxContactPerson.Text = SelectedCustomer.ContactPerson;
+            
+            
         }
 
     }

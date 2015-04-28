@@ -13,15 +13,18 @@ namespace ojm.Controllers {
         // CUSTOMER METHODS
         public void AddCustomer(string companyname, string cvr, string address, string email, string phonenumber, string contactperson) {
             
-            Customer customer = new Customer(companyname, cvr, address, email, phonenumber, contactperson);
-            if (IsCustomerExsisting(customer.CVR) != true) {
-                DatabaseFacade.AddCustomer(customer);
+            Customer _customer = new Customer(companyname, cvr, address, email, phonenumber, contactperson);
+            if (IsCustomerExsisting(_customer.CVR) != true) {
+                DatabaseFacade.AddCustomer(_customer);
                 System.Windows.MessageBox.Show("Kunden blev oprettet", "OJM");
             }
             else {
                 System.Windows.MessageBox.Show("Kunden eksisterer allerede", "OJM");
             }
-           
+        }
+        public void UpdateCustomer(int id, string companyname, string cvr, string address, string email, string phonenumber, string contactperson) {
+            Customer _customer = new Customer(id, companyname, cvr, address, email, phonenumber, contactperson);
+            DatabaseFacade.UpdateCustomer(_customer);
         }
         public bool IsCustomerExsisting(string cvr) {
             string _cvr = DatabaseFacade.GetCustomerFromCVR(cvr).CVR;
