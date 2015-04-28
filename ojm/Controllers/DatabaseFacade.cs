@@ -14,11 +14,57 @@ namespace ojm.Controllers {
 
         // CUSTOMER METHODS
         public static bool IsCustomerExsisting(string cvr) {
-            return true;
+            List<int> _customerList = new List<int>();
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("GetCustomerFromCVR", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@CVR", cvr));
+                SqlDataReader reader = cmd.ExecuteReader();
+                
+                while (reader.Read()){
+                    _customerList.Add((int)reader["ID"]);
+                }
+                reader.Close();
+
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+            if (_customerList.Count > 0) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
 
-        public static void AddCustomer(Customer customer) { 
-            
+        public static void AddCustomer(Customer customer) {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("AddCustomer", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@CompanyName", customer.CompanyName));
+                cmd.Parameters.Add(new SqlParameter("@CVR", customer.CVR));
+                cmd.Parameters.Add(new SqlParameter("@Address", customer.Address));
+                cmd.Parameters.Add(new SqlParameter("@Email", customer.Email));
+                cmd.Parameters.Add(new SqlParameter("@Phonenumber", customer.Phonenumber));
+                cmd.Parameters.Add(new SqlParameter("@ContactPerson", customer.ContactPerson));
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
         }
 
 
@@ -26,20 +72,22 @@ namespace ojm.Controllers {
         public static void UpdateStorageItem(Product product)
         {
             SqlConnection conn = new SqlConnection(ConnectionString);
-            try 
-            {
+            try {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("UpdateStorageItem", conn); 
-                cmd.CommandType = CommandType.StoredProcedure; 
+                SqlCommand cmd = new SqlCommand("UpdateStorageItem", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("ID", product.ID));
                 cmd.Parameters.Add(new SqlParameter("Name", product.Name));
                 cmd.Parameters.Add(new SqlParameter("InStock", product.InStock));
-                cmd.ExecuteNonQuery(); 
-            } 
-            catch (SqlException e) 
-            { 
-                MessageBox.Show(e.Message); 
-            } 
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
         }
 
         public static void RegisterDelivery(Delivery delivery)
@@ -56,7 +104,11 @@ namespace ojm.Controllers {
             catch (SqlException e)
             {
                 MessageBox.Show(e.Message);
-            } 
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
         }
     }
 }
