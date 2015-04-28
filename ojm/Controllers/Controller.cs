@@ -39,6 +39,9 @@ namespace ojm.Controllers {
         public List<Models.Customer> GetCustomers() {
             return DatabaseFacade.GetCustomers();
         }
+        public int GetIDFromCustomerModel(Models.Customer _customer){
+            return _customer.ID;
+        }
 
         // STORAGE METHODS
         public List<Models.Product> GetStorageItems()
