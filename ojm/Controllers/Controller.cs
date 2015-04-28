@@ -23,6 +23,17 @@ namespace ojm.Controllers {
         }
 
         // STORAGE METHODS
+        public List<string> GetStorageItems()
+        {
+            List<string> StorageItemsList = new List<string>();
+
+            foreach (Product product in DatabaseFacade.GetStorageItems())
+            {
+                StorageItemsList.Add(product.Name + " " + product.InStock)
+            }
+
+            return StorageItemsList;
+        }
         public void UpdateStorageItem(int id, string name, int instock)
         {
             Product product = new Product(id, name, instock);

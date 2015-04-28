@@ -23,6 +23,30 @@ namespace ojm.Controllers {
 
 
         // STORAGE METHODS
+        public static List<Product> GetStorageItems()
+        {
+            List<Product> StorageItemsList = new List<Product>();
+            
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("GetStorageItems", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Product product = new Product(int.Parse(reader["ID"].ToString()), reader["Name"].ToString(), int.Parse(reader["InStock"].ToString()));
+                }
+                reader.Close(); 
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return StorageItemsList;
+        }
         public static void UpdateStorageItem(Product product)
         {
             SqlConnection conn = new SqlConnection(ConnectionString);
