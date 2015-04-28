@@ -19,24 +19,20 @@ namespace ojm {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainView : Window {
-        Controller controller { get; set; }
+        Controller controller;
         int selectedProduct { get; set; }
 
         public MainView() {
             InitializeComponent();
-
+            
             controller = new Controller();
+            ListviewCustomers.ItemsSource = controller.GetCustomers();
         }
 
+        // Storage
         private void TabVarelager_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (ListviewStorage.Items.Count == 0)
-            {
-                foreach (string StorageItem in controller.GetStorageItems())
-                {
-                    ListviewStorage.Items.Add(StorageItem);
-                }
-            }
+            ListviewStorage.ItemsSource = controller.GetStorageItems();
         }
 
         private void ListviewStorage_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -48,5 +44,35 @@ namespace ojm {
             TextBoxProductName.Text = storageItem["Name"];
             TextBoxInStock.Text = storageItem["InStock"];
         }
+
+
+
+        // Customer
+        private void BtnAddCustomer_Click(object sender, RoutedEventArgs e) {
+            controller.AddCustomer(TextBoxCompanyName.Text, TextBoxCVR.Text, TextBoxAddress.Text, TextBoxEmail.Text, TextBoxPhonenumber.Text, TextBoxContactPerson.Text);
+            TextBoxCompanyName.Text = "";
+            TextBoxCVR.Text = "";
+            TextBoxAddress.Text = "";
+            TextBoxEmail.Text = "";
+            TextBoxPhonenumber.Text = "";
+            TextBoxContactPerson.Text = "";
+            ListviewCustomers.ItemsSource = controller.GetCustomers();
+        }
+
+        private void BtnCustomerCancel_Click(object sender, RoutedEventArgs e) {
+            TextBoxCompanyName.Text = "";
+            TextBoxCVR.Text = "";
+            TextBoxAddress.Text = "";
+            TextBoxEmail.Text = "";
+            TextBoxPhonenumber.Text = "";
+            TextBoxContactPerson.Text = "";
+            BtnAddCustomer.Content = "Tilføj";
+        }
+
+        private void ListviewCustomers_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            BtnAddCustomer.Content = "Opdater";
+
+        }
+
     }
 }
