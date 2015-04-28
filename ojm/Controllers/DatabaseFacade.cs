@@ -29,7 +29,7 @@ namespace ojm.Controllers {
             try 
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("[StoredProcedure Name]", conn); 
+                SqlCommand cmd = new SqlCommand("UpdateStorageItem", conn); 
                 cmd.CommandType = CommandType.StoredProcedure; 
                 cmd.Parameters.Add(new SqlParameter("ID", product.ID));
                 cmd.Parameters.Add(new SqlParameter("Name", product.Name));
@@ -48,7 +48,7 @@ namespace ojm.Controllers {
             try
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("[StoredProcedure Name]", conn);
+                SqlCommand cmd = new SqlCommand("RegisterDelivery", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("ID", delivery.ID));
                 cmd.ExecuteNonQuery();
