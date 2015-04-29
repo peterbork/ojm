@@ -20,7 +20,7 @@ namespace ojm {
     /// </summary>
     public partial class MainView : Window {
         Controller controller;
-        int selectedProduct { get; set; }
+        int selectedProduct;
         int SelectedCustomerIndex = -1;
         int SelectedCustomerID;
         public MainView() {
