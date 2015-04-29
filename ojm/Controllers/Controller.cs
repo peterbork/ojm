@@ -9,6 +9,7 @@ namespace ojm.Controllers {
     class Controller {
 
         List<Product> products = new List<Product>();
+        List<Customer> customers = new List<Customer>();
 
         // CUSTOMER METHODS
         public void AddCustomer(string companyname, string cvr, string address, string email, string phonenumber, string contactperson) {
@@ -37,10 +38,20 @@ namespace ojm.Controllers {
 
         }
         public List<Models.Customer> GetCustomers() {
-            return DatabaseFacade.GetCustomers();
+            customers = DatabaseFacade.GetCustomers();
+            return customers;
         }
-        public int GetIDFromCustomerModel(Models.Customer _customer){
-            return _customer.ID;
+
+        public Dictionary<string, string> GetCustomer(int index) {
+            Dictionary<string, string> _customer = new Dictionary<string, string>();
+            _customer.Add("ID", customers[index].ID.ToString());
+            _customer.Add("CompanyName", customers[index].CompanyName);
+            _customer.Add("CVR", customers[index].CVR);
+            _customer.Add("Address", customers[index].Address);
+            _customer.Add("Email", customers[index].Email);
+            _customer.Add("Phonenumber", customers[index].Phonenumber);
+            _customer.Add("ContactPerson", customers[index].ContactPerson);
+            return _customer;
         }
 
         // STORAGE METHODS
