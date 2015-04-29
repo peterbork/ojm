@@ -68,10 +68,11 @@ namespace ojm.Controllers {
             DatabaseFacade.UpdateStorageItem(product);
         }
 
-        public void RegisterDelivery(int id, int quantity, int pid, string name, int instock)
+        public void RegisterDelivery(int dindex, int pindex)
         {
-            Delivery delivery = new Delivery(id, quantity);
-            Product product = new Product(pid, name, instock);
+            Product product = products[pindex];
+            Delivery delivery = product.Deliveries[dindex];
+            product.InStock += delivery.Quantity;
 
             DatabaseFacade.RegisterDelivery(delivery);
             DatabaseFacade.UpdateStorageItem(product);

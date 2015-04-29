@@ -12,11 +12,14 @@ namespace ojm.Models
         public string Name { get; set; }
         public int InStock { get; set; }
 
+        public List<Delivery> Deliveries;
+
         public Product(int id, string name, int instock)
         {
             ID = id;
             Name = name;
             InStock = instock;
+            Deliveries = new List<Delivery>();
         }
     }
 }
