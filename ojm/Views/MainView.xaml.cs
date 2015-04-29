@@ -106,7 +106,7 @@ namespace ojm {
                 try {
                     InStock = Convert.ToInt32(TextBoxInStock.Text);
                 }
-                catch (Exception exception) {
+                catch (Exception) {
                     MessageBox.Show("Antal på lager skal være et tal.");
                 }
                 controller.UpdateStorageItem(selectedProduct, TextBoxProductName.Text, InStock);
