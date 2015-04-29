@@ -20,7 +20,7 @@ namespace ojm {
     /// </summary>
     public partial class MainView : Window {
         Controller controller;
-        int selectedProduct;
+        int selectedProduct = -1;
         int SelectedCustomerIndex = -1;
         int SelectedCustomerID;
         public MainView() {
@@ -28,31 +28,6 @@ namespace ojm {
             
             controller = new Controller();
             ListviewCustomers.ItemsSource = controller.GetCustomers();
-            ListviewStorage.ItemsSource = controller.GetStorageItems();
-        }
-
-        // Storage
-
-        private void ListviewStorage_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            selectedProduct = ListviewStorage.SelectedIndex;
-            
-            Dictionary<string, string> storageItem = controller.GetStorageItem(selectedProduct);
-
-            TextBoxProductName.Text = storageItem["Name"];
-            TextBoxInStock.Text = storageItem["InStock"];
-        }
-
-        private void BtnAddProduct_Click(object sender, RoutedEventArgs e) {
-            // Tjek if InStock is a number
-            int InStock = 0;
-            try {
-                InStock = Convert.ToInt32(TextBoxInStock.Text);
-            }
-            catch (Exception exception) {
-                MessageBox.Show("Antal på lager skal være et tal.");
-            }
-            controller.UpdateStorageItem(selectedProduct, TextBoxProductName.Text, InStock);
             ListviewStorage.ItemsSource = controller.GetStorageItems();
         }
 
@@ -91,23 +66,64 @@ namespace ojm {
             TextBoxPhonenumber.Text = "";
             TextBoxContactPerson.Text = "";
             BtnAddCustomer.Content = "Tilføj";
-           
+
         }
 
         private void ListviewCustomers_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
             BtnAddCustomer.Content = "Opdater";
             SelectedCustomerIndex = ListviewCustomers.SelectedIndex;
+
+            Dictionary<string, string> _customer = controller.GetCustomer(SelectedCustomerIndex);
+            SelectedCustomerID = int.Parse(_customer["ID"]);
+
+            TextBoxCompanyName.Text = _customer["CompanyName"];
+            TextBoxCVR.Text = _customer["CVR"];
+            TextBoxAddress.Text = _customer["Address"];
+            TextBoxEmail.Text = _customer["Email"];
+            TextBoxPhonenumber.Text = _customer["Phonenumber"];
+            TextBoxContactPerson.Text = _customer["ContactPerson"];
+
+
+        }
+
+        // Storage
+
+        private void ListviewStorage_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            selectedProduct = ListviewStorage.SelectedIndex;
             
-            SelectedCustomerID = controller.GetIDFromCustomerModel(DatabaseFacade.GetCustomers()[SelectedCustomerIndex]);
-            // Should be optimized, way to many database connections
-            TextBoxCompanyName.Text = DatabaseFacade.GetCustomers()[SelectedCustomerIndex].CompanyName;
-            TextBoxCVR.Text = DatabaseFacade.GetCustomers()[SelectedCustomerIndex].CVR;
-            TextBoxAddress.Text = DatabaseFacade.GetCustomers()[SelectedCustomerIndex].Address;
-            TextBoxEmail.Text = DatabaseFacade.GetCustomers()[SelectedCustomerIndex].Email;
-            TextBoxPhonenumber.Text = DatabaseFacade.GetCustomers()[SelectedCustomerIndex].Phonenumber;
-            TextBoxContactPerson.Text = DatabaseFacade.GetCustomers()[SelectedCustomerIndex].ContactPerson;
-            
-            
+            Dictionary<string, string> storageItem = controller.GetStorageItem(selectedProduct);
+
+            TextBoxProductName.Text = storageItem["Name"];
+            TextBoxInStock.Text = storageItem["InStock"];
+            BtnAddProduct.Content = "Opdater";
+        }
+
+        private void BtnAddProduct_Click(object sender, RoutedEventArgs e) {
+            if (selectedProduct != -1) {
+                // Tjek if InStock is a number
+                int InStock = 0;
+                try {
+                    InStock = Convert.ToInt32(TextBoxInStock.Text);
+                }
+                catch (Exception exception) {
+                    MessageBox.Show("Antal på lager skal være et tal.");
+                }
+                controller.UpdateStorageItem(selectedProduct, TextBoxProductName.Text, InStock);
+                ListviewStorage.ItemsSource = controller.GetStorageItems();
+                MessageBox.Show("Produktet er blevet tilføjet", "OJM");
+            }
+            else { 
+                // Update product
+
+            }
+           
+        }
+
+        private void BtnStoreageCancel_Click(object sender, RoutedEventArgs e) {
+            BtnAddProduct.Content = "Tilføj";
+            TextBoxInStock.Text = "";
+            TextBoxProductName.Text = "";
         }
 
     }

@@ -20,10 +20,10 @@
                     </ListView>
                     <TextBox Name="TextBoxCompanyName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="563,56,0,0"/>
                     <Label Content="Firmanavn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="563,30,0,0" Width="64"/>
-                    <TextBox Name="TextBoxCVR" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="563,110,0,0"/>
+                    <TextBox Name="TextBoxCVR" MaxLength="8" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="563,110,0,0"/>
                     <TextBox Name="TextBoxAddress" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="563,164,0,0"/>
                     <TextBox Name="TextBoxEmail" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="563,218,0,0"/>
-                    <TextBox Name="TextBoxPhonenumber" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="563,272,0,0"/>
+                    <TextBox Name="TextBoxPhonenumber" MaxLength="8" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="563,272,0,0"/>
                     <TextBox Name="TextBoxContactPerson" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="563,326,0,0"/>
                     <Button Name="BtnCustomerCancel" Content="Anuller" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="563,365,0,0" Click="BtnCustomerCancel_Click"/>
                     <Button Name="BtnAddCustomer" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="688,365,0,0" Click="BtnAddCustomer_Click"/>
@@ -51,7 +51,7 @@
                     <TextBox Name="TextBoxProductName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="561,56,0,0"/>
                     <Label Content="Antal på lager" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="561,84,0,0" Width="200"/>
                     <TextBox Name="TextBoxInStock" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="561,110,0,0"/>
-                    <Button Name="BtnStoreageCancel" Content="Annuller" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="561,150,0,0"/>
+                    <Button Name="BtnStoreageCancel" Content="Annuller" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="561,150,0,0" Click="BtnStoreageCancel_Click"/>
                     <Button Name="BtnAddProduct" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="686,150,0,0" Click="BtnAddProduct_Click"/>
                     <ListView HorizontalAlignment="Left" Height="351" VerticalAlignment="Top" Width="200" Margin="561,190,0,-0.183">
                         <ListView.View>
