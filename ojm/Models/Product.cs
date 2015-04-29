@@ -11,6 +11,9 @@ namespace ojm.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public int InStock { get; set; }
+        public string Type { get; set; }
+        public int Tolerance { get; set; }
+        public Customer Customer { get; set; }
 
         public List<Delivery> Deliveries;
 
