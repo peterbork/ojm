@@ -28,18 +28,14 @@ namespace ojm {
             
             controller = new Controller();
             ListviewCustomers.ItemsSource = controller.GetCustomers();
+            ListviewStorage.ItemsSource = controller.GetStorageItems();
         }
 
         // Storage
-        private void TabVarelager_GotFocus(object sender, RoutedEventArgs e)
-        {
-            ListviewStorage.ItemsSource = controller.GetStorageItems();
-        }
 
         private void ListviewStorage_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             selectedProduct = ListviewStorage.SelectedIndex;
-            MessageBox.Show(ListviewStorage.SelectedIndex + "");
             
             Dictionary<string, string> storageItem = controller.GetStorageItem(selectedProduct);
 
@@ -47,7 +43,18 @@ namespace ojm {
             TextBoxInStock.Text = storageItem["InStock"];
         }
 
-
+        private void BtnAddProduct_Click(object sender, RoutedEventArgs e) {
+            // Tjek if InStock is a number
+            int InStock = 0;
+            try {
+                InStock = Convert.ToInt32(TextBoxInStock.Text);
+            }
+            catch (Exception exception) {
+                MessageBox.Show("Antal på lager skal være et tal.");
+            }
+            controller.UpdateStorageItem(selectedProduct, TextBoxProductName.Text, InStock);
+            ListviewStorage.ItemsSource = controller.GetStorageItems();
+        }
 
         // Customer
         private void BtnAddCustomer_Click(object sender, RoutedEventArgs e) {

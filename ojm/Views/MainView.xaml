@@ -35,10 +35,10 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Name="TabVarelager" Header="Varelager" GotFocus="TabVarelager_GotFocus">
+            <TabItem Name="TabVarelager" Header="Varelager">
                 <Grid Background="#fff">
 
-                    <ListView Name="ListviewStorage" HorizontalAlignment="Left" Height="541" VerticalAlignment="Top" Width="536" MouseDoubleClick="ListviewStorage_MouseDoubleClick" Grid.ColumnSpan="3">
+                    <ListView Name="ListviewStorage" HorizontalAlignment="Left" Height="541" VerticalAlignment="Top" Width="536" MouseDoubleClick="ListviewStorage_MouseDoubleClick" Grid.ColumnSpan="3" IsSynchronizedWithCurrentItem="True">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Produkt" Width="80" DisplayMemberBinding="{Binding Name}" />
@@ -52,7 +52,7 @@
                     <Label Content="Antal på lager" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="561,84,0,0" Width="200"/>
                     <TextBox Name="TextBoxInStock" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="561,110,0,0"/>
                     <Button Name="BtnStoreageCancel" Content="Annuller" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="561,150,0,0"/>
-                    <Button Name="BtnAddProduct" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="686,150,0,0"/>
+                    <Button Name="BtnAddProduct" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="686,150,0,0" Click="BtnAddProduct_Click"/>
                     <ListView HorizontalAlignment="Left" Height="351" VerticalAlignment="Top" Width="200" Margin="561,190,0,-0.183">
                         <ListView.View>
                             <GridView>

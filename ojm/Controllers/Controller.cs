@@ -46,7 +46,8 @@ namespace ojm.Controllers {
         // STORAGE METHODS
         public List<Models.Product> GetStorageItems()
         {
-            return DatabaseFacade.GetStorageItems();
+            products = DatabaseFacade.GetStorageItems();
+            return products;
         }
 
         public Dictionary<string, string> GetStorageItem(int index)
@@ -58,9 +59,12 @@ namespace ojm.Controllers {
 
             return storageItem;
         }
-        public void UpdateStorageItem(int id, string name, int instock)
+        public void UpdateStorageItem(int index, string name, int instock)
         {
-            Product product = new Product(id, name, instock);
+            Product product = products[index];
+            product.Name = name;
+            product.InStock = instock;
+            
             DatabaseFacade.UpdateStorageItem(product);
         }
 
