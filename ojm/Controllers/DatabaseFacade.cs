@@ -233,5 +233,33 @@ namespace ojm.Controllers {
                 conn.Dispose();
             }
         }
+
+        internal static void AddStorageItem(Product product)
+        {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("AddStorageItem", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("Name", product.Name));
+                cmd.Parameters.Add(new SqlParameter("InStock", product.InStock));
+                cmd.Parameters.Add(new SqlParameter("Type", product.Type));
+                cmd.Parameters.Add(new SqlParameter("Tolerance", product.Tolerance));
+                cmd.Parameters.Add(new SqlParameter("Reserved", product.Reserved));
+                if (product.Customer != null)
+                    cmd.Parameters.Add(new SqlParameter("CustomerID", product.Customer.ID));
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+            }
+        }
     }
 }

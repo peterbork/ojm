@@ -121,5 +121,21 @@ namespace ojm.Controllers {
             DatabaseFacade.UpdateStorageItem(product);
         }
 
+
+        internal void AddStorageItem(string name, int instock, string type, int tolerance, int reserved, int customer)
+        {
+            Product product;
+            
+            if (customer != -1 )
+            {
+                product = new Product(0, name, instock, type, tolerance, reserved, customers[customer]);
+            }
+            else
+            {
+                product = new Product(0, name, instock, type, tolerance, reserved);
+            }
+            
+            DatabaseFacade.AddStorageItem(product);
+        }
     }
 }

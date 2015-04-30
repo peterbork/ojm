@@ -106,41 +106,64 @@ namespace ojm {
             if (storageItem.ContainsKey("Customer")) {
                 ComboboxCustomer.SelectedIndex = int.Parse(storageItem["Customer"]);
             }
+            else
+            {
+                ComboboxCustomer.SelectedIndex = -1;
+            }
             BtnAddProduct.Content = "Opdater";
         }
 
         private void BtnAddProduct_Click(object sender, RoutedEventArgs e) {
-            // Update product
-            if (selectedProduct != -1) {
-                // Tjek if InStock is a number
-                int InStock = 0;
-                int tolerance = 0;
-                int reserved = 0;
+            // Check if InStock is a number
+            int InStock = 0;
+            int tolerance = 0;
+            int reserved = 0;
 
-                try {
-                    InStock = Convert.ToInt32(TextBoxInStock.Text);
-                    tolerance = Convert.ToInt32(TextBoxTolerance.Text);
-                    reserved = Convert.ToInt32(TextBoxReserved.Text);
+            try
+            {
+                InStock = Convert.ToInt32(TextBoxInStock.Text);
+                tolerance = Convert.ToInt32(TextBoxTolerance.Text);
+                reserved = Convert.ToInt32(TextBoxReserved.Text);
+
+                // Update product
+                if (selectedProduct != -1)
+                {
+                    controller.UpdateStorageItem(selectedProduct, TextBoxProductName.Text, InStock, TextBoxType.Text, tolerance, reserved, ComboboxCustomer.SelectedIndex);
+                    ListviewStorage.ItemsSource = controller.GetStorageItems();
+                    MessageBox.Show("Produktet er blevet Opdateret", "OJM");
                 }
-                catch (Exception) {
-                    MessageBox.Show("Antal på lager, tolerance og reserveret skal være et tal.");
+                // Create product
+                else
+                {
+                    controller.AddStorageItem(TextBoxProductName.Text, InStock, TextBoxType.Text, tolerance, reserved, ComboboxCustomer.SelectedIndex);
+                    ListviewStorage.ItemsSource = controller.GetStorageItems();
+                    MessageBox.Show("Produktet er blevet tilføjet", "OJM");
+                    ClearInputFields();
                 }
-                controller.UpdateStorageItem(selectedProduct, TextBoxProductName.Text, InStock, TextBoxType.Text, tolerance, reserved, ComboboxCustomer.SelectedIndex);
-                ListviewStorage.ItemsSource = controller.GetStorageItems();
-                MessageBox.Show("Produktet er blevet Opdateret", "OJM");
             }
-            // Create product
-            else { 
-                
+            catch (Exception)
+            {
+                MessageBox.Show("Antal på lager, tolerance og reserveret skal være et tal.");
             }
+
+            
            
         }
 
         private void BtnStoreageCancel_Click(object sender, RoutedEventArgs e) {
+            ClearInputFields();
+        }
+
+        private void ClearInputFields()
+        {
             selectedProduct = -1;
             BtnAddProduct.Content = "Tilføj";
             TextBoxInStock.Text = "";
             TextBoxProductName.Text = "";
+            TextBoxType.Text = "";
+            TextBoxTolerance.Text = "";
+            TextBoxReserved.Text = "";
+            ComboboxCustomer.SelectedIndex = -1;
         }
 
     }
