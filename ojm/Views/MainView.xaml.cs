@@ -27,8 +27,11 @@ namespace ojm {
             InitializeComponent();
             
             controller = new Controller();
+
             ListviewCustomers.ItemsSource = controller.GetCustomers();
             ListviewStorage.ItemsSource = controller.GetStorageItems();
+
+            ComboboxCustomer.ItemsSource = controller.GetCustomerNames();
         }
 
         // Customer
@@ -47,14 +50,15 @@ namespace ojm {
                 MessageBox.Show("Kunden er blevet opdateret", "OJM");
             }
             else {
-                controller.AddCustomer(TextBoxCompanyName.Text, TextBoxCVR.Text, TextBoxAddress.Text, TextBoxEmail.Text, TextBoxPhonenumber.Text, TextBoxContactPerson.Text);
-                TextBoxCompanyName.Text = "";
-                TextBoxCVR.Text = "";
-                TextBoxAddress.Text = "";
-                TextBoxEmail.Text = "";
-                TextBoxPhonenumber.Text = "";
-                TextBoxContactPerson.Text = "";
-                ListviewCustomers.ItemsSource = controller.GetCustomers();
+                if (controller.AddCustomer(TextBoxCompanyName.Text, TextBoxCVR.Text, TextBoxAddress.Text, TextBoxEmail.Text, TextBoxPhonenumber.Text, TextBoxContactPerson.Text)) {
+                    TextBoxCompanyName.Text = "";
+                    TextBoxCVR.Text = "";
+                    TextBoxAddress.Text = "";
+                    TextBoxEmail.Text = "";
+                    TextBoxPhonenumber.Text = "";
+                    TextBoxContactPerson.Text = "";
+                    ListviewCustomers.ItemsSource = controller.GetCustomers();
+                }
             }
         }
 
@@ -96,10 +100,17 @@ namespace ojm {
 
             TextBoxProductName.Text = storageItem["Name"];
             TextBoxInStock.Text = storageItem["InStock"];
+            TextBoxType.Text = storageItem["Type"];
+            TextBoxTolerance.Text = storageItem["Tolerance"];
+            TextBoxReserved.Text = storageItem["Reserved"];
+            if (storageItem.ContainsKey("Customer")) {
+                ComboboxCustomer.SelectedIndex = int.Parse(storageItem["Customer"]);
+            }
             BtnAddProduct.Content = "Opdater";
         }
 
         private void BtnAddProduct_Click(object sender, RoutedEventArgs e) {
+            // Update product
             if (selectedProduct != -1) {
                 // Tjek if InStock is a number
                 int InStock = 0;
@@ -113,14 +124,15 @@ namespace ojm {
                 ListviewStorage.ItemsSource = controller.GetStorageItems();
                 MessageBox.Show("Produktet er blevet tilføjet", "OJM");
             }
+            // Create product
             else { 
-                // Update product
-
+                
             }
            
         }
 
         private void BtnStoreageCancel_Click(object sender, RoutedEventArgs e) {
+            selectedProduct = -1;
             BtnAddProduct.Content = "Tilføj";
             TextBoxInStock.Text = "";
             TextBoxProductName.Text = "";

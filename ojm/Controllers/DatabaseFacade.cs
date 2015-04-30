@@ -13,8 +13,8 @@ namespace ojm.Controllers {
         static string ConnectionString = "Server=ealdb1.eal.local;" + "Database=ejl26_db;" + "User Id=ejl26_usr;" + "Password=Baz1nga26";
 
         // CUSTOMER METHODS
-        public static Models.Customer GetCustomerFromCVR(string cvr) {
-            Models.Customer _customer = new Models.Customer();
+        public static Customer GetCustomerFromCVR(string cvr) {
+            Customer _customer = new Customer();
 
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
@@ -26,6 +26,33 @@ namespace ojm.Controllers {
 
                 while (reader.Read()){
                     _customer = new Models.Customer((int)reader["ID"], (string)reader["CompanyName"], (string)reader["CVR"], (string)reader["Address"], (string)reader["Email"], (string)reader["Phonenumber"], (string)reader["ContactPerson"]);
+                }
+                reader.Close();
+
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+            return _customer;
+        }
+
+        public static Customer GetCustomerFromID(int ID) {
+            Customer _customer = new Customer();
+
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("GetCustomerFromID", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@ID", ID));
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read()) {
+                    _customer = new Customer((int)reader["ID"], (string)reader["CompanyName"], (string)reader["CVR"], (string)reader["Address"], (string)reader["Email"], (string)reader["Phonenumber"], (string)reader["ContactPerson"]);
                 }
                 reader.Close();
 
@@ -126,7 +153,30 @@ namespace ojm.Controllers {
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    StorageItemsList.Add(new Product(int.Parse(reader["ID"].ToString()), reader["Name"].ToString(), int.Parse(reader["InStock"].ToString())));
+                    string customerID = reader["CustomerID"].ToString();
+                    // If product has a customer
+                    if (customerID != "") {
+                        Customer customer = GetCustomerFromID(int.Parse(customerID));
+                        StorageItemsList.Add(new Product(
+                                                int.Parse(reader["ID"].ToString()),
+                                                reader["Name"].ToString(),
+                                                int.Parse(reader["InStock"].ToString()),
+                                                reader["Type"].ToString(),
+                                                int.Parse(reader["Tolerance"].ToString()),
+                                                int.Parse(reader["Reserved"].ToString()),
+                                                customer
+                                            ));
+                    }else {
+                        StorageItemsList.Add(new Product(
+                                                int.Parse(reader["ID"].ToString()),
+                                                reader["Name"].ToString(),
+                                                int.Parse(reader["InStock"].ToString()),
+                                                reader["Type"].ToString(),
+                                                int.Parse(reader["Tolerance"].ToString()),
+                                                int.Parse(reader["Reserved"].ToString())
+                                            ));
+                    }
+                    
                 }
                 reader.Close(); 
             }

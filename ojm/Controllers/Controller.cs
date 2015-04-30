@@ -12,15 +12,17 @@ namespace ojm.Controllers {
         List<Customer> customers = new List<Customer>();
 
         // CUSTOMER METHODS
-        public void AddCustomer(string companyname, string cvr, string address, string email, string phonenumber, string contactperson) {
+        public bool AddCustomer(string companyname, string cvr, string address, string email, string phonenumber, string contactperson) {
             
             Customer _customer = new Customer(companyname, cvr, address, email, phonenumber, contactperson);
             if (IsCustomerExsisting(_customer.CVR) != true) {
                 DatabaseFacade.AddCustomer(_customer);
                 System.Windows.MessageBox.Show("Kunden blev oprettet", "OJM");
+                return true;
             }
             else {
-                System.Windows.MessageBox.Show("Kunden eksisterer allerede", "OJM");
+                System.Windows.MessageBox.Show("Kunden med CVR "+ cvr +" eksisterer allerede", "OJM");
+                return false;
             }
         }
         public void UpdateCustomer(int id, string companyname, string cvr, string address, string email, string phonenumber, string contactperson) {
@@ -42,6 +44,16 @@ namespace ojm.Controllers {
             return customers;
         }
 
+        public List<string> GetCustomerNames() {
+            List<string> customerNames = new List<string>();
+
+            foreach (Customer customer in customers) {
+                customerNames.Add(customer.CompanyName);
+            }
+
+            return customerNames;
+        }
+
         public Dictionary<string, string> GetCustomer(int index) {
             Dictionary<string, string> _customer = new Dictionary<string, string>();
             _customer.Add("ID", customers[index].ID.ToString());
@@ -51,6 +63,7 @@ namespace ojm.Controllers {
             _customer.Add("Email", customers[index].Email);
             _customer.Add("Phonenumber", customers[index].Phonenumber);
             _customer.Add("ContactPerson", customers[index].ContactPerson);
+
             return _customer;
         }
 
@@ -67,6 +80,19 @@ namespace ojm.Controllers {
 
             storageItem.Add("Name", products[index].Name);
             storageItem.Add("InStock", products[index].InStock + "");
+            storageItem.Add("Type", products[index].Type);
+            storageItem.Add("Tolerance", products[index].Tolerance + "");
+            storageItem.Add("Reserved", products[index].Reserved + "");
+
+            if (products[index].Customer != null) {
+                int customerIndex = -1;
+                for (int i = 0; i < customers.Count && customerIndex == -1; i++) {
+                    if (products[index].Customer.CVR == customers[i].CVR)
+                        customerIndex = i;
+                }
+                storageItem.Add("Customer", customerIndex + "");
+            }
+            
 
             return storageItem;
         }

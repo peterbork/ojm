@@ -13,6 +13,7 @@ namespace ojm.Models
         public int InStock { get; set; }
         public string Type { get; set; }
         public int Tolerance { get; set; }
+        public int Reserved { get; set; }
         public Customer Customer { get; set; }
 
         public List<Delivery> Deliveries;
@@ -23,6 +24,21 @@ namespace ojm.Models
             Name = name;
             InStock = instock;
             Deliveries = new List<Delivery>();
+        }
+
+        public Product(int id, string name, int instock, string type, int tolerance, int reserved) {
+            ID = id;
+            Name = name;
+            InStock = instock;
+            Type = type;
+            Tolerance = tolerance;
+            Reserved = reserved;
+            Deliveries = new List<Delivery>();
+        }
+
+        public Product(int id, string name, int instock, string type, int tolerance, int reserved, Customer customer) 
+        : this(id, name, instock, type, tolerance, reserved) {
+            Customer = customer;
         }
     }
 }
