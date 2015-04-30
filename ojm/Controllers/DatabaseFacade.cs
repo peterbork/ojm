@@ -156,7 +156,7 @@ namespace ojm.Controllers {
                     string customerID = reader["CustomerID"].ToString();
                     // If product has a customer
                     if (customerID != "") {
-                        Customer customer = GetCustomerFromID(int.Parse(customerID));
+                        Customer customer = DatabaseFacade.GetCustomerFromID(int.Parse(customerID));
                         StorageItemsList.Add(new Product(
                                                 int.Parse(reader["ID"].ToString()),
                                                 reader["Name"].ToString(),
@@ -197,6 +197,11 @@ namespace ojm.Controllers {
                 cmd.Parameters.Add(new SqlParameter("ID", product.ID));
                 cmd.Parameters.Add(new SqlParameter("Name", product.Name));
                 cmd.Parameters.Add(new SqlParameter("InStock", product.InStock));
+                cmd.Parameters.Add(new SqlParameter("Type", product.Type));
+                cmd.Parameters.Add(new SqlParameter("Tolerance", product.Tolerance));
+                cmd.Parameters.Add(new SqlParameter("Reserved", product.Reserved));
+                if (product.Customer != null)
+                    cmd.Parameters.Add(new SqlParameter("CustomerID", product.Customer.ID));
                 cmd.ExecuteNonQuery();
             }
             catch (SqlException e) {

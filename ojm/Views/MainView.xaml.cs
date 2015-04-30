@@ -114,15 +114,20 @@ namespace ojm {
             if (selectedProduct != -1) {
                 // Tjek if InStock is a number
                 int InStock = 0;
+                int tolerance = 0;
+                int reserved = 0;
+
                 try {
                     InStock = Convert.ToInt32(TextBoxInStock.Text);
+                    tolerance = Convert.ToInt32(TextBoxTolerance.Text);
+                    reserved = Convert.ToInt32(TextBoxReserved.Text);
                 }
                 catch (Exception) {
-                    MessageBox.Show("Antal på lager skal være et tal.");
+                    MessageBox.Show("Antal på lager, tolerance og reserveret skal være et tal.");
                 }
-                controller.UpdateStorageItem(selectedProduct, TextBoxProductName.Text, InStock);
+                controller.UpdateStorageItem(selectedProduct, TextBoxProductName.Text, InStock, TextBoxType.Text, tolerance, reserved, ComboboxCustomer.SelectedIndex);
                 ListviewStorage.ItemsSource = controller.GetStorageItems();
-                MessageBox.Show("Produktet er blevet tilføjet", "OJM");
+                MessageBox.Show("Produktet er blevet Opdateret", "OJM");
             }
             // Create product
             else { 

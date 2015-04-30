@@ -96,11 +96,17 @@ namespace ojm.Controllers {
 
             return storageItem;
         }
-        public void UpdateStorageItem(int index, string name, int instock)
+        public void UpdateStorageItem(int index, string name, int instock,  string type, int tolerance, int reserved, int customerIndex)
         {
             Product product = products[index];
             product.Name = name;
             product.InStock = instock;
+            product.Type = type;
+            product.Tolerance = tolerance;
+            product.Reserved = reserved;
+            if (customerIndex > -1) {
+                product.Customer = customers[customerIndex];
+            }
             
             DatabaseFacade.UpdateStorageItem(product);
         }
