@@ -137,5 +137,12 @@ namespace ojm.Controllers {
             
             DatabaseFacade.AddStorageItem(product);
         }
+
+        internal List<Delivery> GetStorageItemOrders(int selectedProduct) {
+
+            products[selectedProduct].Deliveries = DatabaseFacade.GetStorageItemOrders(products[selectedProduct].ID);
+
+            return products[selectedProduct].Deliveries;
+        }
     }
 }

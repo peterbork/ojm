@@ -261,5 +261,30 @@ namespace ojm.Controllers {
                 conn.Dispose();
             }
         }
+
+        internal static List<Delivery> GetStorageItemOrders(int productID) {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            List<Delivery> deliveries = new List<Delivery>();
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("GetStorageItemOrders", conn);
+                cmd.Parameters.Add(new SqlParameter("ProductID", productID));
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read()) {
+                    deliveries.Add(new Delivery(int.Parse(reader["ID"].ToString()), DateTime.Parse(reader["DeliveryDate"].ToString()), int.Parse(reader["Quantity"].ToString())));
+                }
+                reader.Close();
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+            return deliveries;
+        }
     }
 }

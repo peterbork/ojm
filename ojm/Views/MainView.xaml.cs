@@ -110,6 +110,9 @@ namespace ojm {
             {
                 ComboboxCustomer.SelectedIndex = -1;
             }
+
+            ListviewOrders.ItemsSource = controller.GetStorageItemOrders(selectedProduct);
+
             BtnAddProduct.Content = "Opdater";
         }
 
@@ -144,9 +147,7 @@ namespace ojm {
             catch (Exception)
             {
                 MessageBox.Show("Antal på lager, tolerance og reserveret skal være et tal.");
-            }
-
-            
+            }            
            
         }
 

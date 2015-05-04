@@ -12,15 +12,13 @@ namespace ojm.Models
         public DateTime DeliveryDate { get; set; }
         public int Quantity { get; set; }
         public bool Arrived { get; set; }
-        public Product Product { get; set; }
 
-        public Delivery(int id, DateTime delivery, int quantity, Product product)
+        public Delivery(int id, DateTime delivery, int quantity)
         {
             ID = id;
             DeliveryDate = delivery;
             Quantity = quantity;
             Arrived = false;
-            Product = product;
         }
         public Delivery(int id, int quantity)
         {
