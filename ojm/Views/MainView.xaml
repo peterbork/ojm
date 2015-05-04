@@ -66,7 +66,7 @@
                     <ListView x:Name="ListviewOrders" HorizontalAlignment="Left" Height="164" VerticalAlignment="Top" Width="200" Margin="561,377,0,0">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="DeliveryDate" Width="80" DisplayMemberBinding="{Binding DeliveryDate}" />
+                                <GridViewColumn Header="DeliveryDate" Width="80" DisplayMemberBinding="{Binding DeliveryDate, StringFormat='{}{0:dd/MM-yyyy}'}" />
                                 <GridViewColumn Header="Quantity" Width="80" DisplayMemberBinding="{Binding Quantity}" />
                             </GridView>
                         </ListView.View>
