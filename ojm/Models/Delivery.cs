@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ojm.Models
 {
-    class Delivery
+    public class Delivery
     {
         public int ID { get; set; }
         public DateTime DeliveryDate { get; set; }

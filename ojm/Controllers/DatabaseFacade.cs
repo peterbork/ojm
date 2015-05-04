@@ -286,5 +286,25 @@ namespace ojm.Controllers {
             }
             return deliveries;
         }
+
+        internal static void OrderStorageItem(int productID, Delivery delivery) {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("OrderStorageItem", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("ProductID", productID));
+                cmd.Parameters.Add(new SqlParameter("DeliveryDate", delivery.DeliveryDate));
+                cmd.Parameters.Add(new SqlParameter("Quantity", delivery.Quantity));
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+        }
     }
 }

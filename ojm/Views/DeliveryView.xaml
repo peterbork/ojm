@@ -1,0 +1,15 @@
+﻿<Window x:Class="ojm.Views.DeliveryView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DeliveryView" Height="300" Width="277" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Margin="4,43,133,201">Ankomst dato</Label>
+        <DatePicker x:Name="DeliveryDate" HorizontalAlignment="Left" Margin="9,73,0,0" VerticalAlignment="Top"/>
+        <Label Margin="4,99,133,145" Content="Antal"/>
+        <TextBox x:Name="Quantity" Width="150" Height="25" HorizontalAlignment="Left" Margin="9,129,0,115"/>
+        <CheckBox Content="Ankommet" Name="Arrived" HorizontalAlignment="Left" Margin="9,166,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+        <Button x:Name="Save" Content="Gem" HorizontalAlignment="Left" Margin="85,197,0,0" VerticalAlignment="Top" Width="70" Click="Save_Click"/>
+        <Button x:Name="Cancel" Content="Annuller" HorizontalAlignment="Left" Margin="10,197,0,0" VerticalAlignment="Top" Width="70" Click="Cancel_Click"/>
+        <Label x:Name="ProductName" Content="" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20"/>
+    </Grid>
+</Window>

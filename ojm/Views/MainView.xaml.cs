@@ -27,6 +27,7 @@ namespace ojm {
             InitializeComponent();
             
             controller = new Controller();
+            controller.setView(this);
 
             ListviewCustomers.ItemsSource = controller.GetCustomers();
             ListviewStorage.ItemsSource = controller.GetStorageItems();
@@ -111,6 +112,8 @@ namespace ojm {
                 ComboboxCustomer.SelectedIndex = -1;
             }
 
+            BtnOrderStorageItem.IsEnabled = true;
+
             ListviewOrders.ItemsSource = controller.GetStorageItemOrders(selectedProduct);
 
             BtnAddProduct.Content = "Opdater";
@@ -165,6 +168,15 @@ namespace ojm {
             TextBoxTolerance.Text = "";
             TextBoxReserved.Text = "";
             ComboboxCustomer.SelectedIndex = -1;
+            BtnOrderStorageItem.IsEnabled = false;
+        }
+
+        private void BtnOrderStorageItem_Click(object sender, RoutedEventArgs e) {
+            controller.NewDelivery(selectedProduct);
+        }
+
+        public void SetDeliveries() {
+            ListviewOrders.ItemsSource = controller.GetStorageItemOrders(selectedProduct);
         }
 
     }

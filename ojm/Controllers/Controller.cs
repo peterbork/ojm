@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 using ojm.Models;
 
 namespace ojm.Controllers {
-    class Controller {
+    public class Controller {
 
         List<Product> products = new List<Product>();
         List<Customer> customers = new List<Customer>();
+        MainView View;
+
+        public void setView(MainView view) {
+            View = view;
+        }
 
         // CUSTOMER METHODS
         public bool AddCustomer(string companyname, string cvr, string address, string email, string phonenumber, string contactperson) {
@@ -143,6 +148,23 @@ namespace ojm.Controllers {
             products[selectedProduct].Deliveries = DatabaseFacade.GetStorageItemOrders(products[selectedProduct].ID);
 
             return products[selectedProduct].Deliveries;
+        }
+
+        internal void NewDelivery(int productIndex) {
+            Views.DeliveryView view = new Views.DeliveryView();
+            view.Show();
+
+            view.setController(this);
+            view.SetProduct(productIndex, products[productIndex].Name);
+        }
+
+        internal void OrderStorageItem(int productIndex, DateTime deliveryDate, int quantity) {
+            Delivery delivery = new Delivery(0, deliveryDate, quantity);
+            products[productIndex].Deliveries.Add(delivery);
+
+            DatabaseFacade.OrderStorageItem(products[productIndex].ID, delivery);
+
+            View.SetDeliveries();
         }
     }
 }

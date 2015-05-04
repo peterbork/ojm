@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ojm.Models {
-    class Customer {
+    public class Customer {
         public int ID { get; set; }
         public string CompanyName { get; set; }
         public string CVR { get; set; }
