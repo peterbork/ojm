@@ -25,13 +25,19 @@ namespace ojm.Views {
             InitializeComponent();
         }
 
-        public void setController(Controller controller) {
+        public void SetController(Controller controller) {
             this.controller = controller;
         }
 
         public void SetProduct(int index, string productName) {
             productIndex = index;
             ProductName.Content = productName;
+        }
+
+        public void SetDelivery(int index, Dictionary<string, string> delivery) {
+            deliveryIndex = index;
+            DeliveryDate.SelectedDate = Convert.ToDateTime(delivery["DeliveryDate"]);
+            Quantity.Text = delivery["Quantity"];
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e) {
@@ -41,7 +47,14 @@ namespace ojm.Views {
         private void Save_Click(object sender, RoutedEventArgs e) {
             try {
                 int quantity = int.Parse(Quantity.Text);
-                controller.OrderStorageItem(productIndex, Convert.ToDateTime(DeliveryDate.SelectedDate.ToString()), quantity);
+                if (deliveryIndex > -1) {
+                    // Update 
+                    controller.UpdateStorageOrder(productIndex, deliveryIndex, Convert.ToDateTime(DeliveryDate.SelectedDate), quantity, Convert.ToBoolean(Arrived.IsChecked));
+                }
+                else {
+                    // Create
+                    controller.OrderStorageItem(productIndex, Convert.ToDateTime(DeliveryDate.SelectedDate), quantity);
+                }                
                 this.Close();
             }catch(Exception) {
                 MessageBox.Show("Antal skal være et tal.");

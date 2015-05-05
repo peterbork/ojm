@@ -175,8 +175,15 @@ namespace ojm {
             controller.NewDelivery(selectedProduct);
         }
 
-        public void SetDeliveries() {
+        public void UpdateStorageItems() {
+            ListviewStorage.ItemsSource = controller.GetStorageItems();
+            TextBoxInStock.Text = controller.GetStorageItem(selectedProduct)["InStock"];
+
             ListviewOrders.ItemsSource = controller.GetStorageItemOrders(selectedProduct);
+        }
+
+        private void ListviewOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            controller.UpdateDelivery(selectedProduct, ListviewOrders.SelectedIndex);
         }
 
     }

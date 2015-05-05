@@ -154,8 +154,22 @@ namespace ojm.Controllers {
             Views.DeliveryView view = new Views.DeliveryView();
             view.Show();
 
-            view.setController(this);
+            view.SetController(this);
             view.SetProduct(productIndex, products[productIndex].Name);
+        }
+
+        public void UpdateDelivery(int productIndex, int deliveryIndex) {
+            Product product = products[productIndex];
+            Dictionary<string, string> delivery = new Dictionary<string,string>();
+            delivery.Add("DeliveryDate", product.Deliveries[deliveryIndex].DeliveryDate.ToString());
+            delivery.Add("Quantity", product.Deliveries[deliveryIndex].Quantity.ToString());
+
+            Views.DeliveryView view = new Views.DeliveryView();
+            view.Show();
+
+            view.SetController(this);
+            view.SetProduct(productIndex, product.Name);
+            view.SetDelivery(deliveryIndex, delivery);
         }
 
         internal void OrderStorageItem(int productIndex, DateTime deliveryDate, int quantity) {
@@ -164,7 +178,25 @@ namespace ojm.Controllers {
 
             DatabaseFacade.OrderStorageItem(products[productIndex].ID, delivery);
 
-            View.SetDeliveries();
+            View.UpdateStorageItems();
+        }
+
+        internal void UpdateStorageOrder(int productIndex, int deliveryIndex, DateTime deliveryDate, int quantity, bool Arrived) {
+            Product product = products[productIndex];
+            Delivery delivery = product.Deliveries[deliveryIndex];
+            if (Arrived && !delivery.Arrived) {
+                // Update the storage item's quantity
+                product.InStock += quantity;
+                DatabaseFacade.UpdateStorageItem(product);
+            }
+
+            // Update the Delivery
+            delivery.DeliveryDate = deliveryDate;
+            delivery.Quantity = quantity;
+            delivery.Arrived = Arrived;
+            DatabaseFacade.UpdateStorageOrder(delivery);
+
+            View.UpdateStorageItems();
         }
     }
 }

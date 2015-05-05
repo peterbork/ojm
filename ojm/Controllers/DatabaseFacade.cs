@@ -306,5 +306,26 @@ namespace ojm.Controllers {
                 conn.Dispose();
             }
         }
+
+        internal static void UpdateStorageOrder(Delivery delivery) {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("UpdateStorageOrder", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("ID", delivery.ID));
+                cmd.Parameters.Add(new SqlParameter("DeliveryDate", delivery.DeliveryDate));
+                cmd.Parameters.Add(new SqlParameter("Quantity", delivery.Quantity));
+                cmd.Parameters.Add(new SqlParameter("Arrived", delivery.Arrived));
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+        }
     }
 }
