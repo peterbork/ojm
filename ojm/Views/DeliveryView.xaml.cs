@@ -49,7 +49,7 @@ namespace ojm.Views {
                 int quantity = int.Parse(Quantity.Text);
                 if (deliveryIndex > -1) {
                     // Update 
-                    controller.UpdateStorageOrder(productIndex, deliveryIndex, Convert.ToDateTime(DeliveryDate.SelectedDate), quantity, Convert.ToBoolean(Arrived.IsChecked));
+                    controller.UpdateStorageDelivery(productIndex, deliveryIndex, Convert.ToDateTime(DeliveryDate.SelectedDate), quantity, Convert.ToBoolean(Arrived.IsChecked));
                 }
                 else {
                     // Create

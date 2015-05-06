@@ -181,8 +181,8 @@ namespace ojm.Controllers {
             View.UpdateStorageItems();
         }
 
-        internal void UpdateStorageOrder(int productIndex, int deliveryIndex, DateTime deliveryDate, int quantity, bool Arrived) {
-            Material product = products[productIndex];
+        internal void UpdateStorageDelivery(int productIndex, int deliveryIndex, DateTime deliveryDate, int quantity, bool Arrived) {
+            Material material = products[productIndex];
             Delivery delivery = product.Deliveries[deliveryIndex];
             if (Arrived && !delivery.Arrived) {
                 // Update the storage item's quantity
