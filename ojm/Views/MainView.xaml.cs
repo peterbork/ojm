@@ -30,7 +30,7 @@ namespace ojm {
             controller.setView(this);
 
             ListviewCustomers.ItemsSource = controller.GetCustomers();
-            ListviewStorage.ItemsSource = controller.GetStorageItems();
+            ListviewStorage.ItemsSource = controller.GetMaterials();
 
             ComboboxCustomer.ItemsSource = controller.GetCustomerNames();
         }
@@ -97,7 +97,7 @@ namespace ojm {
         {
             selectedMaterial = ListviewStorage.SelectedIndex;
             
-            Dictionary<string, string> storageItem = controller.GetStorageItem(selectedMaterial);
+            Dictionary<string, string> storageItem = controller.GetMaterial(selectedMaterial);
 
             TextBoxMaterialName.Text = storageItem["Name"];
             TextBoxInStock.Text = storageItem["InStock"];
@@ -134,15 +134,15 @@ namespace ojm {
                 // Update product
                 if (selectedMaterial != -1)
                 {
-                    controller.UpdateStorageItem(selectedMaterial, TextBoxMaterialName.Text, InStock, TextBoxType.Text, tolerance, reserved, ComboboxCustomer.SelectedIndex);
-                    ListviewStorage.ItemsSource = controller.GetStorageItems();
+                    controller.UpdateMaterial(selectedMaterial, TextBoxMaterialName.Text, InStock, TextBoxType.Text, tolerance, reserved, ComboboxCustomer.SelectedIndex);
+                    ListviewStorage.ItemsSource = controller.GetMaterials();
                     MessageBox.Show("Materialet er blevet Opdateret", "OJM");
                 }
                 // Create product
                 else
                 {
-                    controller.AddStorageItem(TextBoxMaterialName.Text, InStock, TextBoxType.Text, tolerance, reserved, ComboboxCustomer.SelectedIndex);
-                    ListviewStorage.ItemsSource = controller.GetStorageItems();
+                    controller.AddMaterial(TextBoxMaterialName.Text, InStock, TextBoxType.Text, tolerance, reserved, ComboboxCustomer.SelectedIndex);
+                    ListviewStorage.ItemsSource = controller.GetMaterials();
                     MessageBox.Show("Materialet er blevet tilføjet", "OJM");
                     ClearInputFields();
                 }
@@ -176,8 +176,8 @@ namespace ojm {
         }
 
         public void UpdateStorageItems() {
-            ListviewStorage.ItemsSource = controller.GetStorageItems();
-            TextBoxInStock.Text = controller.GetStorageItem(selectedMaterial)["InStock"];
+            ListviewStorage.ItemsSource = controller.GetMaterials();
+            TextBoxInStock.Text = controller.GetMaterial(selectedMaterial)["InStock"];
 
             ListviewOrders.ItemsSource = controller.GetStorageItemOrders(selectedMaterial);
         }

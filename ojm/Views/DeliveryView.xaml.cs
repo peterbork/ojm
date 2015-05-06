@@ -53,7 +53,7 @@ namespace ojm.Views {
                 }
                 else {
                     // Create
-                    controller.OrderStorageItem(materialIndex, Convert.ToDateTime(DeliveryDate.SelectedDate), quantity);
+                    controller.OrderMaterial(materialIndex, Convert.ToDateTime(DeliveryDate.SelectedDate), quantity);
                 }                
                 this.Close();
             }catch(Exception) {

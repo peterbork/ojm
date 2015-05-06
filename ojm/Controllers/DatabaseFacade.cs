@@ -140,9 +140,9 @@ namespace ojm.Controllers {
 
 
         // STORAGE METHODS
-        public static List<Material> GetStorageItems()
+        public static List<Material> GetMaterials()
         {
-            List<Material> StorageItemsList = new List<Material>();
+            List<Material> MaterialsList = new List<Material>();
             
             SqlConnection conn = new SqlConnection(ConnectionString);
             try
@@ -157,7 +157,7 @@ namespace ojm.Controllers {
                     // If product has a customer
                     if (customerID != "") {
                         Customer customer = DatabaseFacade.GetCustomerFromID(int.Parse(customerID));
-                        StorageItemsList.Add(new Material(
+                        MaterialsList.Add(new Material(
                                                 int.Parse(reader["ID"].ToString()),
                                                 reader["Name"].ToString(),
                                                 int.Parse(reader["InStock"].ToString()),
@@ -167,7 +167,7 @@ namespace ojm.Controllers {
                                                 customer
                                             ));
                     }else {
-                        StorageItemsList.Add(new Material(
+                        MaterialsList.Add(new Material(
                                                 int.Parse(reader["ID"].ToString()),
                                                 reader["Name"].ToString(),
                                                 int.Parse(reader["InStock"].ToString()),
@@ -185,23 +185,23 @@ namespace ojm.Controllers {
                 MessageBox.Show(e.Message);
             }
 
-            return StorageItemsList;
+            return MaterialsList;
         }
-        public static void UpdateStorageItem(Material product)
+        public static void UpdateMaterial(Material material)
         {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("UpdateStorageItem", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("ID", product.ID));
-                cmd.Parameters.Add(new SqlParameter("Name", product.Name));
-                cmd.Parameters.Add(new SqlParameter("InStock", product.InStock));
-                cmd.Parameters.Add(new SqlParameter("Type", product.Type));
-                cmd.Parameters.Add(new SqlParameter("Tolerance", product.Tolerance));
-                cmd.Parameters.Add(new SqlParameter("Reserved", product.Reserved));
-                if (product.Customer != null)
-                    cmd.Parameters.Add(new SqlParameter("CustomerID", product.Customer.ID));
+                cmd.Parameters.Add(new SqlParameter("ID", material.ID));
+                cmd.Parameters.Add(new SqlParameter("Name", material.Name));
+                cmd.Parameters.Add(new SqlParameter("InStock", material.InStock));
+                cmd.Parameters.Add(new SqlParameter("Type", material.Type));
+                cmd.Parameters.Add(new SqlParameter("Tolerance", material.Tolerance));
+                cmd.Parameters.Add(new SqlParameter("Reserved", material.Reserved));
+                if (material.Customer != null)
+                    cmd.Parameters.Add(new SqlParameter("CustomerID", material.Customer.ID));
                 cmd.ExecuteNonQuery();
             }
             catch (SqlException e) {
@@ -234,7 +234,7 @@ namespace ojm.Controllers {
             }
         }
 
-        internal static void AddStorageItem(Material product)
+        internal static void AddMaterial(Material material)
         {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try
@@ -242,13 +242,13 @@ namespace ojm.Controllers {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("AddStorageItem", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("Name", product.Name));
-                cmd.Parameters.Add(new SqlParameter("InStock", product.InStock));
-                cmd.Parameters.Add(new SqlParameter("Type", product.Type));
-                cmd.Parameters.Add(new SqlParameter("Tolerance", product.Tolerance));
-                cmd.Parameters.Add(new SqlParameter("Reserved", product.Reserved));
-                if (product.Customer != null)
-                    cmd.Parameters.Add(new SqlParameter("CustomerID", product.Customer.ID));
+                cmd.Parameters.Add(new SqlParameter("Name", material.Name));
+                cmd.Parameters.Add(new SqlParameter("InStock", material.InStock));
+                cmd.Parameters.Add(new SqlParameter("Type", material.Type));
+                cmd.Parameters.Add(new SqlParameter("Tolerance", material.Tolerance));
+                cmd.Parameters.Add(new SqlParameter("Reserved", material.Reserved));
+                if (material.Customer != null)
+                    cmd.Parameters.Add(new SqlParameter("CustomerID", material.Customer.ID));
                 cmd.ExecuteNonQuery();
             }
             catch (SqlException e)
@@ -262,13 +262,13 @@ namespace ojm.Controllers {
             }
         }
 
-        internal static List<Delivery> GetStorageItemOrders(int productID) {
+        internal static List<Delivery> GetMaterialOrders(int materialID) {
             SqlConnection conn = new SqlConnection(ConnectionString);
             List<Delivery> deliveries = new List<Delivery>();
             try {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("GetStorageItemDeliveries", conn);
-                cmd.Parameters.Add(new SqlParameter("ProductID", productID));
+                cmd.Parameters.Add(new SqlParameter("ProductID", materialID));
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataReader reader = cmd.ExecuteReader();
 
@@ -287,13 +287,13 @@ namespace ojm.Controllers {
             return deliveries;
         }
 
-        internal static void OrderStorageItem(int productID, Delivery delivery) {
+        internal static void OrderStorageItem(int materialID, Delivery delivery) {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("OrderStorageItem", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("ProductID", productID));
+                cmd.Parameters.Add(new SqlParameter("ProductID", materialID));
                 cmd.Parameters.Add(new SqlParameter("DeliveryDate", delivery.DeliveryDate));
                 cmd.Parameters.Add(new SqlParameter("Quantity", delivery.Quantity));
                 cmd.ExecuteNonQuery();

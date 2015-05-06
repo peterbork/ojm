@@ -73,13 +73,13 @@ namespace ojm.Controllers {
         }
 
         // STORAGE METHODS
-        public List<Models.Material> GetStorageItems()
+        public List<Models.Material> GetMaterials()
         {
-            materials = DatabaseFacade.GetStorageItems();
+            materials = DatabaseFacade.GetMaterials();
             return materials;
         }
 
-        public Dictionary<string, string> GetStorageItem(int index)
+        public Dictionary<string, string> GetMaterial(int index)
         {
             Dictionary<string, string> storageItem = new Dictionary<string, string>();
 
@@ -101,7 +101,7 @@ namespace ojm.Controllers {
 
             return storageItem;
         }
-        public void UpdateStorageItem(int index, string name, int instock,  string type, int tolerance, int reserved, int customerIndex)
+        public void UpdateMaterial(int index, string name, int instock,  string type, int tolerance, int reserved, int customerIndex)
         {
             Material material = materials[index];
             material.Name = name;
@@ -113,7 +113,7 @@ namespace ojm.Controllers {
                 material.Customer = customers[customerIndex];
             }
             
-            DatabaseFacade.UpdateStorageItem(material);
+            DatabaseFacade.UpdateMaterial(material);
         }
 
         public void RegisterDelivery(int deliveryIndex, int materialIndex)
@@ -123,11 +123,11 @@ namespace ojm.Controllers {
             material.InStock += delivery.Quantity;
 
             DatabaseFacade.RegisterDelivery(delivery);
-            DatabaseFacade.UpdateStorageItem(material);
+            DatabaseFacade.UpdateMaterial(material);
         }
 
 
-        internal void AddStorageItem(string name, int instock, string type, int tolerance, int reserved, int customer)
+        internal void AddMaterial(string name, int instock, string type, int tolerance, int reserved, int customer)
         {
             Material material;
             
@@ -140,12 +140,12 @@ namespace ojm.Controllers {
                 material = new Material(0, name, instock, type, tolerance, reserved);
             }
             
-            DatabaseFacade.AddStorageItem(material);
+            DatabaseFacade.AddMaterial(material);
         }
 
         internal List<Delivery> GetStorageItemOrders(int materialIndex) {
 
-            materials[materialIndex].Deliveries = DatabaseFacade.GetStorageItemOrders(materials[materialIndex].ID);
+            materials[materialIndex].Deliveries = DatabaseFacade.GetMaterialOrders(materials[materialIndex].ID);
 
             return materials[materialIndex].Deliveries;
         }
@@ -172,7 +172,7 @@ namespace ojm.Controllers {
             view.SetDelivery(deliveryIndex, delivery);
         }
 
-        internal void OrderStorageItem(int materialIndex, DateTime deliveryDate, int quantity) {
+        internal void OrderMaterial(int materialIndex, DateTime deliveryDate, int quantity) {
             Delivery delivery = new Delivery(0, deliveryDate, quantity);
             materials[materialIndex].Deliveries.Add(delivery);
 
@@ -187,7 +187,7 @@ namespace ojm.Controllers {
             if (Arrived && !delivery.Arrived) {
                 // Update the storage item's quantity
                 material.InStock += quantity;
-                DatabaseFacade.UpdateStorageItem(material);
+                DatabaseFacade.UpdateMaterial(material);
             }
 
             // Update the Delivery
