@@ -16,7 +16,8 @@ namespace ojm.Controllers {
             View = view;
         }
 
-        // CUSTOMER METHODS
+        #region Customers
+
         public bool AddCustomer(string companyname, string cvr, string address, string email, string phonenumber, string contactperson) {
             
             Customer _customer = new Customer(companyname, cvr, address, email, phonenumber, contactperson);
@@ -72,7 +73,9 @@ namespace ojm.Controllers {
             return _customer;
         }
 
-        // STORAGE METHODS
+        #endregion
+        #region Materials
+
         public List<Models.Material> GetMaterials()
         {
             materials = DatabaseFacade.GetMaterials();
@@ -198,5 +201,12 @@ namespace ojm.Controllers {
 
             View.UpdateStorageItems();
         }
+
+        #endregion
+        #region ProductOrders
+
+
+
+        #endregion
     }
 }
