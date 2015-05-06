@@ -76,7 +76,8 @@
     <Compile Include="Controllers\DatabaseFacade.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Delivery.cs" />
-    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Material.cs" />
+    <Compile Include="Models\ProductOrder.cs" />
     <Compile Include="Views\DeliveryView.xaml.cs">
       <DependentUpon>DeliveryView.xaml</DependentUpon>
     </Compile>
