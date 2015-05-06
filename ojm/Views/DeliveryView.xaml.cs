@@ -19,7 +19,7 @@ namespace ojm.Views {
     /// </summary>
     public partial class DeliveryView : Window {
         Controller controller;
-        int productIndex = -1;
+        int materialIndex = -1;
         int deliveryIndex = -1;
         public DeliveryView() {
             InitializeComponent();
@@ -29,9 +29,9 @@ namespace ojm.Views {
             this.controller = controller;
         }
 
-        public void SetProduct(int index, string productName) {
-            productIndex = index;
-            ProductName.Content = productName;
+        public void SetProduct(int index, string materialName) {
+            materialIndex = index;
+            ProductName.Content = materialName;
         }
 
         public void SetDelivery(int index, Dictionary<string, string> delivery) {
@@ -49,11 +49,11 @@ namespace ojm.Views {
                 int quantity = int.Parse(Quantity.Text);
                 if (deliveryIndex > -1) {
                     // Update 
-                    controller.UpdateStorageDelivery(productIndex, deliveryIndex, Convert.ToDateTime(DeliveryDate.SelectedDate), quantity, Convert.ToBoolean(Arrived.IsChecked));
+                    controller.UpdateStorageDelivery(materialIndex, deliveryIndex, Convert.ToDateTime(DeliveryDate.SelectedDate), quantity, Convert.ToBoolean(Arrived.IsChecked));
                 }
                 else {
                     // Create
-                    controller.OrderStorageItem(productIndex, Convert.ToDateTime(DeliveryDate.SelectedDate), quantity);
+                    controller.OrderStorageItem(materialIndex, Convert.ToDateTime(DeliveryDate.SelectedDate), quantity);
                 }                
                 this.Close();
             }catch(Exception) {

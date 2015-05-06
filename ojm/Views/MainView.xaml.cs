@@ -20,7 +20,7 @@ namespace ojm {
     /// </summary>
     public partial class MainView : Window {
         Controller controller;
-        int selectedProduct = -1;
+        int selectedMaterial = -1;
         int SelectedCustomerIndex = -1;
         int SelectedCustomerID;
         public MainView() {
@@ -95,11 +95,11 @@ namespace ojm {
 
         private void ListviewStorage_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            selectedProduct = ListviewStorage.SelectedIndex;
+            selectedMaterial = ListviewStorage.SelectedIndex;
             
-            Dictionary<string, string> storageItem = controller.GetStorageItem(selectedProduct);
+            Dictionary<string, string> storageItem = controller.GetStorageItem(selectedMaterial);
 
-            TextBoxProductName.Text = storageItem["Name"];
+            TextBoxMaterialName.Text = storageItem["Name"];
             TextBoxInStock.Text = storageItem["InStock"];
             TextBoxType.Text = storageItem["Type"];
             TextBoxTolerance.Text = storageItem["Tolerance"];
@@ -114,12 +114,12 @@ namespace ojm {
 
             BtnOrderStorageItem.IsEnabled = true;
 
-            ListviewOrders.ItemsSource = controller.GetStorageItemOrders(selectedProduct);
+            ListviewOrders.ItemsSource = controller.GetStorageItemOrders(selectedMaterial);
 
-            BtnAddProduct.Content = "Opdater";
+            BtnAddMaterial.Content = "Opdater";
         }
 
-        private void BtnAddProduct_Click(object sender, RoutedEventArgs e) {
+        private void BtnAddMaterial_Click(object sender, RoutedEventArgs e) {
             // Check if InStock is a number
             int InStock = 0;
             int tolerance = 0;
@@ -132,18 +132,18 @@ namespace ojm {
                 reserved = Convert.ToInt32(TextBoxReserved.Text);
 
                 // Update product
-                if (selectedProduct != -1)
+                if (selectedMaterial != -1)
                 {
-                    controller.UpdateStorageItem(selectedProduct, TextBoxProductName.Text, InStock, TextBoxType.Text, tolerance, reserved, ComboboxCustomer.SelectedIndex);
+                    controller.UpdateStorageItem(selectedMaterial, TextBoxMaterialName.Text, InStock, TextBoxType.Text, tolerance, reserved, ComboboxCustomer.SelectedIndex);
                     ListviewStorage.ItemsSource = controller.GetStorageItems();
-                    MessageBox.Show("Produktet er blevet Opdateret", "OJM");
+                    MessageBox.Show("Materialet er blevet Opdateret", "OJM");
                 }
                 // Create product
                 else
                 {
-                    controller.AddStorageItem(TextBoxProductName.Text, InStock, TextBoxType.Text, tolerance, reserved, ComboboxCustomer.SelectedIndex);
+                    controller.AddStorageItem(TextBoxMaterialName.Text, InStock, TextBoxType.Text, tolerance, reserved, ComboboxCustomer.SelectedIndex);
                     ListviewStorage.ItemsSource = controller.GetStorageItems();
-                    MessageBox.Show("Produktet er blevet tilføjet", "OJM");
+                    MessageBox.Show("Materialet er blevet tilføjet", "OJM");
                     ClearInputFields();
                 }
             }
@@ -160,10 +160,10 @@ namespace ojm {
 
         private void ClearInputFields()
         {
-            selectedProduct = -1;
-            BtnAddProduct.Content = "Tilføj";
+            selectedMaterial = -1;
+            BtnAddMaterial.Content = "Tilføj";
             TextBoxInStock.Text = "";
-            TextBoxProductName.Text = "";
+            TextBoxMaterialName.Text = "";
             TextBoxType.Text = "";
             TextBoxTolerance.Text = "";
             TextBoxReserved.Text = "";
@@ -172,18 +172,18 @@ namespace ojm {
         }
 
         private void BtnOrderStorageItem_Click(object sender, RoutedEventArgs e) {
-            controller.NewDelivery(selectedProduct);
+            controller.NewDelivery(selectedMaterial);
         }
 
         public void UpdateStorageItems() {
             ListviewStorage.ItemsSource = controller.GetStorageItems();
-            TextBoxInStock.Text = controller.GetStorageItem(selectedProduct)["InStock"];
+            TextBoxInStock.Text = controller.GetStorageItem(selectedMaterial)["InStock"];
 
-            ListviewOrders.ItemsSource = controller.GetStorageItemOrders(selectedProduct);
+            ListviewOrders.ItemsSource = controller.GetStorageItemOrders(selectedMaterial);
         }
 
         private void ListviewOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
-            controller.UpdateDelivery(selectedProduct, ListviewOrders.SelectedIndex);
+            controller.UpdateDelivery(selectedMaterial, ListviewOrders.SelectedIndex);
         }
 
     }

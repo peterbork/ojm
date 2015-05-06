@@ -8,7 +8,7 @@ using ojm.Models;
 namespace ojm.Controllers {
     public class Controller {
 
-        List<Material> products = new List<Material>();
+        List<Material> materials = new List<Material>();
         List<Customer> customers = new List<Customer>();
         MainView View;
 
@@ -75,24 +75,24 @@ namespace ojm.Controllers {
         // STORAGE METHODS
         public List<Models.Material> GetStorageItems()
         {
-            products = DatabaseFacade.GetStorageItems();
-            return products;
+            materials = DatabaseFacade.GetStorageItems();
+            return materials;
         }
 
         public Dictionary<string, string> GetStorageItem(int index)
         {
             Dictionary<string, string> storageItem = new Dictionary<string, string>();
 
-            storageItem.Add("Name", products[index].Name);
-            storageItem.Add("InStock", products[index].InStock + "");
-            storageItem.Add("Type", products[index].Type);
-            storageItem.Add("Tolerance", products[index].Tolerance + "");
-            storageItem.Add("Reserved", products[index].Reserved + "");
+            storageItem.Add("Name", materials[index].Name);
+            storageItem.Add("InStock", materials[index].InStock + "");
+            storageItem.Add("Type", materials[index].Type);
+            storageItem.Add("Tolerance", materials[index].Tolerance + "");
+            storageItem.Add("Reserved", materials[index].Reserved + "");
 
-            if (products[index].Customer != null) {
+            if (materials[index].Customer != null) {
                 int customerIndex = -1;
                 for (int i = 0; i < customers.Count && customerIndex == -1; i++) {
-                    if (products[index].Customer.CVR == customers[i].CVR)
+                    if (materials[index].Customer.CVR == customers[i].CVR)
                         customerIndex = i;
                 }
                 storageItem.Add("Customer", customerIndex + "");
@@ -103,91 +103,91 @@ namespace ojm.Controllers {
         }
         public void UpdateStorageItem(int index, string name, int instock,  string type, int tolerance, int reserved, int customerIndex)
         {
-            Material product = products[index];
-            product.Name = name;
-            product.InStock = instock;
-            product.Type = type;
-            product.Tolerance = tolerance;
-            product.Reserved = reserved;
+            Material material = materials[index];
+            material.Name = name;
+            material.InStock = instock;
+            material.Type = type;
+            material.Tolerance = tolerance;
+            material.Reserved = reserved;
             if (customerIndex > -1) {
-                product.Customer = customers[customerIndex];
+                material.Customer = customers[customerIndex];
             }
             
-            DatabaseFacade.UpdateStorageItem(product);
+            DatabaseFacade.UpdateStorageItem(material);
         }
 
-        public void RegisterDelivery(int dindex, int pindex)
+        public void RegisterDelivery(int deliveryIndex, int materialIndex)
         {
-            Material product = products[pindex];
-            Delivery delivery = product.Deliveries[dindex];
-            product.InStock += delivery.Quantity;
+            Material material = materials[materialIndex];
+            Delivery delivery = material.Deliveries[deliveryIndex];
+            material.InStock += delivery.Quantity;
 
             DatabaseFacade.RegisterDelivery(delivery);
-            DatabaseFacade.UpdateStorageItem(product);
+            DatabaseFacade.UpdateStorageItem(material);
         }
 
 
         internal void AddStorageItem(string name, int instock, string type, int tolerance, int reserved, int customer)
         {
-            Material product;
+            Material material;
             
             if (customer != -1 )
             {
-                product = new Material(0, name, instock, type, tolerance, reserved, customers[customer]);
+                material = new Material(0, name, instock, type, tolerance, reserved, customers[customer]);
             }
             else
             {
-                product = new Material(0, name, instock, type, tolerance, reserved);
+                material = new Material(0, name, instock, type, tolerance, reserved);
             }
             
-            DatabaseFacade.AddStorageItem(product);
+            DatabaseFacade.AddStorageItem(material);
         }
 
-        internal List<Delivery> GetStorageItemOrders(int selectedProduct) {
+        internal List<Delivery> GetStorageItemOrders(int materialIndex) {
 
-            products[selectedProduct].Deliveries = DatabaseFacade.GetStorageItemOrders(products[selectedProduct].ID);
+            materials[materialIndex].Deliveries = DatabaseFacade.GetStorageItemOrders(materials[materialIndex].ID);
 
-            return products[selectedProduct].Deliveries;
+            return materials[materialIndex].Deliveries;
         }
 
-        internal void NewDelivery(int productIndex) {
+        internal void NewDelivery(int materialIndex) {
             Views.DeliveryView view = new Views.DeliveryView();
             view.Show();
 
             view.SetController(this);
-            view.SetProduct(productIndex, products[productIndex].Name);
+            view.SetProduct(materialIndex, materials[materialIndex].Name);
         }
 
-        public void UpdateDelivery(int productIndex, int deliveryIndex) {
-            Material product = products[productIndex];
+        public void UpdateDelivery(int materialIndex, int deliveryIndex) {
+            Material material = materials[materialIndex];
             Dictionary<string, string> delivery = new Dictionary<string,string>();
-            delivery.Add("DeliveryDate", product.Deliveries[deliveryIndex].DeliveryDate.ToString());
-            delivery.Add("Quantity", product.Deliveries[deliveryIndex].Quantity.ToString());
+            delivery.Add("DeliveryDate", material.Deliveries[deliveryIndex].DeliveryDate.ToString());
+            delivery.Add("Quantity", material.Deliveries[deliveryIndex].Quantity.ToString());
 
             Views.DeliveryView view = new Views.DeliveryView();
             view.Show();
 
             view.SetController(this);
-            view.SetProduct(productIndex, product.Name);
+            view.SetProduct(materialIndex, material.Name);
             view.SetDelivery(deliveryIndex, delivery);
         }
 
-        internal void OrderStorageItem(int productIndex, DateTime deliveryDate, int quantity) {
+        internal void OrderStorageItem(int materialIndex, DateTime deliveryDate, int quantity) {
             Delivery delivery = new Delivery(0, deliveryDate, quantity);
-            products[productIndex].Deliveries.Add(delivery);
+            materials[materialIndex].Deliveries.Add(delivery);
 
-            DatabaseFacade.OrderStorageItem(products[productIndex].ID, delivery);
+            DatabaseFacade.OrderStorageItem(materials[materialIndex].ID, delivery);
 
             View.UpdateStorageItems();
         }
 
-        internal void UpdateStorageDelivery(int productIndex, int deliveryIndex, DateTime deliveryDate, int quantity, bool Arrived) {
-            Material material = products[productIndex];
-            Delivery delivery = product.Deliveries[deliveryIndex];
+        internal void UpdateStorageDelivery(int materialIndex, int deliveryIndex, DateTime deliveryDate, int quantity, bool Arrived) {
+            Material material = materials[materialIndex];
+            Delivery delivery = material.Deliveries[deliveryIndex];
             if (Arrived && !delivery.Arrived) {
                 // Update the storage item's quantity
-                product.InStock += quantity;
-                DatabaseFacade.UpdateStorageItem(product);
+                material.InStock += quantity;
+                DatabaseFacade.UpdateStorageItem(material);
             }
 
             // Update the Delivery

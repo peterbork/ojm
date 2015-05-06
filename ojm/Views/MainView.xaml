@@ -62,7 +62,7 @@
                     <TextBox Name="TextBoxInStock" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="561,82,0,0"/>
                     <Button x:Name="BtnStorageCancel" Content="Annuller" HorizontalAlignment="Left" VerticalAlignment="Top" Width="62
                             " Margin="561,338,0,0" Click="BtnStoreageCancel_Click"/>
-                    <Button Name="BtnAddProduct" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="62" Margin="697,338,0,0" Click="BtnAddProduct_Click"/>
+                    <Button x:Name="BtnAddMaterial" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="62" Margin="697,338,0,0" Click="BtnAddMaterial_Click"/>
                     <ListView x:Name="ListviewOrders" HorizontalAlignment="Left" Height="164" VerticalAlignment="Top" Width="200" Margin="561,377,0,0" MouseDoubleClick="ListviewOrders_MouseDoubleClick">
                         <ListView.View>
                             <GridView>
