@@ -8,7 +8,7 @@ using ojm.Models;
 namespace ojm.Controllers {
     public class Controller {
 
-        List<Product> products = new List<Product>();
+        List<Material> products = new List<Material>();
         List<Customer> customers = new List<Customer>();
         MainView View;
 
@@ -73,7 +73,7 @@ namespace ojm.Controllers {
         }
 
         // STORAGE METHODS
-        public List<Models.Product> GetStorageItems()
+        public List<Models.Material> GetStorageItems()
         {
             products = DatabaseFacade.GetStorageItems();
             return products;
@@ -103,7 +103,7 @@ namespace ojm.Controllers {
         }
         public void UpdateStorageItem(int index, string name, int instock,  string type, int tolerance, int reserved, int customerIndex)
         {
-            Product product = products[index];
+            Material product = products[index];
             product.Name = name;
             product.InStock = instock;
             product.Type = type;
@@ -118,7 +118,7 @@ namespace ojm.Controllers {
 
         public void RegisterDelivery(int dindex, int pindex)
         {
-            Product product = products[pindex];
+            Material product = products[pindex];
             Delivery delivery = product.Deliveries[dindex];
             product.InStock += delivery.Quantity;
 
@@ -129,15 +129,15 @@ namespace ojm.Controllers {
 
         internal void AddStorageItem(string name, int instock, string type, int tolerance, int reserved, int customer)
         {
-            Product product;
+            Material product;
             
             if (customer != -1 )
             {
-                product = new Product(0, name, instock, type, tolerance, reserved, customers[customer]);
+                product = new Material(0, name, instock, type, tolerance, reserved, customers[customer]);
             }
             else
             {
-                product = new Product(0, name, instock, type, tolerance, reserved);
+                product = new Material(0, name, instock, type, tolerance, reserved);
             }
             
             DatabaseFacade.AddStorageItem(product);
@@ -159,7 +159,7 @@ namespace ojm.Controllers {
         }
 
         public void UpdateDelivery(int productIndex, int deliveryIndex) {
-            Product product = products[productIndex];
+            Material product = products[productIndex];
             Dictionary<string, string> delivery = new Dictionary<string,string>();
             delivery.Add("DeliveryDate", product.Deliveries[deliveryIndex].DeliveryDate.ToString());
             delivery.Add("Quantity", product.Deliveries[deliveryIndex].Quantity.ToString());
@@ -182,7 +182,7 @@ namespace ojm.Controllers {
         }
 
         internal void UpdateStorageOrder(int productIndex, int deliveryIndex, DateTime deliveryDate, int quantity, bool Arrived) {
-            Product product = products[productIndex];
+            Material product = products[productIndex];
             Delivery delivery = product.Deliveries[deliveryIndex];
             if (Arrived && !delivery.Arrived) {
                 // Update the storage item's quantity

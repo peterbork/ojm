@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ojm.Models
 {
-    public class Product
+    public class Material
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -18,7 +18,7 @@ namespace ojm.Models
 
         public List<Delivery> Deliveries;
 
-        public Product(int id, string name, int instock)
+        public Material(int id, string name, int instock)
         {
             ID = id;
             Name = name;
@@ -26,7 +26,7 @@ namespace ojm.Models
             Deliveries = new List<Delivery>();
         }
 
-        public Product(int id, string name, int instock, string type, int tolerance, int reserved) {
+        public Material(int id, string name, int instock, string type, int tolerance, int reserved) {
             ID = id;
             Name = name;
             InStock = instock;
@@ -36,7 +36,7 @@ namespace ojm.Models
             Deliveries = new List<Delivery>();
         }
 
-        public Product(int id, string name, int instock, string type, int tolerance, int reserved, Customer customer) 
+        public Material(int id, string name, int instock, string type, int tolerance, int reserved, Customer customer) 
         : this(id, name, instock, type, tolerance, reserved) {
             Customer = customer;
         }

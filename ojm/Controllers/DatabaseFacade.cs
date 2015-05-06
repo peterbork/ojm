@@ -140,9 +140,9 @@ namespace ojm.Controllers {
 
 
         // STORAGE METHODS
-        public static List<Product> GetStorageItems()
+        public static List<Material> GetStorageItems()
         {
-            List<Product> StorageItemsList = new List<Product>();
+            List<Material> StorageItemsList = new List<Material>();
             
             SqlConnection conn = new SqlConnection(ConnectionString);
             try
@@ -157,7 +157,7 @@ namespace ojm.Controllers {
                     // If product has a customer
                     if (customerID != "") {
                         Customer customer = DatabaseFacade.GetCustomerFromID(int.Parse(customerID));
-                        StorageItemsList.Add(new Product(
+                        StorageItemsList.Add(new Material(
                                                 int.Parse(reader["ID"].ToString()),
                                                 reader["Name"].ToString(),
                                                 int.Parse(reader["InStock"].ToString()),
@@ -167,7 +167,7 @@ namespace ojm.Controllers {
                                                 customer
                                             ));
                     }else {
-                        StorageItemsList.Add(new Product(
+                        StorageItemsList.Add(new Material(
                                                 int.Parse(reader["ID"].ToString()),
                                                 reader["Name"].ToString(),
                                                 int.Parse(reader["InStock"].ToString()),
@@ -187,7 +187,7 @@ namespace ojm.Controllers {
 
             return StorageItemsList;
         }
-        public static void UpdateStorageItem(Product product)
+        public static void UpdateStorageItem(Material product)
         {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
@@ -234,7 +234,7 @@ namespace ojm.Controllers {
             }
         }
 
-        internal static void AddStorageItem(Product product)
+        internal static void AddStorageItem(Material product)
         {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try
