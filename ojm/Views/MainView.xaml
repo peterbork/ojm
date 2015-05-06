@@ -82,6 +82,21 @@
                     <Button x:Name="BtnOrderStorageItem" Content="Bestil" HorizontalAlignment="Left" Margin="629,338,0,0" IsEnabled="False" VerticalAlignment="Top" Width="62" Click="BtnOrderStorageItem_Click"/>
                 </Grid>
             </TabItem>
+            <TabItem Name="TabOrders" Header="Ordrer">
+                <Grid Background="#fff">
+                    <ListView Name="ListViewOrders" HorizontalAlignment="Left" Height="541" VerticalAlignment="Top" Width="536" Grid.ColumnSpan="3" IsSynchronizedWithCurrentItem="True">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Produktnavn" Width="auto"/>
+                                <GridViewColumn Header="Kunde" Width="auto"/>
+                                <GridViewColumn Header="Færdiggjorte processor" Width="auto"/>
+                                <GridViewColumn Header="Forventet leveringsdato" Width="auto"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
