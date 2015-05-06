@@ -8,6 +8,13 @@ namespace ojm.Models
 {
     class ProductOrder
     {
+        public ProductOrder(int id, string name, string description, Models.Customer customer)
+        {
+            ID = id;
+            Name = name;
+            Description = description;
+            Customer = customer;
+        }
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
