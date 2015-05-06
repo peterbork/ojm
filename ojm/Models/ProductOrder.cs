@@ -8,7 +8,7 @@ namespace ojm.Models
 {
     class ProductOrder
     {
-        public ProductOrder(int id, string name, string description, Models.Customer customer)
+        public ProductOrder(int id, string name, string description, Customer customer)
         {
             ID = id;
             Name = name;
@@ -18,7 +18,7 @@ namespace ojm.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<Models.Material> Materials { get; set; }
-        public Models.Customer Customer { get; set; }
+        public List<Material> Materials { get; set; }
+        public Customer Customer { get; set; }
     }
 }
