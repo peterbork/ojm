@@ -56,7 +56,7 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Label Content="Produktnavn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="561,2,0,0" Width="200"/>
+                    <Label Content="Navn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="561,2,0,0" Width="200"/>
                     <TextBox Name="TextBoxMaterialName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="561,28,0,0"/>
                     <Label Content="Antal på lager" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="561,56,0,0" Width="200"/>
                     <TextBox Name="TextBoxInStock" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="561,82,0,0"/>
