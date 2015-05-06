@@ -267,7 +267,7 @@ namespace ojm.Controllers {
             List<Delivery> deliveries = new List<Delivery>();
             try {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("GetStorageItemOrders", conn);
+                SqlCommand cmd = new SqlCommand("GetStorageItemDeliveries", conn);
                 cmd.Parameters.Add(new SqlParameter("ProductID", productID));
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -311,7 +311,7 @@ namespace ojm.Controllers {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("UpdateStorageOrder", conn);
+                SqlCommand cmd = new SqlCommand("UpdateStorageDelivery", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("ID", delivery.ID));
                 cmd.Parameters.Add(new SqlParameter("DeliveryDate", delivery.DeliveryDate));
