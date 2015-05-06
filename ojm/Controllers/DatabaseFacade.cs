@@ -12,6 +12,7 @@ namespace ojm.Controllers {
     static class DatabaseFacade {
         static string ConnectionString = "Server=ealdb1.eal.local;" + "Database=ejl26_db;" + "User Id=ejl26_usr;" + "Password=Baz1nga26";
 
+        #region Customers
         // CUSTOMER METHODS
         public static Customer GetCustomerFromCVR(string cvr) {
             Customer _customer = new Customer();
@@ -138,6 +139,8 @@ namespace ojm.Controllers {
             return _customerList;
         }
 
+        #endregion
+        #region Materials
 
         // STORAGE METHODS
         public static List<Material> GetMaterials()
@@ -328,6 +331,7 @@ namespace ojm.Controllers {
             }
         }
 
+        #endregion
         #region ProductOrders
 
         public static List<ProductOrder> GetProductOrders() {
