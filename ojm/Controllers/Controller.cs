@@ -207,6 +207,10 @@ namespace ojm.Controllers {
         #endregion
         #region ProductOrders
 
+        public void GetProductOrders() {
+
+        }
+
         public void AddProductOrder(string name, string description, int customerIndex, List<int> materials) {
 
         }

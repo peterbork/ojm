@@ -327,5 +327,21 @@ namespace ojm.Controllers {
                 conn.Dispose();
             }
         }
+
+        #region ProductOrders
+
+        public static List<ProductOrder> GetProductOrders() {
+            return new List<ProductOrder>();
+        }
+
+        public static void AddProductOrder(ProductOrder productorder) {
+
+        }
+
+        public static void UpdateProductOrder(ProductOrder productorder) {
+
+        }
+
+        #endregion
     }
 }
