@@ -10,6 +10,8 @@ namespace ojm.Controllers {
 
         List<Material> materials = new List<Material>();
         List<Customer> customers = new List<Customer>();
+        List<ProductOrder> productorders = new List<ProductOrder>();
+
         MainView View;
 
         public void setView(MainView view) {
@@ -206,6 +208,10 @@ namespace ojm.Controllers {
         #region ProductOrders
 
         public void AddProductOrder(string name, string description, int customerIndex, List<int> materials) {
+
+        }
+
+        public void UpdateProductOrder(int productorderIndex, string name, string description, int customerIndex, List<int> materials) {
 
         }
 
