@@ -146,7 +146,7 @@ namespace ojm.Controllers {
             DatabaseFacade.AddMaterial(material);
         }
 
-        internal List<Delivery> GetStorageItemOrders(int materialIndex) {
+        internal List<Delivery> GetMaterialDeliveries(int materialIndex) {
 
             materials[materialIndex].Deliveries = DatabaseFacade.GetMaterialOrders(materials[materialIndex].ID);
 
@@ -205,7 +205,9 @@ namespace ojm.Controllers {
         #endregion
         #region ProductOrders
 
+        public void AddProductOrder(string name, string description, int customerIndex, List<int> materials) {
 
+        }
 
         #endregion
     }

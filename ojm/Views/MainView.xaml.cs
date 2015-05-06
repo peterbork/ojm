@@ -114,7 +114,7 @@ namespace ojm {
 
             BtnOrderStorageItem.IsEnabled = true;
 
-            ListviewOrders.ItemsSource = controller.GetStorageItemOrders(selectedMaterial);
+            ListviewOrders.ItemsSource = controller.GetMaterialDeliveries(selectedMaterial);
 
             BtnAddMaterial.Content = "Opdater";
         }
@@ -179,7 +179,7 @@ namespace ojm {
             ListviewStorage.ItemsSource = controller.GetMaterials();
             TextBoxInStock.Text = controller.GetMaterial(selectedMaterial)["InStock"];
 
-            ListviewOrders.ItemsSource = controller.GetStorageItemOrders(selectedMaterial);
+            ListviewOrders.ItemsSource = controller.GetMaterialDeliveries(selectedMaterial);
         }
 
         private void ListviewOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
