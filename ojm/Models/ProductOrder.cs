@@ -8,5 +8,10 @@ namespace ojm.Models
 {
     class ProductOrder
     {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public List<Models.Material> Materials { get; set; }
+        public Models.Customer Customer { get; set; }
     }
 }
