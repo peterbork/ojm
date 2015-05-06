@@ -131,14 +131,14 @@ namespace ojm {
                 tolerance = Convert.ToInt32(TextBoxTolerance.Text);
                 reserved = Convert.ToInt32(TextBoxReserved.Text);
 
-                // Update product
+                // Update material
                 if (selectedMaterial != -1)
                 {
                     controller.UpdateMaterial(selectedMaterial, TextBoxMaterialName.Text, InStock, TextBoxType.Text, tolerance, reserved, ComboboxCustomer.SelectedIndex);
                     ListviewStorage.ItemsSource = controller.GetMaterials();
                     MessageBox.Show("Materialet er blevet Opdateret", "OJM");
                 }
-                // Create product
+                // Create material
                 else
                 {
                     controller.AddMaterial(TextBoxMaterialName.Text, InStock, TextBoxType.Text, tolerance, reserved, ComboboxCustomer.SelectedIndex);

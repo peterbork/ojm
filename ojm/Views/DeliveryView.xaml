@@ -10,6 +10,6 @@
         <CheckBox Content="Ankommet" Name="Arrived" HorizontalAlignment="Left" Margin="9,166,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
         <Button x:Name="Save" Content="Gem" HorizontalAlignment="Left" Margin="85,197,0,0" VerticalAlignment="Top" Width="70" Click="Save_Click"/>
         <Button x:Name="Cancel" Content="Annuller" HorizontalAlignment="Left" Margin="10,197,0,0" VerticalAlignment="Top" Width="70" Click="Cancel_Click"/>
-        <Label x:Name="ProductName" Content="" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label x:Name="MaterialName" Content="" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20"/>
     </Grid>
 </Window>

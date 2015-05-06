@@ -158,7 +158,7 @@ namespace ojm.Controllers {
             view.Show();
 
             view.SetController(this);
-            view.SetProduct(materialIndex, materials[materialIndex].Name);
+            view.SetMaterial(materialIndex, materials[materialIndex].Name);
         }
 
         public void UpdateDelivery(int materialIndex, int deliveryIndex) {
@@ -171,7 +171,7 @@ namespace ojm.Controllers {
             view.Show();
 
             view.SetController(this);
-            view.SetProduct(materialIndex, material.Name);
+            view.SetMaterial(materialIndex, material.Name);
             view.SetDelivery(deliveryIndex, delivery);
         }
 

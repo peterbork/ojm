@@ -29,9 +29,9 @@ namespace ojm.Views {
             this.controller = controller;
         }
 
-        public void SetProduct(int index, string materialName) {
+        public void SetMaterial(int index, string materialName) {
             materialIndex = index;
-            ProductName.Content = materialName;
+            MaterialName.Content = materialName;
         }
 
         public void SetDelivery(int index, Dictionary<string, string> delivery) {
