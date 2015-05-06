@@ -150,7 +150,7 @@ namespace ojm.Controllers {
 
         internal List<Delivery> GetMaterialDeliveries(int materialIndex) {
 
-            materials[materialIndex].Deliveries = DatabaseFacade.GetMaterialOrders(materials[materialIndex].ID);
+            materials[materialIndex].Deliveries = DatabaseFacade.GetMaterialDeliveries(materials[materialIndex].ID);
 
             return materials[materialIndex].Deliveries;
         }
@@ -181,7 +181,7 @@ namespace ojm.Controllers {
             Delivery delivery = new Delivery(0, deliveryDate, quantity);
             materials[materialIndex].Deliveries.Add(delivery);
 
-            DatabaseFacade.OrderStorageItem(materials[materialIndex].ID, delivery);
+            DatabaseFacade.OrderMaterial(materials[materialIndex].ID, delivery);
 
             View.UpdateStorageItems();
         }
@@ -199,7 +199,7 @@ namespace ojm.Controllers {
             delivery.DeliveryDate = deliveryDate;
             delivery.Quantity = quantity;
             delivery.Arrived = Arrived;
-            DatabaseFacade.UpdateStorageOrder(delivery);
+            DatabaseFacade.UpdateStorageDelivery(delivery);
 
             View.UpdateStorageItems();
         }

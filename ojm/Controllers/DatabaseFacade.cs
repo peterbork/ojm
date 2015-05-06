@@ -262,7 +262,7 @@ namespace ojm.Controllers {
             }
         }
 
-        internal static List<Delivery> GetMaterialOrders(int materialID) {
+        internal static List<Delivery> GetMaterialDeliveries(int materialID) {
             SqlConnection conn = new SqlConnection(ConnectionString);
             List<Delivery> deliveries = new List<Delivery>();
             try {
@@ -287,7 +287,7 @@ namespace ojm.Controllers {
             return deliveries;
         }
 
-        internal static void OrderStorageItem(int materialID, Delivery delivery) {
+        internal static void OrderMaterial(int materialID, Delivery delivery) {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
@@ -307,7 +307,7 @@ namespace ojm.Controllers {
             }
         }
 
-        internal static void UpdateStorageOrder(Delivery delivery) {
+        internal static void UpdateStorageDelivery(Delivery delivery) {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
