@@ -183,10 +183,10 @@ namespace ojm.Controllers {
 
             DatabaseFacade.OrderMaterial(materials[materialIndex].ID, delivery);
 
-            View.UpdateStorageItems();
+            View.UpdateMaterials();
         }
 
-        internal void UpdateStorageDelivery(int materialIndex, int deliveryIndex, DateTime deliveryDate, int quantity, bool Arrived) {
+        internal void UpdateMaterialDelivery(int materialIndex, int deliveryIndex, DateTime deliveryDate, int quantity, bool Arrived) {
             Material material = materials[materialIndex];
             Delivery delivery = material.Deliveries[deliveryIndex];
             if (Arrived && !delivery.Arrived) {
@@ -199,9 +199,9 @@ namespace ojm.Controllers {
             delivery.DeliveryDate = deliveryDate;
             delivery.Quantity = quantity;
             delivery.Arrived = Arrived;
-            DatabaseFacade.UpdateStorageDelivery(delivery);
+            DatabaseFacade.UpdateMaterialDelivery(delivery);
 
-            View.UpdateStorageItems();
+            View.UpdateMaterials();
         }
 
         #endregion

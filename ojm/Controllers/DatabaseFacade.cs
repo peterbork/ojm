@@ -307,11 +307,11 @@ namespace ojm.Controllers {
             }
         }
 
-        internal static void UpdateStorageDelivery(Delivery delivery) {
+        internal static void UpdateMaterialDelivery(Delivery delivery) {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("UpdateStorageDelivery", conn);
+                SqlCommand cmd = new SqlCommand("UpdateMaterialDelivery", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("ID", delivery.ID));
                 cmd.Parameters.Add(new SqlParameter("DeliveryDate", delivery.DeliveryDate));

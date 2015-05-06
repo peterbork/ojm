@@ -175,7 +175,7 @@ namespace ojm {
             controller.NewDelivery(selectedMaterial);
         }
 
-        public void UpdateStorageItems() {
+        public void UpdateMaterials() {
             ListviewStorage.ItemsSource = controller.GetMaterials();
             TextBoxInStock.Text = controller.GetMaterial(selectedMaterial)["InStock"];
 
