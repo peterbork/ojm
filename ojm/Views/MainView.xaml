@@ -1,9 +1,9 @@
 ﻿<Window x:Class="ojm.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="600" Width="800" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
     <Grid>
-        <TabControl HorizontalAlignment="Left" Height="585" VerticalAlignment="Top" Width="795" Margin="0,0,-3,-16">
+        <TabControl HorizontalAlignment="Left" Height="736" VerticalAlignment="Top" Width="1014">
             <TabItem Name="CustomerTab" Header="Kunder">
                 <Grid Background="#fff">
                     <Grid.ColumnDefinitions>
@@ -43,7 +43,7 @@
             <TabItem Name="TabVarelager" Header="Materialelager">
                 <Grid Background="#fff">
 
-                    <ListView Name="ListviewStorage" HorizontalAlignment="Left" Height="541" VerticalAlignment="Top" Width="536" MouseDoubleClick="ListviewStorage_MouseDoubleClick" Grid.ColumnSpan="3" IsSynchronizedWithCurrentItem="True">
+                    <ListView Name="ListviewStorage" HorizontalAlignment="Left" Height="708" VerticalAlignment="Top" Width="772" MouseDoubleClick="ListviewStorage_MouseDoubleClick" IsSynchronizedWithCurrentItem="True">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Material" Width="80" DisplayMemberBinding="{Binding Name}" />
@@ -56,14 +56,14 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Label Content="Navn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="561,2,0,0" Width="200"/>
-                    <TextBox Name="TextBoxMaterialName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="561,28,0,0"/>
-                    <Label Content="Antal på lager" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="561,56,0,0" Width="200"/>
-                    <TextBox Name="TextBoxInStock" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="561,82,0,0"/>
+                    <Label Content="Navn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="792,2,0,0" Width="200"/>
+                    <TextBox Name="TextBoxMaterialName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="792,28,0,0"/>
+                    <Label Content="Antal på lager" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="792,56,0,0" Width="200"/>
+                    <TextBox Name="TextBoxInStock" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="792,82,0,0"/>
                     <Button x:Name="BtnStorageCancel" Content="Annuller" HorizontalAlignment="Left" VerticalAlignment="Top" Width="62
-                            " Margin="561,338,0,0" Click="BtnStoreageCancel_Click"/>
-                    <Button x:Name="BtnAddMaterial" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="62" Margin="697,338,0,0" Click="BtnAddMaterial_Click"/>
-                    <ListView x:Name="ListviewOrders" HorizontalAlignment="Left" Height="164" VerticalAlignment="Top" Width="200" Margin="561,377,0,0" MouseDoubleClick="ListviewOrders_MouseDoubleClick">
+                            " Margin="792,338,0,0" Click="BtnStoreageCancel_Click"/>
+                    <Button x:Name="BtnAddMaterial" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="62" Margin="927,338,0,0" Click="BtnAddMaterial_Click"/>
+                    <ListView x:Name="ListviewOrders" HorizontalAlignment="Left" Height="164" VerticalAlignment="Top" Width="200" Margin="792,377,0,0" MouseDoubleClick="ListviewOrders_MouseDoubleClick">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Leveringsdag" Width="80" DisplayMemberBinding="{Binding DeliveryDate, StringFormat='{}{0:dd/MM-yyyy}'}" />
@@ -71,20 +71,20 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Label Content="Type" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="561,111,0,0" Width="200"/>
-                    <TextBox x:Name="TextBoxType" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="561,137,0,0"/>
-                    <Label Content="Tolerance" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="561,164,0,0" Width="200"/>
-                    <TextBox x:Name="TextBoxTolerance" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="561,190,0,0"/>
-                    <Label Content="Reserveret" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="561,219,0,0" Width="200"/>
-                    <TextBox x:Name="TextBoxReserved" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="561,245,0,0"/>
-                    <Label Content="Kunde" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="561,273,0,0" Width="200"/>
-                    <ComboBox x:Name="ComboboxCustomer" HorizontalAlignment="Left" Margin="561,299,0,0" VerticalAlignment="Top" Width="200"/>
-                    <Button x:Name="BtnOrderStorageItem" Content="Bestil" HorizontalAlignment="Left" Margin="629,338,0,0" IsEnabled="False" VerticalAlignment="Top" Width="62" Click="BtnOrderStorageItem_Click"/>
+                    <Label Content="Type" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="792,111,0,0" Width="200"/>
+                    <TextBox x:Name="TextBoxType" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="792,137,0,0"/>
+                    <Label Content="Tolerance" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="792,164,0,0" Width="200"/>
+                    <TextBox x:Name="TextBoxTolerance" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="792,190,0,0"/>
+                    <Label Content="Reserveret" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="792,219,0,0" Width="200"/>
+                    <TextBox x:Name="TextBoxReserved" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="792,245,0,0"/>
+                    <Label Content="Kunde" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="792,273,0,0" Width="200"/>
+                    <ComboBox x:Name="ComboboxCustomer" HorizontalAlignment="Left" Margin="792,299,0,0" VerticalAlignment="Top" Width="200"/>
+                    <Button x:Name="BtnOrderStorageItem" Content="Bestil" HorizontalAlignment="Left" Margin="859,338,0,0" IsEnabled="False" VerticalAlignment="Top" Width="62" Click="BtnOrderStorageItem_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Name="TabOrders" Header="Ordrer">
                 <Grid Background="#fff">
-                    <ListView Name="ListViewOrders" HorizontalAlignment="Left" Height="541" VerticalAlignment="Top" Width="536" Grid.ColumnSpan="3" IsSynchronizedWithCurrentItem="True">
+                    <ListView Name="ListViewOrders" HorizontalAlignment="Left" Height="708" VerticalAlignment="Top" Width="536" IsSynchronizedWithCurrentItem="True">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Produktnavn" Width="auto"/>
@@ -94,7 +94,20 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-
+                    <Button Content="Tilføj ny ordre" HorizontalAlignment="Left" Margin="899,10,0,0" VerticalAlignment="Top" Width="100"/>
+                    <Label Name="LabelProductOrderName" Content="ProductOrder" HorizontalAlignment="Left" Margin="541,29,0,0" VerticalAlignment="Top" FontSize="14"/>
+                    <Label Name="LabelProductOrderDescription" Content="Beskrivelse" HorizontalAlignment="Left" Margin="541,63,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="TextBoxProductOrderDescription" HorizontalAlignment="Left" IsReadOnly="True" Height="65" Margin="545,89,0,0" ScrollViewer.VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="454"/>
+                    <Label Name="LabelProductOrderMaterials" Content="Materialer" HorizontalAlignment="Left" Margin="541,159,0,0" VerticalAlignment="Top"/>
+                    <ListView Name="ListViewProductOrderMaterials" HorizontalAlignment="Left" Height="100" Margin="545,185,0,0" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalAlignment="Top" Width="454">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Materiale" Width="auto"/>
+                                <GridViewColumn Header="Tilgængeligt antal" Width="auto"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Content="Vis detaljer" HorizontalAlignment="Left" Margin="909,300,0,0" VerticalAlignment="Top" Width="90"/>
                 </Grid>
             </TabItem>
         </TabControl>
