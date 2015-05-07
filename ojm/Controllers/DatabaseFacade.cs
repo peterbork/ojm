@@ -336,7 +336,7 @@ namespace ojm.Controllers {
             try
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("AddNewProductOrder", conn);
+                SqlCommand cmd = new SqlCommand("AddProductOrder", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("Name", productorder.Name));
                 cmd.Parameters.Add(new SqlParameter("Description", productorder.Description));
