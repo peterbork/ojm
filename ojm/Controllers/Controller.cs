@@ -203,9 +203,25 @@ namespace ojm.Controllers {
 
             View.UpdateMaterials();
         }
+        public List<Material> GetMaterialsFromCustomerID(int customerid) {
+            materials = DatabaseFacade.GetMaterialsFromCustomerID(customerid);
+            return materials;
+        }
 
         #endregion
         #region ProductOrders
+
+        public List<Models.ProductOrder> GetProductOrders() { 
+            productorders = DatabaseFacade.GetProductOrders();
+            return productorders;
+        }
+        public Dictionary<string, string> GetProductOrder(int index) {
+            Dictionary<string, string> productorder = new Dictionary<string, string>();
+            productorder.Add("Name", productorders[index].Name);
+            productorder.Add("Description", productorders[index].Description);
+            productorder.Add("CompanyName", productorders[index].Customer.CompanyName);
+            return productorder;
+        }
 
         public void AddProductOrder(string name, string description, int customerIndex, List<int> materialIndexes) {
             ProductOrder productorder = new ProductOrder(0, name, description, customers[customerIndex]);

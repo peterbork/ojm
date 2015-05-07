@@ -3,10 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="ProductOrderView" Height="418.988" Width="667.088">
     <Grid>
-        <ListBox HorizontalAlignment="Left" Height="120" Margin="425,59,0,0" VerticalAlignment="Top" Width="200"/>
-        <ListBox HorizontalAlignment="Left" Height="120" Margin="425,184,0,0" VerticalAlignment="Top" Width="200"/>
-        <ComboBox HorizontalAlignment="Left" Margin="74,124,0,0" VerticalAlignment="Top" Width="120"/>
-        <ListBox HorizontalAlignment="Left" Height="100" Margin="286,216,0,0" VerticalAlignment="Top" Width="100"/>
+        <ListBox Name="ListviewAvailableMaterials" HorizontalAlignment="Left" Height="347" Margin="202,36,0,0" VerticalAlignment="Top" Width="210"/>
+        <ListBox Name="ListviewProductOrderMaterials"  HorizontalAlignment="Left" Height="347" Margin="435,36,0,0" VerticalAlignment="Top" Width="210"/>
+        <ComboBox Name="ComboBoxCustomers" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="173" SelectionChanged="ComboBoxCustomers_SelectionChanged"/>
+        <TextBox Name="TextBoxProductOrderName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="173" Margin="10,89,0,0"/>
+        <TextBox Name="TextBoxProductOrderDescription" HorizontalAlignment="Left" Height="86" TextWrapping="Wrap" VerticalAlignment="Top" Width="173" Margin="10,143,0,0"/>
+        <Label Content="Kunde" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
+        <Label Content="Produktnavn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,63,0,0"/>
+        <Label Content="Produktbeskrivelse" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,117,0,0"/>
+        <Label Content="Tilgængelige Materialer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="202,10,0,0"/>
+        <Label Content="Produktets Materialer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="435,10,0,0"/>
+        <Button Name="BtnAddProductOrder" Content="Tilføj Ordre" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" Margin="26,248,0,0"/>
+        <Label Content="Dobbelklik for at tilføje" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,356,0,0" Opacity="0.5"/>
+        <Label Content="Dobbelklik for at fjerne" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="472,356,0,0" Opacity="0.5"/>
 
     </Grid>
 </Window>

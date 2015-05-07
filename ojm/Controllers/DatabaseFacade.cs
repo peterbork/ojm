@@ -362,5 +362,55 @@ namespace ojm.Controllers {
                 conn.Dispose();
             }
         }
+
+        public static List<ProductOrder> GetProductOrders() {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            List<ProductOrder> productorders = new List<ProductOrder>();
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("GetProductOrders", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read()) {
+                    productorders.Add(new ProductOrder(int.Parse(reader["ID"].ToString()), reader["Name"].ToString(), reader["Description"].ToString(), GetCustomerFromID(int.Parse(reader["CustomerID"].ToString()))));
+                }
+                reader.Close();
+
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+            return productorders;
+        }
+        public static List<Material> GetMaterialsFromCustomerID(int customerid) {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            List<Material> materials = new List<Material>();
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("GetMaterialsFromCustomerID", conn);
+                cmd.Parameters.Add(new SqlParameter("CustomerID", customerid));
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read()) {
+                    materials.Add(new Material(int.Parse(reader["ID"].ToString()), reader["Name"].ToString(), int.Parse(reader["InStock"].ToString())));
+                }
+                reader.Close();
+
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+            return materials;
+        }
     }
 }

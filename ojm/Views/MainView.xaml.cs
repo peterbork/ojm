@@ -23,6 +23,7 @@ namespace ojm {
         int selectedMaterial = -1;
         int SelectedCustomerIndex = -1;
         int SelectedCustomerID;
+        int selectedProductOrder;
         public MainView() {
             InitializeComponent();
             
@@ -31,6 +32,7 @@ namespace ojm {
 
             ListviewCustomers.ItemsSource = controller.GetCustomers();
             ListviewStorage.ItemsSource = controller.GetMaterials();
+            ListViewOrders.ItemsSource = controller.GetProductOrders();
 
             ComboboxCustomer.ItemsSource = controller.GetCustomerNames();
         }
@@ -185,6 +187,19 @@ namespace ojm {
         private void ListviewOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
             controller.UpdateDelivery(selectedMaterial, ListviewOrders.SelectedIndex);
         }
+
+        private void BtnAddNewProductOrder_Click(object sender, RoutedEventArgs e) {
+            Views.ProductOrderView window = new Views.ProductOrderView(controller);
+            window.Show();
+        }
+
+        private void ListViewOrders_MouseDoubleClick_1(object sender, MouseButtonEventArgs e) {
+            selectedProductOrder = ListViewOrders.SelectedIndex;
+            TextBoxProductOrderDescription.Text = controller.GetProductOrder(selectedProductOrder)["Description"];
+            LabelProductOrderName.Content = controller.GetProductOrder(selectedProductOrder)["Name"];
+        }
+
+
 
     }
 }

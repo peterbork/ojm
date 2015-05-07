@@ -11,32 +11,32 @@
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="237*"/>
                     </Grid.ColumnDefinitions>
-                    <ListView Name="ListviewCustomers" HorizontalAlignment="Left" Height="541" VerticalAlignment="Top" Width="536" MouseDoubleClick="ListviewCustomers_MouseDoubleClick" Grid.ColumnSpan="3">
+                    <ListView Name="ListviewCustomers" HorizontalAlignment="Left" Height="704" VerticalAlignment="Top" Width="776" MouseDoubleClick="ListviewCustomers_MouseDoubleClick" Grid.ColumnSpan="3" Margin="0,0,0,-0.335">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Firmanavn" Width="80" DisplayMemberBinding="{Binding CompanyName}" />
-                                <GridViewColumn Header="CVR" Width="70" DisplayMemberBinding="{Binding CVR}" />
-                                <GridViewColumn Header="Adresse" Width="100" DisplayMemberBinding="{Binding Address}" />
-                                <GridViewColumn Header="E-mail" Width="120" DisplayMemberBinding="{Binding Email}" />
-                                <GridViewColumn Header="Telefon" Width="60" DisplayMemberBinding="{Binding Phonenumber}" />
-                                <GridViewColumn Header="Kontakt Person" Width="auto" DisplayMemberBinding="{Binding ContactPerson}" />
+                                <GridViewColumn Header="Firmanavn" Width="100" DisplayMemberBinding="{Binding CompanyName}" />
+                                <GridViewColumn Header="CVR" Width="90" DisplayMemberBinding="{Binding CVR}" />
+                                <GridViewColumn Header="Adresse" Width="180" DisplayMemberBinding="{Binding Address}" />
+                                <GridViewColumn Header="E-mail" Width="140" DisplayMemberBinding="{Binding Email}" />
+                                <GridViewColumn Header="Telefon" Width="90" DisplayMemberBinding="{Binding Phonenumber}" />
+                                <GridViewColumn Header="Kontakt Person" Width="169" DisplayMemberBinding="{Binding ContactPerson}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <TextBox Name="TextBoxCompanyName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="485,56,0,0" Grid.Column="2"/>
-                    <Label Content="Firmanavn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="485,30,0,0" Width="64" Grid.Column="2"/>
-                    <TextBox Name="TextBoxCVR" MaxLength="8" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="485,110,0,0" Grid.Column="2"/>
-                    <TextBox Name="TextBoxAddress" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="485,164,0,0" Grid.Column="2"/>
-                    <TextBox Name="TextBoxEmail" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="485,218,0,0" Grid.Column="2"/>
-                    <TextBox Name="TextBoxPhonenumber" MaxLength="8" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="485,272,0,0" Grid.Column="2"/>
-                    <TextBox Name="TextBoxContactPerson" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="485,326,0,0" Grid.Column="2"/>
-                    <Button Name="BtnCustomerCancel" Content="Anuller" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="485,365,0,0" Click="BtnCustomerCancel_Click" Grid.Column="2"/>
-                    <Button Name="BtnAddCustomer" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="610,365,0,0" Click="BtnAddCustomer_Click" Grid.Column="2"/>
-                    <Label Content="CVR" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="485,84,0,0" Width="200" Grid.Column="2"/>
-                    <Label Content="Adresse" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="485,138,0,0" Width="200" Grid.Column="2"/>
-                    <Label Content="E-mail" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="485,192,0,0" Width="200" Grid.Column="2"/>
-                    <Label Content="Kontakt Person" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="485,300,0,0" Width="200" Grid.Column="2"/>
-                    <Label Content="Phonenumber" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="485,246,0,0" Width="200" Grid.Column="2"/>
+                    <TextBox Name="TextBoxCompanyName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="694.984,39,0,0" Grid.Column="2"/>
+                    <Label Content="Firmanavn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="694.984,13,0,0" Width="64" Grid.Column="2"/>
+                    <TextBox Name="TextBoxCVR" MaxLength="8" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="694.984,93,0,0" Grid.Column="2"/>
+                    <TextBox Name="TextBoxAddress" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="694.984,147,0,0" Grid.Column="2"/>
+                    <TextBox Name="TextBoxEmail" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="694.984,201,0,0" Grid.Column="2"/>
+                    <TextBox Name="TextBoxPhonenumber" MaxLength="8" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="694.984,255,0,0" Grid.Column="2"/>
+                    <TextBox Name="TextBoxContactPerson" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="694.984,309,0,0" Grid.Column="2"/>
+                    <Button Name="BtnCustomerCancel" Content="Anuller" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="694.984,348,0,0" Click="BtnCustomerCancel_Click" Grid.Column="2"/>
+                    <Button Name="BtnAddCustomer" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="819.984,348,0,0" Click="BtnAddCustomer_Click" Grid.Column="2"/>
+                    <Label Content="CVR" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="694.984,67,0,0" Width="200" Grid.Column="2"/>
+                    <Label Content="Adresse" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="694.984,121,0,0" Width="200" Grid.Column="2"/>
+                    <Label Content="E-mail" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="694.984,175,0,0" Width="200" Grid.Column="2"/>
+                    <Label Content="Kontakt Person" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="694.984,283,0,0" Width="200" Grid.Column="2"/>
+                    <Label Content="Phonenumber" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="694.984,229,0,0" Width="200" Grid.Column="2"/>
 
                 </Grid>
             </TabItem>
@@ -46,12 +46,12 @@
                     <ListView Name="ListviewStorage" HorizontalAlignment="Left" Height="708" VerticalAlignment="Top" Width="772" MouseDoubleClick="ListviewStorage_MouseDoubleClick" IsSynchronizedWithCurrentItem="True">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Material" Width="80" DisplayMemberBinding="{Binding Name}" />
-                                <GridViewColumn Header="Antal på lager" Width="80" DisplayMemberBinding="{Binding InStock}" />
-                                <GridViewColumn Header="Type" Width="80" DisplayMemberBinding="{Binding Type}" />
-                                <GridViewColumn Header="Tolerance" Width="80" DisplayMemberBinding="{Binding Tolerance}" />
-                                <GridViewColumn Header="Reserveret" Width="80" DisplayMemberBinding="{Binding Reserved}" />
-                                <GridViewColumn Header="Kunde" Width="80" DisplayMemberBinding="{Binding Customer.CompanyName}" />
+                                <GridViewColumn Header="Material" Width="167" DisplayMemberBinding="{Binding Name}" />
+                                <GridViewColumn Header="Antal på lager" Width="100" DisplayMemberBinding="{Binding InStock}" />
+                                <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding Type}" />
+                                <GridViewColumn Header="Tolerance" Width="100" DisplayMemberBinding="{Binding Tolerance}" />
+                                <GridViewColumn Header="Reserveret" Width="100" DisplayMemberBinding="{Binding Reserved}" />
+                                <GridViewColumn Header="Kunde" Width="200" DisplayMemberBinding="{Binding Customer.CompanyName}" />
 
                             </GridView>
                         </ListView.View>
@@ -63,11 +63,11 @@
                     <Button x:Name="BtnStorageCancel" Content="Annuller" HorizontalAlignment="Left" VerticalAlignment="Top" Width="62
                             " Margin="792,338,0,0" Click="BtnStoreageCancel_Click"/>
                     <Button x:Name="BtnAddMaterial" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="62" Margin="927,338,0,0" Click="BtnAddMaterial_Click"/>
-                    <ListView x:Name="ListviewOrders" HorizontalAlignment="Left" Height="164" VerticalAlignment="Top" Width="200" Margin="792,377,0,0" MouseDoubleClick="ListviewOrders_MouseDoubleClick">
+                    <ListView x:Name="ListviewOrders" HorizontalAlignment="Left" Height="327" VerticalAlignment="Top" Width="200" Margin="792,377,0,-0.335" MouseDoubleClick="ListviewOrders_MouseDoubleClick">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Leveringsdag" Width="80" DisplayMemberBinding="{Binding DeliveryDate, StringFormat='{}{0:dd/MM-yyyy}'}" />
-                                <GridViewColumn Header="Antal" Width="80" DisplayMemberBinding="{Binding Quantity}" />
+                                <GridViewColumn Header="Leveringsdag" Width="140" DisplayMemberBinding="{Binding DeliveryDate, StringFormat='{}{0:dd/MM-yyyy}'}" />
+                                <GridViewColumn Header="Antal" Width="55" DisplayMemberBinding="{Binding Quantity}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -84,26 +84,26 @@
             </TabItem>
             <TabItem Name="TabOrders" Header="Ordrer">
                 <Grid Background="#fff">
-                    <ListView Name="ListViewOrders" HorizontalAlignment="Left" Height="708" VerticalAlignment="Top" Width="536" IsSynchronizedWithCurrentItem="True">
+                    <ListView Name="ListViewOrders" HorizontalAlignment="Left" Height="708" VerticalAlignment="Top" Width="668" IsSynchronizedWithCurrentItem="True" Margin="0,0,0,-4.335" MouseDoubleClick="ListViewOrders_MouseDoubleClick_1">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Produktnavn" Width="auto"/>
-                                <GridViewColumn Header="Kunde" Width="auto"/>
-                                <GridViewColumn Header="Færdiggjorte processor" Width="auto"/>
-                                <GridViewColumn Header="Forventet leveringsdato" Width="auto"/>
+                                <GridViewColumn Header="Produktnavn" Width="150" DisplayMemberBinding="{Binding Name}"/>
+                                <GridViewColumn Header="Kunde" Width="213" DisplayMemberBinding="{Binding Customer.CompanyName}"/>
+                                <!--<GridViewColumn Header="Færdiggjorte processor" Width="150" DisplayMemberBinding="{Binding CompanyName}"/>-->
+                                <!--<GridViewColumn Header="Forventet leveringsdato" Width="150"/>-->
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button Content="Tilføj ny ordre" HorizontalAlignment="Left" Margin="899,10,0,0" VerticalAlignment="Top" Width="100"/>
-                    <Label Name="LabelProductOrderName" Content="ProductOrder" HorizontalAlignment="Left" Margin="541,29,0,0" VerticalAlignment="Top" FontSize="14"/>
-                    <Label Name="LabelProductOrderDescription" Content="Beskrivelse" HorizontalAlignment="Left" Margin="541,63,0,0" VerticalAlignment="Top"/>
-                    <TextBox Name="TextBoxProductOrderDescription" HorizontalAlignment="Left" IsReadOnly="True" Height="65" Margin="545,89,0,0" ScrollViewer.VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="454"/>
-                    <Label Name="LabelProductOrderMaterials" Content="Materialer" HorizontalAlignment="Left" Margin="541,159,0,0" VerticalAlignment="Top"/>
-                    <ListView Name="ListViewProductOrderMaterials" HorizontalAlignment="Left" Height="100" Margin="545,185,0,0" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalAlignment="Top" Width="454">
+                    <Button Name="BtnAddNewProductOrder" Content="Tilføj ny ordre" HorizontalAlignment="Left" Margin="899,10,0,0" VerticalAlignment="Top" Width="100" Click="BtnAddNewProductOrder_Click"/>
+                    <Label Name="LabelProductOrderName" Content="" HorizontalAlignment="Left" Margin="687,29,0,0" VerticalAlignment="Top" FontSize="14"/>
+                    <Label Name="LabelProductOrderDescription" Content="Beskrivelse" HorizontalAlignment="Left" Margin="687,63,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="TextBoxProductOrderDescription" HorizontalAlignment="Left" IsReadOnly="True" Height="65" Margin="687,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312"/>
+                    <Label Name="LabelProductOrderMaterials" Content="Materialer" HorizontalAlignment="Left" Margin="687,159,0,0" VerticalAlignment="Top"/>
+                    <ListView Name="ListViewProductOrderMaterials" HorizontalAlignment="Left" Height="100" Margin="687,185,0,0" VerticalAlignment="Top" Width="312">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Materiale" Width="auto"/>
-                                <GridViewColumn Header="Tilgængeligt antal" Width="auto"/>
+                                <GridViewColumn Header="Materiale" Width="187"/>
+                                <GridViewColumn Header="Tilgængeligt antal" Width="120"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
