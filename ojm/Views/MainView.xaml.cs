@@ -27,7 +27,7 @@ namespace ojm {
             InitializeComponent();
             
             controller = new Controller();
-            controller.setView(this);
+            controller.SetView(this);
 
             ListviewCustomers.ItemsSource = controller.GetCustomers();
             ListviewStorage.ItemsSource = controller.GetMaterials();

@@ -20,15 +20,17 @@ namespace ojm.Controllers {
 
         #region Customers
 
-        public void AddCustomer(string companyname, string cvr, string address, string email, string phonenumber, string contactperson) {
+        public bool AddCustomer(string companyname, string cvr, string address, string email, string phonenumber, string contactperson) {
             
             Customer _customer = new Customer(companyname, cvr, address, email, phonenumber, contactperson);
             if (IsCustomerExsisting(_customer.CVR) != true) {
                 DatabaseFacade.AddCustomer(_customer);
                 System.Windows.MessageBox.Show("Kunden blev oprettet", "OJM");
+                return true;
             }
             else {
                 System.Windows.MessageBox.Show("Kunden med CVR "+ cvr +" eksisterer allerede", "OJM");
+                return false;
             }
         }
         public void UpdateCustomer(int id, string companyname, string cvr, string address, string email, string phonenumber, string contactperson) {
