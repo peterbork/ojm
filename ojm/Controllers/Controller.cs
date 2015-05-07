@@ -207,13 +207,12 @@ namespace ojm.Controllers {
         #endregion
         #region ProductOrders
 
-        public void AddProductOrder(string name, string description, int customerIndex, List<int> materialIDs) {
-            List<Material> _materials = new List<Material>();
-            foreach(int i in materialIDs) {
-                _materials.Add(materials[i]);
+        public void AddProductOrder(string name, string description, int customerIndex, List<int> materialIndexes) {
+            ProductOrder productorder = new ProductOrder(0, name, description, customers[customerIndex]);
+            foreach (int i in materialIndexes) {
+                productorder.Materials.Add(materials[i]);
             }
-            ProductOrder _productorder = new ProductOrder(name, description, customers[customerIndex], _materials);
-            DatabaseFacade.AddProductOrder(_productorder);
+            DatabaseFacade.AddProductOrder(productorder);
             System.Windows.MessageBox.Show("Produktordren er blevet tilføjet", "OJM");
         }
 
