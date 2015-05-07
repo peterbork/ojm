@@ -14,23 +14,21 @@ namespace ojm.Controllers {
 
         MainView View;
 
-        public void setView(MainView view) {
+        public void SetView(MainView view) {
             View = view;
         }
 
         #region Customers
 
-        public bool AddCustomer(string companyname, string cvr, string address, string email, string phonenumber, string contactperson) {
+        public void AddCustomer(string companyname, string cvr, string address, string email, string phonenumber, string contactperson) {
             
             Customer _customer = new Customer(companyname, cvr, address, email, phonenumber, contactperson);
             if (IsCustomerExsisting(_customer.CVR) != true) {
                 DatabaseFacade.AddCustomer(_customer);
                 System.Windows.MessageBox.Show("Kunden blev oprettet", "OJM");
-                return true;
             }
             else {
                 System.Windows.MessageBox.Show("Kunden med CVR "+ cvr +" eksisterer allerede", "OJM");
-                return false;
             }
         }
         public void UpdateCustomer(int id, string companyname, string cvr, string address, string email, string phonenumber, string contactperson) {
@@ -207,8 +205,14 @@ namespace ojm.Controllers {
         #endregion
         #region ProductOrders
 
-        public void AddProductOrder(string name, string description, int customerIndex, List<int> materials) {
-
+        public void AddProductOrder(string name, string description, int customerIndex, List<int> materialIDs) {
+            List<Material> _materials = new List<Material>();
+            foreach(int i in materialIDs) {
+                _materials.Add(materials[i]);
+            }
+            ProductOrder _productorder = new ProductOrder(name, description, customers[customerIndex], _materials);
+            DatabaseFacade.AddProductOrder(_productorder);
+            System.Windows.MessageBox.Show("Produktordren er blevet tilføjet", "OJM");
         }
 
         public void UpdateProductOrder(int productorderIndex, string name, string description, int customerIndex, List<int> materials) {

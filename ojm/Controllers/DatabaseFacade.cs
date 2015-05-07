@@ -327,5 +327,38 @@ namespace ojm.Controllers {
                 conn.Dispose();
             }
         }
+
+
+
+        internal static void AddProductOrder(ProductOrder productorder)
+        {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("AddNewProductOrder", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("Name", productorder.Name));
+                cmd.Parameters.Add(new SqlParameter("Description", productorder.Description));
+                cmd.Parameters.Add(new SqlParameter("CustomerID", productorder.Customer.ID));
+                int newProdID = (int)cmd.ExecuteScalar();
+                cmd = new SqlCommand("AddProductOrderMaterial", conn);
+                foreach (Material m in productorder.Materials)
+                {  
+                    cmd.Parameters.Add(new SqlParameter("ProductOrderID", newProdID));
+                    cmd.Parameters.Add(new SqlParameter("Description", productorder.Description));
+                }
+
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+            }
+        }
     }
 }
