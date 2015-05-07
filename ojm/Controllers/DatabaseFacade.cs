@@ -342,11 +342,13 @@ namespace ojm.Controllers {
                 cmd.Parameters.Add(new SqlParameter("Description", productorder.Description));
                 cmd.Parameters.Add(new SqlParameter("CustomerID", productorder.Customer.ID));
                 int newProdID = (int)cmd.ExecuteScalar();
-                cmd = new SqlCommand("AddProductOrderMaterial", conn);
+                
                 foreach (Material m in productorder.Materials)
-                {  
+                {
+                    cmd = new SqlCommand("AddProductOrderMaterial", conn);
                     cmd.Parameters.Add(new SqlParameter("ProductOrderID", newProdID));
-                    cmd.Parameters.Add(new SqlParameter("Description", productorder.Description));
+                    cmd.Parameters.Add(new SqlParameter("MaterialID", m.ID));
+                    cmd.ExecuteNonQuery();
                 }
 
             }
