@@ -22,7 +22,7 @@ namespace ojm.Views
     {
         Controller controller;
 
-        public ProductOrderView(Controllers.Controller incontroller)
+        public ProductOrderView(Controller incontroller)
         {
             InitializeComponent();
             controller = incontroller;
@@ -50,7 +50,7 @@ namespace ojm.Views
                 TextBoxProductOrderDescription.IsEnabled = true;
                 ListviewAvailableMaterials.IsEnabled = true;
                 ListviewProductOrderMaterials.IsEnabled = true;
-                ListviewAvailableMaterials.ItemsSource = controller.GetMaterialsFromCustomerID(controller.GetCustomers()[ComboBoxCustomers.SelectedIndex].ID);
+                ListviewAvailableMaterials.ItemsSource = controller.GetMaterialsFromCustomerIndex(ComboBoxCustomers.SelectedIndex);
                 
             }
             
