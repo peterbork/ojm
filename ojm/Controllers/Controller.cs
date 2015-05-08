@@ -236,7 +236,17 @@ namespace ojm.Controllers {
         }
 
         public void UpdateProductOrder(int productorderIndex, string name, string description, int customerIndex, List<int> materials) {
+            ProductOrder productorder = productorders[productorderIndex];
+            productorder.Name = name;
+            productorder.Description = description;
+            productorder.Customer = customers[customerIndex];
 
+            productorder.Materials = new List<Material>();
+            foreach (int material in materials) {
+                productorder.Materials.Add(this.materials[material]);
+            }
+
+            DatabaseFacade.UpdateProductOrder(productorder);
         }
 
         #endregion

@@ -415,6 +415,41 @@ namespace ojm.Controllers {
             }
             return materials;
         }
+        internal static void UpdateProductOrder(ProductOrder productorder) {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("UpdateProductOrder", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("ID", productorder.ID));
+                cmd.Parameters.Add(new SqlParameter("Name", productorder.Name));
+                cmd.Parameters.Add(new SqlParameter("Description", productorder.Description));
+                cmd.Parameters.Add(new SqlParameter("CustomerID", productorder.Customer.ID));
+                cmd.ExecuteNonQuery();
+                // Delete all materials for the product
+                cmd = new SqlCommand("DeleteProductOrderMaterials", conn);
+                cmd.Parameters.Add(new SqlParameter("ProductOrderID", productorder.ID));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.ExecuteNonQuery();
+
+                // Insert all Materials for the product
+                foreach (Material material in productorder.Materials) {
+                    cmd = new SqlCommand("DeleteProductOrderMaterials", conn);
+                    cmd.Parameters.Add(new SqlParameter("ProductOrderID", productorder.ID));
+                    cmd.Parameters.Add(new SqlParameter("MaterialID", material.ID));
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+        }
+
         #endregion
     }
 }
