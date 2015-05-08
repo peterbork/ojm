@@ -203,10 +203,10 @@ namespace ojm.Controllers {
 
             View.UpdateMaterials();
         }
-        public List<string> GetMaterialsFromCustomerIndex(int customerIndex) {
-            List<string> materials = new List<string>();
+        public Dictionary<int, string> GetMaterialsFromCustomerIndex(int customerIndex) {
+            Dictionary<int, string> materials = new Dictionary<int, string>();
             foreach (Material material in DatabaseFacade.GetMaterialsFromCustomerID(customers[customerIndex].ID)) {
-                materials.Add(material.Name);
+                materials.Add(material.ID, material.Name);
             }
             return materials;
         }

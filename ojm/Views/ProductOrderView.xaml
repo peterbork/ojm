@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="ProductOrderView" Height="418.988" Width="667.088">
     <Grid>
-        <ListBox Name="ListviewAvailableMaterials" HorizontalAlignment="Left" Height="347" Margin="202,36,0,0" VerticalAlignment="Top" Width="210"/>
-        <ListBox Name="ListviewProductOrderMaterials"  HorizontalAlignment="Left" Height="347" Margin="435,36,0,0" VerticalAlignment="Top" Width="210"/>
+        <ListBox Name="ListviewAvailableMaterials" HorizontalAlignment="Left" Height="347" Margin="202,36,0,0" VerticalAlignment="Top" Width="210" MouseDoubleClick="ListviewAvailableMaterials_MouseDoubleClick"/>
+        <ListBox Name="ListviewProductOrderMaterials"  HorizontalAlignment="Left" Height="347" Margin="435,36,0,0" VerticalAlignment="Top" Width="210" MouseDoubleClick="ListviewProductOrderMaterials_MouseDoubleClick"/>
         <ComboBox Name="ComboBoxCustomers" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="173" SelectionChanged="ComboBoxCustomers_SelectionChanged"/>
         <TextBox Name="TextBoxProductOrderName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="173" Margin="10,89,0,0"/>
         <TextBox Name="TextBoxProductOrderDescription" HorizontalAlignment="Left" Height="86" TextWrapping="Wrap" VerticalAlignment="Top" Width="173" Margin="10,143,0,0"/>

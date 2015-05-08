@@ -21,6 +21,8 @@ namespace ojm.Views
     public partial class ProductOrderView : Window
     {
         Controller controller;
+        Dictionary<int, string> availablematerials;
+        Dictionary<int, string> productordermaterials;
 
         public ProductOrderView(Controller incontroller)
         {
@@ -50,10 +52,24 @@ namespace ojm.Views
                 TextBoxProductOrderDescription.IsEnabled = true;
                 ListviewAvailableMaterials.IsEnabled = true;
                 ListviewProductOrderMaterials.IsEnabled = true;
-                ListviewAvailableMaterials.ItemsSource = controller.GetMaterialsFromCustomerIndex(ComboBoxCustomers.SelectedIndex);
-                
+                availablematerials = controller.GetMaterialsFromCustomerIndex(ComboBoxCustomers.SelectedIndex);
+                foreach (string material in controller.GetMaterialsFromCustomerIndex(ComboBoxCustomers.SelectedIndex).Values) {
+                    ListviewAvailableMaterials.Items.Add(material);  
+                }
             }
+        }
+
+        public void UpdateListViews() { 
             
+        }
+        private void ListviewAvailableMaterials_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            int selectedIndex = ListviewAvailableMaterials.SelectedIndex;
+            ListviewProductOrderMaterials.Items.Add(controller.GetMaterialsFromCustomerIndex(ComboBoxCustomers.SelectedIndex)[selectedIndex]);
+            ListviewAvailableMaterials.Items.RemoveAt(selectedIndex);
+        }
+
+        private void ListviewProductOrderMaterials_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+
         }
 
     }
