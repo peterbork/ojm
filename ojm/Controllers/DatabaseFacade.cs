@@ -350,6 +350,7 @@ namespace ojm.Controllers {
                 foreach (Material m in productorder.Materials)
                 {
                     cmd = new SqlCommand("AddProductOrderMaterial", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("ProductOrderID", newProdID));
                     cmd.Parameters.Add(new SqlParameter("MaterialID", m.ID));
                     cmd.ExecuteNonQuery();

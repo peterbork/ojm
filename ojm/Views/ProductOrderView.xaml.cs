@@ -22,7 +22,7 @@ namespace ojm.Views
     {
         Controller controller;
         Dictionary<int, string> availablematerials;
-        Dictionary<int, string> productordermaterials;
+        Dictionary<int, string> productordermaterials = new Dictionary<int,string>();
 
         public ProductOrderView(Controller incontroller)
         {
@@ -38,7 +38,6 @@ namespace ojm.Views
             TextBoxProductOrderDescription.IsEnabled = false;
             ListviewAvailableMaterials.IsEnabled = false;
             ListviewProductOrderMaterials.IsEnabled = false;
-            BtnAddProductOrder.IsEnabled = false;
             
         }
         public void SetController(Controller controller) {
@@ -53,23 +52,47 @@ namespace ojm.Views
                 ListviewAvailableMaterials.IsEnabled = true;
                 ListviewProductOrderMaterials.IsEnabled = true;
                 availablematerials = controller.GetMaterialsFromCustomerIndex(ComboBoxCustomers.SelectedIndex);
+                
                 foreach (string material in controller.GetMaterialsFromCustomerIndex(ComboBoxCustomers.SelectedIndex).Values) {
                     ListviewAvailableMaterials.Items.Add(material);  
                 }
             }
         }
 
-        public void UpdateListViews() { 
-            
+        public void UpdateListViews() {
+            ListviewAvailableMaterials.Items.Clear();
+            ListviewProductOrderMaterials.Items.Clear();
+            foreach (string material in availablematerials.Values) {
+                ListviewAvailableMaterials.Items.Add(material);
+            }
+            foreach (string material in productordermaterials.Values) {
+                ListviewProductOrderMaterials.Items.Add(material);
+            }
         }
         private void ListviewAvailableMaterials_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
-            int selectedIndex = ListviewAvailableMaterials.SelectedIndex;
-            ListviewProductOrderMaterials.Items.Add(controller.GetMaterialsFromCustomerIndex(ComboBoxCustomers.SelectedIndex)[selectedIndex]);
-            ListviewAvailableMaterials.Items.RemoveAt(selectedIndex);
+            //int selectedItem = ListviewAvailableMaterials.SelectedItem.;
+            List<int> keylist = new List<int>(this.availablematerials.Keys);
+            List<string> valuelist = new List<string>(this.availablematerials.Values);
+            int selectedKey = keylist[ListviewAvailableMaterials.SelectedIndex];
+            string selectedValue = valuelist[ListviewAvailableMaterials.SelectedIndex];
+            productordermaterials.Add(selectedKey, selectedValue);
+            availablematerials.Remove(selectedKey);
+            UpdateListViews();
         }
 
         private void ListviewProductOrderMaterials_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            List<int> keylist = new List<int>(this.productordermaterials.Keys);
+            List<string> valuelist = new List<string>(this.productordermaterials.Values);
+            int selectedKey = keylist[ListviewProductOrderMaterials.SelectedIndex];
+            string selectedValue = valuelist[ListviewProductOrderMaterials.SelectedIndex];
+            availablematerials.Add(selectedKey, selectedValue);
+            productordermaterials.Remove(selectedKey);
+            UpdateListViews();
+        }
 
+        private void BtnAddProductOrder_Click(object sender, RoutedEventArgs e) {
+            List<int> materialkeys = productordermaterials.Keys.ToList();
+            controller.AddProductOrder(TextBoxProductOrderName.Text, TextBoxProductOrderDescription.Text, ComboBoxCustomers.SelectedIndex, materialkeys);
         }
 
     }

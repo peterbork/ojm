@@ -204,11 +204,15 @@ namespace ojm.Controllers {
             View.UpdateMaterials();
         }
         public Dictionary<int, string> GetMaterialsFromCustomerIndex(int customerIndex) {
-            Dictionary<int, string> materials = new Dictionary<int, string>();
-            foreach (Material material in DatabaseFacade.GetMaterialsFromCustomerID(customers[customerIndex].ID)) {
-                materials.Add(material.ID, material.Name);
+            Dictionary<int, string> _materials = new Dictionary<int, string>();
+            int i = 0;
+            foreach (Material material in materials) {
+                if (material.Customer == null || material.Customer.ID == customers[customerIndex].ID) {
+                    _materials.Add(i, material.Name);
+                }
+                i++;
             }
-            return materials;
+            return _materials;
         }
 
         #endregion

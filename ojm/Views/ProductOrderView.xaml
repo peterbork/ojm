@@ -13,7 +13,7 @@
         <Label Content="Produktbeskrivelse" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,117,0,0"/>
         <Label Content="Tilgængelige Materialer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="202,10,0,0"/>
         <Label Content="Produktets Materialer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="435,10,0,0"/>
-        <Button Name="BtnAddProductOrder" Content="Tilføj Ordre" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" Margin="26,248,0,0"/>
+        <Button Name="BtnAddProductOrder" Content="Tilføj Ordre" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" Margin="26,248,0,0" Click="BtnAddProductOrder_Click"/>
         <Label Content="Dobbelklik for at tilføje" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,356,0,0" Opacity="0.5"/>
         <Label Content="Dobbelklik for at fjerne" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="472,356,0,0" Opacity="0.5"/>
 
