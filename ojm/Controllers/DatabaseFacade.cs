@@ -366,8 +366,6 @@ namespace ojm.Controllers {
                 conn.Dispose();
             }
         }
-
-<<<<<<< HEAD
         public static List<ProductOrder> GetProductOrders() {
             SqlConnection conn = new SqlConnection(ConnectionString);
             List<ProductOrder> productorders = new List<ProductOrder>();
@@ -417,8 +415,7 @@ namespace ojm.Controllers {
             }
             return materials;
         }
-=======
         #endregion
->>>>>>> origin/master
+
     }
 }
