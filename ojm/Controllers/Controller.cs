@@ -267,6 +267,7 @@ namespace ojm.Controllers {
             }
 
             DatabaseFacade.UpdateProductOrder(productorder);
+            System.Windows.MessageBox.Show("Produktordren er blevet opdateret", "OJM");
         }
 
         #endregion

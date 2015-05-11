@@ -46,7 +46,6 @@ namespace ojm.Views
         }
 
         private void ComboBoxCustomers_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            MessageBox.Show("heello");
             if (ComboBoxCustomers.SelectedIndex != -1) {
                 TextBoxProductOrderName.IsEnabled = true;
                 TextBoxProductOrderDescription.IsEnabled = true;
@@ -60,7 +59,6 @@ namespace ojm.Views
                     ListviewAvailableMaterials.Items.Add(material);  
                 }
             }
-            MessageBox.Show("Goodbye");
         }
 
         public void UpdateListViews() {
@@ -96,10 +94,10 @@ namespace ojm.Views
 
         private void BtnAddProductOrder_Click(object sender, RoutedEventArgs e) {
             List<int> materialkeys = productordermaterials.Keys.ToList();
-            if (selectedProductOrder != null)
-                controller.AddProductOrder(TextBoxProductOrderName.Text, TextBoxProductOrderDescription.Text, ComboBoxCustomers.SelectedIndex, materialkeys);
-            else
+            if (selectedProductOrder > -1)
                 controller.UpdateProductOrder(selectedProductOrder, TextBoxProductOrderName.Text, TextBoxProductOrderDescription.Text, ComboBoxCustomers.SelectedIndex, materialkeys);
+            else
+                controller.AddProductOrder(TextBoxProductOrderName.Text, TextBoxProductOrderDescription.Text, ComboBoxCustomers.SelectedIndex, materialkeys);
         }
 
         internal void SetProductOrder(int selectedProductOrder) {
@@ -109,8 +107,8 @@ namespace ojm.Views
             ComboBoxCustomers.SelectedItem = productorder["CompanyName"];
             TextBoxProductOrderName.Text = productorder["Name"];
             TextBoxProductOrderDescription.Text = productorder["Description"];
-            MessageBox.Show(availablematerials.Count + "");
             List<string> selectedmaterials = controller.GetProductOrderMaterialStrings(selectedProductOrder);
+            BtnAddProductOrder.Content = "Opdater product ordre";
             // Remove Productorders materials from available materials
             foreach (string material in selectedmaterials) {
                 foreach (KeyValuePair<int, string> amaterial in availablematerials.Reverse()) {
