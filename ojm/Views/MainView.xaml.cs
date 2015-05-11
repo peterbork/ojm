@@ -199,6 +199,12 @@ namespace ojm {
             LabelProductOrderName.Content = controller.GetProductOrder(selectedProductOrder)["Name"];
         }
 
+        private void BtnShowDetails_Click(object sender, RoutedEventArgs e) {
+            Views.ProductOrderView window = new Views.ProductOrderView(controller);
+            window.SetProductOrder(selectedProductOrder);
+            window.Show();
+        }
+
 
 
     }

@@ -107,7 +107,7 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button Content="Vis detaljer" HorizontalAlignment="Left" Margin="909,300,0,0" VerticalAlignment="Top" Width="90"/>
+                    <Button x:Name="BtnShowDetails" Content="Vis detaljer" HorizontalAlignment="Left" Margin="909,300,0,0" VerticalAlignment="Top" Width="90" Click="BtnShowDetails_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>
