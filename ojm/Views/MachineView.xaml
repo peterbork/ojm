@@ -6,7 +6,7 @@
         <ListBox x:Name="ListBoxAllMachines" HorizontalAlignment="Left" Height="310" VerticalAlignment="Top" Width="210
                  " Margin="11,39,0,0"/>
         <ListBox x:Name="ListBoxChosenMachines" HorizontalAlignment="Left" Height="310" VerticalAlignment="Top" Width="210                  " Margin="239,39,0,0"/>
-        <Button x:Name="btnAddMachinesToProductOrder" Content="Tilføj maskiner" HorizontalAlignment="Left" VerticalAlignment="Top" Width="109" Margin="178,364,0,0"/>
+        <Button x:Name="btnAddMachinesToProductOrder" Content="Tilføj maskiner!" HorizontalAlignment="Left" VerticalAlignment="Top" Width="109" Margin="178,364,0,0"/>
         <Label Content="Alle maskiner" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="11,13,0,0"/>
         <Label Content="Valgte maskeiner" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="239,13,0,0"/>
         <Label Content="Dobbelklik for at tilføje" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="47,323,0,0" Opacity="0.5"/>
