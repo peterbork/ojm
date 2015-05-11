@@ -107,9 +107,19 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button x:Name="BtnShowDetails" Content="Vis detaljer" HorizontalAlignment="Left" Margin="909,300,0,0" VerticalAlignment="Top" Width="90" Click="BtnShowDetails_Click"/>
+                    <Button x:Name="BtnShowDetails" Content="Vis detaljer" HorizontalAlignment="Left" Margin="907,290,0,0" VerticalAlignment="Top" 
+                     Width="90" Click="BtnShowDetails_Click"/>
+                    <ListView x:Name="ListViewMachines" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="312" Margin="687,343,0,0">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Maskine" Width="187"/>
+                                <GridViewColumn Header="Færdig" Width="120"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                 </Grid>
             </TabItem>
         </TabControl>
+        <Button x:Name="btnAddMachines" Content="Tilføj Maskiner" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" Margin="895,473,0,0"/>
     </Grid>
 </Window>
