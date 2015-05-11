@@ -57,6 +57,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Machine.cs" />
+    <Compile Include="Views\MachineView.xaml.cs">
+      <DependentUpon>MachineView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProductOrderView.xaml.cs">
       <DependentUpon>ProductOrderView.xaml</DependentUpon>
     </Compile>
@@ -67,6 +70,10 @@
     <Page Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MachineView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
