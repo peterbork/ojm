@@ -265,8 +265,12 @@ namespace ojm.Controllers {
             }
         }
 
+<<<<<<< HEAD
         public static List<Delivery> GetMaterialDeliveries(int materialID)
         {
+=======
+        public static List<Delivery> GetMaterialDeliveries(int materialID) {
+>>>>>>> origin/master
             SqlConnection conn = new SqlConnection(ConnectionString);
             List<Delivery> deliveries = new List<Delivery>();
             try {
@@ -291,8 +295,12 @@ namespace ojm.Controllers {
             return deliveries;
         }
 
+<<<<<<< HEAD
         public static void OrderMaterial(int materialID, Delivery delivery)
         {
+=======
+        public static void OrderMaterial(int materialID, Delivery delivery) {
+>>>>>>> origin/master
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
@@ -312,8 +320,12 @@ namespace ojm.Controllers {
             }
         }
 
+<<<<<<< HEAD
         public static void UpdateMaterialDelivery(Delivery delivery)
         {
+=======
+        public static void UpdateMaterialDelivery(Delivery delivery) {
+>>>>>>> origin/master
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
@@ -448,8 +460,12 @@ namespace ojm.Controllers {
             }
             return productorders;
         }
+<<<<<<< HEAD
         public static void UpdateProductOrder(ProductOrder productorder)
         {
+=======
+        public static void UpdateProductOrder(ProductOrder productorder) {
+>>>>>>> origin/master
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
@@ -468,7 +484,7 @@ namespace ojm.Controllers {
 
                 // Insert all Materials for the product
                 foreach (Material material in productorder.Materials) {
-                    cmd = new SqlCommand("DeleteProductOrderMaterials", conn);
+                    cmd = new SqlCommand("AddProductOrderMaterial", conn);
                     cmd.Parameters.Add(new SqlParameter("ProductOrderID", productorder.ID));
                     cmd.Parameters.Add(new SqlParameter("MaterialID", material.ID));
                     cmd.CommandType = CommandType.StoredProcedure;
