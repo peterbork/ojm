@@ -330,6 +330,57 @@ namespace ojm.Controllers {
                 conn.Dispose();
             }
         }
+        public static List<Material> GetMaterialsFromCustomerID(int customerid) {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            List<Material> materials = new List<Material>();
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("GetMaterialsFromCustomerID", conn);
+                cmd.Parameters.Add(new SqlParameter("CustomerID", customerid));
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read()) {
+                    materials.Add(new Material(int.Parse(reader["ID"].ToString()), reader["Name"].ToString(), int.Parse(reader["InStock"].ToString())));
+                }
+                reader.Close();
+
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+            return materials;
+        }
+
+        public static List<Material> GetMaterialsFromProductOrderID(int ProductOrderID) {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            List<Material> materials = new List<Material>();
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("GetMaterialsFromProductOrderID", conn);
+                cmd.Parameters.Add(new SqlParameter("ProdctOrderID", ProductOrderID));
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read()) {
+                    materials.Add(new Material(int.Parse(reader["ID"].ToString()), reader["Name"].ToString(), int.Parse(reader["InStock"].ToString())));
+                }
+                reader.Close();
+
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+            return materials;
+        }
 
         #endregion
         #region ProductOrder
@@ -377,7 +428,9 @@ namespace ojm.Controllers {
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read()) {
-                    productorders.Add(new ProductOrder(int.Parse(reader["ID"].ToString()), reader["Name"].ToString(), reader["Description"].ToString(), GetCustomerFromID(int.Parse(reader["CustomerID"].ToString()))));
+                    productorders.Add(new ProductOrder(int.Parse(reader["ID"].ToString()), reader["Name"].ToString(), reader["Description"].ToString(), GetCustomerFromID(int.Parse(reader["CustomerID"].ToString())), GetMaterialsFromProductOrderID(int.Parse(reader["ID"].ToString()))));
+
+                    
                 }
                 reader.Close();
 
@@ -390,31 +443,6 @@ namespace ojm.Controllers {
                 conn.Dispose();
             }
             return productorders;
-        }
-        public static List<Material> GetMaterialsFromCustomerID(int customerid) {
-            SqlConnection conn = new SqlConnection(ConnectionString);
-            List<Material> materials = new List<Material>();
-            try {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("GetMaterialsFromCustomerID", conn);
-                cmd.Parameters.Add(new SqlParameter("CustomerID", customerid));
-                cmd.CommandType = CommandType.StoredProcedure;
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read()) {
-                    materials.Add(new Material(int.Parse(reader["ID"].ToString()), reader["Name"].ToString(), int.Parse(reader["InStock"].ToString())));
-                }
-                reader.Close();
-
-            }
-            catch (SqlException e) {
-                MessageBox.Show(e.Message);
-            }
-            finally {
-                conn.Close();
-                conn.Dispose();
-            }
-            return materials;
         }
         internal static void UpdateProductOrder(ProductOrder productorder) {
             SqlConnection conn = new SqlConnection(ConnectionString);

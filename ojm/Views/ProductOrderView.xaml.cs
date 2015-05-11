@@ -21,6 +21,7 @@ namespace ojm.Views
     public partial class ProductOrderView : Window
     {
         Controller controller;
+        int selectedProductOrder;
         Dictionary<int, string> availablematerials;
         Dictionary<int, string> productordermaterials = new Dictionary<int,string>();
 
@@ -41,8 +42,7 @@ namespace ojm.Views
             
         }
         public void SetController(Controller controller) {
-            this.controller = controller;
-            
+            this.controller = controller;      
         }
 
         private void ComboBoxCustomers_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -52,8 +52,10 @@ namespace ojm.Views
                 ListviewAvailableMaterials.IsEnabled = true;
                 ListviewProductOrderMaterials.IsEnabled = true;
                 availablematerials = controller.GetMaterialsFromCustomerIndex(ComboBoxCustomers.SelectedIndex);
-                
-                foreach (string material in controller.GetMaterialsFromCustomerIndex(ComboBoxCustomers.SelectedIndex).Values) {
+
+                ListviewAvailableMaterials.Items.Clear();
+                ListviewProductOrderMaterials.Items.Clear();
+                foreach (string material in availablematerials.Values) {
                     ListviewAvailableMaterials.Items.Add(material);  
                 }
             }
@@ -95,5 +97,25 @@ namespace ojm.Views
             controller.AddProductOrder(TextBoxProductOrderName.Text, TextBoxProductOrderDescription.Text, ComboBoxCustomers.SelectedIndex, materialkeys);
         }
 
+        internal void SetProductOrder(int selectedProductOrder) {
+            this.selectedProductOrder = selectedProductOrder;
+
+            Dictionary<string, string> productorder = controller.GetProductOrder(selectedProductOrder);
+            ComboBoxCustomers.SelectedItem = productorder["CompanyName"];
+            TextBoxProductOrderName.Text = productorder["Name"];
+            TextBoxProductOrderDescription.Text = productorder["Description"];
+
+            List<string> selectedmaterials = controller.GetProductOrderMaterialStrings(selectedProductOrder);
+            // Remove Productorders materials from available materials
+            foreach (string material in selectedmaterials) {
+                foreach (KeyValuePair<int, string> amaterial in availablematerials) {
+                    if (material == amaterial.Value) {
+                        productordermaterials.Add(amaterial.Key, amaterial.Value);
+                        availablematerials.Remove(amaterial.Key);
+                    }
+                }
+            }
+            UpdateListViews();
+        }
     }
 }

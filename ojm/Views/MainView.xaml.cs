@@ -197,6 +197,7 @@ namespace ojm {
             selectedProductOrder = ListViewOrders.SelectedIndex;
             TextBoxProductOrderDescription.Text = controller.GetProductOrder(selectedProductOrder)["Description"];
             LabelProductOrderName.Content = controller.GetProductOrder(selectedProductOrder)["Name"];
+            ListViewProductOrderMaterials.ItemsSource = controller.GetProductOrderMaterials(selectedProductOrder);
         }
 
         private void BtnShowDetails_Click(object sender, RoutedEventArgs e) {

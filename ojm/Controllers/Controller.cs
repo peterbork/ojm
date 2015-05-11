@@ -227,7 +227,22 @@ namespace ojm.Controllers {
             productorder.Add("Name", productorders[index].Name);
             productorder.Add("Description", productorders[index].Description);
             productorder.Add("CompanyName", productorders[index].Customer.CompanyName);
+
             return productorder;
+        }
+
+        public List<Material> GetProductOrderMaterials(int index) {
+            return productorders[index].Materials;
+        }
+
+        public List<string> GetProductOrderMaterialStrings(int index) {
+            List<string> materials = new List<string>();
+
+            foreach (Material material in productorders[index].Materials) {
+                materials.Add(material.Name);
+            }
+
+            return materials;
         }
 
         public void AddProductOrder(string name, string description, int customerIndex, List<int> materialIndexes) {

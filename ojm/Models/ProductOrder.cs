@@ -23,6 +23,13 @@ namespace ojm.Models
             Customer = customer;
             Materials = new List<Material>();
         }
+        public ProductOrder(int id, string name, string description, Customer customer, List<Material> materials) {
+            ID = id;
+            Name = name;
+            Description = description;
+            Customer = customer;
+            Materials = materials;
+        }
         public ProductOrder(string name, string description, Customer customer, List<Material> materials)
         {
             Name = name;
