@@ -237,7 +237,7 @@ namespace ojm.Controllers {
             }
         }
 
-        internal static void AddMaterial(Material material)
+        public static void AddMaterial(Material material)
         {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try
@@ -265,7 +265,8 @@ namespace ojm.Controllers {
             }
         }
 
-        internal static List<Delivery> GetMaterialDeliveries(int materialID) {
+        public static List<Delivery> GetMaterialDeliveries(int materialID)
+        {
             SqlConnection conn = new SqlConnection(ConnectionString);
             List<Delivery> deliveries = new List<Delivery>();
             try {
@@ -290,7 +291,8 @@ namespace ojm.Controllers {
             return deliveries;
         }
 
-        internal static void OrderMaterial(int materialID, Delivery delivery) {
+        public static void OrderMaterial(int materialID, Delivery delivery)
+        {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
@@ -310,7 +312,8 @@ namespace ojm.Controllers {
             }
         }
 
-        internal static void UpdateMaterialDelivery(Delivery delivery) {
+        public static void UpdateMaterialDelivery(Delivery delivery)
+        {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
@@ -385,7 +388,7 @@ namespace ojm.Controllers {
         #endregion
         #region ProductOrder
 
-        internal static void AddProductOrder(ProductOrder productorder)
+        public static void AddProductOrder(ProductOrder productorder)
         {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try
@@ -418,7 +421,8 @@ namespace ojm.Controllers {
                 conn.Dispose();
             }
         }
-        public static List<ProductOrder> GetProductOrders() {
+        public static List<ProductOrder> GetProductOrders()
+        {
             SqlConnection conn = new SqlConnection(ConnectionString);
             List<ProductOrder> productorders = new List<ProductOrder>();
             try {
@@ -444,7 +448,8 @@ namespace ojm.Controllers {
             }
             return productorders;
         }
-        internal static void UpdateProductOrder(ProductOrder productorder) {
+        public static void UpdateProductOrder(ProductOrder productorder)
+        {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
@@ -482,7 +487,7 @@ namespace ojm.Controllers {
         #endregion
         #region Machines
 
-        internal static List<Machine> GetMachines()
+        public static List<Machine> GetMachines()
         {
             List<Machine> Machinelist = new List<Machine>();
             
