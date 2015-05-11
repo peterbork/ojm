@@ -133,7 +133,7 @@ namespace ojm.Controllers {
         }
 
 
-        internal void AddMaterial(string name, int instock, string type, int tolerance, int reserved, int customer)
+        public void AddMaterial(string name, int instock, string type, int tolerance, int reserved, int customer)
         {
             Material material;
             
@@ -149,14 +149,14 @@ namespace ojm.Controllers {
             DatabaseFacade.AddMaterial(material);
         }
 
-        internal List<Delivery> GetMaterialDeliveries(int materialIndex) {
+        public List<Delivery> GetMaterialDeliveries(int materialIndex) {
 
             materials[materialIndex].Deliveries = DatabaseFacade.GetMaterialDeliveries(materials[materialIndex].ID);
 
             return materials[materialIndex].Deliveries;
         }
 
-        internal void NewDelivery(int materialIndex) {
+        public void NewDelivery(int materialIndex) {
             Views.DeliveryView view = new Views.DeliveryView();
             view.Show();
 
@@ -178,7 +178,7 @@ namespace ojm.Controllers {
             view.SetDelivery(deliveryIndex, delivery);
         }
 
-        internal void OrderMaterial(int materialIndex, DateTime deliveryDate, int quantity) {
+        public void OrderMaterial(int materialIndex, DateTime deliveryDate, int quantity) {
             Delivery delivery = new Delivery(0, deliveryDate, quantity);
             materials[materialIndex].Deliveries.Add(delivery);
 
@@ -187,7 +187,8 @@ namespace ojm.Controllers {
             View.UpdateMaterials();
         }
 
-        internal void UpdateMaterialDelivery(int materialIndex, int deliveryIndex, DateTime deliveryDate, int quantity, bool Arrived) {
+        public void UpdateMaterialDelivery(int materialIndex, int deliveryIndex, DateTime deliveryDate, int quantity, bool Arrived)
+        {
             Material material = materials[materialIndex];
             Delivery delivery = material.Deliveries[deliveryIndex];
             if (Arrived && !delivery.Arrived) {

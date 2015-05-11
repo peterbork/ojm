@@ -264,13 +264,7 @@ namespace ojm.Controllers {
                 conn.Dispose();
             }
         }
-
-<<<<<<< HEAD
-        public static List<Delivery> GetMaterialDeliveries(int materialID)
-        {
-=======
         public static List<Delivery> GetMaterialDeliveries(int materialID) {
->>>>>>> origin/master
             SqlConnection conn = new SqlConnection(ConnectionString);
             List<Delivery> deliveries = new List<Delivery>();
             try {
@@ -295,12 +289,7 @@ namespace ojm.Controllers {
             return deliveries;
         }
 
-<<<<<<< HEAD
-        public static void OrderMaterial(int materialID, Delivery delivery)
-        {
-=======
         public static void OrderMaterial(int materialID, Delivery delivery) {
->>>>>>> origin/master
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
@@ -320,12 +309,7 @@ namespace ojm.Controllers {
             }
         }
 
-<<<<<<< HEAD
-        public static void UpdateMaterialDelivery(Delivery delivery)
-        {
-=======
         public static void UpdateMaterialDelivery(Delivery delivery) {
->>>>>>> origin/master
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
@@ -396,10 +380,8 @@ namespace ojm.Controllers {
             }
             return materials;
         }
-
         #endregion
         #region ProductOrder
-
         public static void AddProductOrder(ProductOrder productorder)
         {
             SqlConnection conn = new SqlConnection(ConnectionString);
@@ -460,12 +442,7 @@ namespace ojm.Controllers {
             }
             return productorders;
         }
-<<<<<<< HEAD
-        public static void UpdateProductOrder(ProductOrder productorder)
-        {
-=======
         public static void UpdateProductOrder(ProductOrder productorder) {
->>>>>>> origin/master
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
