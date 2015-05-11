@@ -96,7 +96,10 @@ namespace ojm.Views
 
         private void BtnAddProductOrder_Click(object sender, RoutedEventArgs e) {
             List<int> materialkeys = productordermaterials.Keys.ToList();
-            controller.AddProductOrder(TextBoxProductOrderName.Text, TextBoxProductOrderDescription.Text, ComboBoxCustomers.SelectedIndex, materialkeys);
+            if (selectedProductOrder != null)
+                controller.AddProductOrder(TextBoxProductOrderName.Text, TextBoxProductOrderDescription.Text, ComboBoxCustomers.SelectedIndex, materialkeys);
+            else
+                controller.UpdateProductOrder(selectedProductOrder, TextBoxProductOrderName.Text, TextBoxProductOrderDescription.Text, ComboBoxCustomers.SelectedIndex, materialkeys);
         }
 
         internal void SetProductOrder(int selectedProductOrder) {
