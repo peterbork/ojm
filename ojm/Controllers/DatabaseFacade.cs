@@ -480,5 +480,33 @@ namespace ojm.Controllers {
         }
 
         #endregion
+        #region Machines
+
+        internal static List<Machine> GetMachines()
+        {
+            List<Machine> Machinelist = new List<Machine>();
+            
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("GetMachines", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                        Machinelist.Add(new Machine( int.Parse(reader["ID"].ToString()), reader["Name"].ToString(), reader["Type"].ToString()));
+                }    
+                reader.Close(); 
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return Machinelist;
+        }
+
+        #endregion
     }
 }

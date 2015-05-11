@@ -11,6 +11,7 @@ namespace ojm.Controllers {
         List<Material> materials = new List<Material>();
         List<Customer> customers = new List<Customer>();
         List<ProductOrder> productorders = new List<ProductOrder>();
+        List<Machine> machines = new List<Machine>();
 
         MainView View;
 
@@ -266,6 +267,17 @@ namespace ojm.Controllers {
             }
 
             DatabaseFacade.UpdateProductOrder(productorder);
+        }
+
+        #endregion
+
+
+        #region Machines
+
+        public List<Models.Machine> GetMachines() {
+
+            machines = DatabaseFacade.GetMachines();
+            return machines;
         }
 
         #endregion

@@ -13,6 +13,7 @@ namespace ojm.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public List<Material> Materials { get; set; }
+        public List<Machine> Machines { get; set; }
         public Customer Customer { get; set; }
 
         public ProductOrder(int id, string name, string description, Customer customer)
