@@ -120,6 +120,6 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button x:Name="btnAddMachines" Content="Tilføj Maskiner" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" Margin="895,473,0,0"/>
+        <Button x:Name="btnAddMachines" Content="Tilføj Maskiner" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" Margin="895,473,0,0" Click="btnAddMachines_Click"/>
     </Grid>
 </Window>

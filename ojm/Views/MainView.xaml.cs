@@ -206,6 +206,13 @@ namespace ojm {
             window.Show();
         }
 
+        private void btnAddMachines_Click(object sender, RoutedEventArgs e) {
+            controller.GetMachines();
+            Views.MachineView window = new Views.MachineView(controller);
+            window.SetProductOrder(selectedProductOrder);
+            window.Show();
+        }
+
 
 
     }

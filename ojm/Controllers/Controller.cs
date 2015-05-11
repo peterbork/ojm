@@ -281,7 +281,28 @@ namespace ojm.Controllers {
             machines = DatabaseFacade.GetMachines();
             return machines;
         }
+        public Dictionary<int, string> GetMachineNames() {
+            Dictionary<int, string> machinenames = new Dictionary<int, string>();
+            int i = 0;
+            foreach (Machine machine in machines) {
+                machinenames.Add(i, machine.Name);
+                i++;
+            }
+            return machinenames;
+        }
 
+        public void AddMachineToProductOrder(List<int> sequence, List<int> machineindexes, int selectedproductorder) {
+            List<int> machineids = new List<int>();
+            foreach (int index in machineindexes) {
+                machineids.Add(machines[index].ID);
+            }
+            DatabaseFacade.AddMachineToProductOrder(sequence, machineids, productorders[selectedproductorder].ID);
+            
+        }
+
+        public void DeleteMachinesFromProductOrderID(int selectedproductorder) {
+            DatabaseFacade.DeleteMachinesFromProductOrderID(productorders[selectedproductorder].ID);
+        }
         #endregion
     }
 }
