@@ -362,12 +362,12 @@ namespace ojm.Controllers {
             try {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("GetMaterialsFromProductOrderID", conn);
-                cmd.Parameters.Add(new SqlParameter("ProdctOrderID", ProductOrderID));
+                cmd.Parameters.Add(new SqlParameter("ProductOrderID", ProductOrderID));
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read()) {
-                    materials.Add(new Material(int.Parse(reader["ID"].ToString()), reader["Name"].ToString(), int.Parse(reader["InStock"].ToString())));
+                    materials.Add(new Material(int.Parse(reader["MaterialID"].ToString()), reader["Name"].ToString(), int.Parse(reader["InStock"].ToString())));
                 }
                 reader.Close();
 
