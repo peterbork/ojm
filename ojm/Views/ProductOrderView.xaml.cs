@@ -46,6 +46,7 @@ namespace ojm.Views
         }
 
         private void ComboBoxCustomers_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            MessageBox.Show("heello");
             if (ComboBoxCustomers.SelectedIndex != -1) {
                 TextBoxProductOrderName.IsEnabled = true;
                 TextBoxProductOrderDescription.IsEnabled = true;
@@ -59,6 +60,7 @@ namespace ojm.Views
                     ListviewAvailableMaterials.Items.Add(material);  
                 }
             }
+            MessageBox.Show("Goodbye");
         }
 
         public void UpdateListViews() {
@@ -104,11 +106,11 @@ namespace ojm.Views
             ComboBoxCustomers.SelectedItem = productorder["CompanyName"];
             TextBoxProductOrderName.Text = productorder["Name"];
             TextBoxProductOrderDescription.Text = productorder["Description"];
-
+            MessageBox.Show(availablematerials.Count + "");
             List<string> selectedmaterials = controller.GetProductOrderMaterialStrings(selectedProductOrder);
             // Remove Productorders materials from available materials
             foreach (string material in selectedmaterials) {
-                foreach (KeyValuePair<int, string> amaterial in availablematerials) {
+                foreach (KeyValuePair<int, string> amaterial in availablematerials.Reverse()) {
                     if (material == amaterial.Value) {
                         productordermaterials.Add(amaterial.Key, amaterial.Value);
                         availablematerials.Remove(amaterial.Key);
