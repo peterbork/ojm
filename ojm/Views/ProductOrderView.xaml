@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ojm.Views.ProductOrderView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ProductOrderView" Height="418.988" Width="667.088">
+        Title="ProductOrderView" Height="418.988" Width="667.088" WindowStartupLocation="CenterScreen">
     <Grid>
         <ListBox Name="ListviewAvailableMaterials" HorizontalAlignment="Left" Height="347" Margin="202,36,0,0" VerticalAlignment="Top" Width="210" MouseDoubleClick="ListviewAvailableMaterials_MouseDoubleClick"/>
         <ListBox Name="ListviewProductOrderMaterials"  HorizontalAlignment="Left" Height="347" Margin="435,36,0,0" VerticalAlignment="Top" Width="210" MouseDoubleClick="ListviewProductOrderMaterials_MouseDoubleClick"/>

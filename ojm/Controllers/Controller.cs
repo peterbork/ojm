@@ -268,6 +268,7 @@ namespace ojm.Controllers {
             }
 
             DatabaseFacade.UpdateProductOrder(productorder);
+            View.UpdateProductOrders();
             System.Windows.MessageBox.Show("Produktordren er blevet opdateret", "OJM");
         }
 

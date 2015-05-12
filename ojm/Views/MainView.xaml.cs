@@ -195,9 +195,18 @@ namespace ojm {
 
         private void ListViewOrders_MouseDoubleClick_1(object sender, MouseButtonEventArgs e) {
             selectedProductOrder = ListViewOrders.SelectedIndex;
+            SetProductOrder();
+        }
+
+        private void SetProductOrder() {
             TextBoxProductOrderDescription.Text = controller.GetProductOrder(selectedProductOrder)["Description"];
             LabelProductOrderName.Content = controller.GetProductOrder(selectedProductOrder)["Name"];
             ListViewProductOrderMaterials.ItemsSource = controller.GetProductOrderMaterials(selectedProductOrder);
+        }
+
+        public void UpdateProductOrders() {
+            ListViewOrders.ItemsSource = controller.GetProductOrders();
+            SetProductOrder();
         }
 
         private void BtnShowDetails_Click(object sender, RoutedEventArgs e) {

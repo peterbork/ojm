@@ -71,7 +71,7 @@ namespace ojm.Views {
         private void Button_Click(object sender, RoutedEventArgs e) {
             MainView MainView = new MainView();
             MainView.Show();
-            this.Hide();
+            this.Close();
         }
     }
 }

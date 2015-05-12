@@ -427,8 +427,6 @@ namespace ojm.Controllers {
 
                 while (reader.Read()) {
                     productorders.Add(new ProductOrder(int.Parse(reader["ID"].ToString()), reader["Name"].ToString(), reader["Description"].ToString(), GetCustomerFromID(int.Parse(reader["CustomerID"].ToString())), GetMaterialsFromProductOrderID(int.Parse(reader["ID"].ToString()))));
-
-                    
                 }
                 reader.Close();
 
