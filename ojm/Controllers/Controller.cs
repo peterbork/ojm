@@ -299,6 +299,11 @@ namespace ojm.Controllers {
             DatabaseFacade.AddMachineToProductOrder(sequence, machineids, productorders[selectedproductorder].ID);
             
         }
+
+        public List<Machine> GetProductOrderMachines(int productOrderIndex)
+        {
+            return productorders[productOrderIndex].Machines;
+        }
         #endregion
     }
 }

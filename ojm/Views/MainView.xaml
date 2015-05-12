@@ -112,7 +112,7 @@
                     <ListView x:Name="ListViewMachines" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="312" Margin="687,343,0,0">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Maskine" Width="187"/>
+                                <GridViewColumn Header="Maskine" Width="187" DisplayMemberBinding="{Binding Name}"/>
                                 <GridViewColumn Header="Færdig" Width="120"/>
                             </GridView>
                         </ListView.View>
