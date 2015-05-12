@@ -66,7 +66,6 @@ namespace ojm.Views {
             UpdateListViews();
         }
         private void btnAddMachinesToProductOrder_Click(object sender, RoutedEventArgs e) {
-            controller.DeleteMachinesFromProductOrderID(selectedProductOrder);
             List<int> machineindexes = new List<int>(this.chosenmachines.Keys);
             List<int> sequences = new List<int>();
             for (int i = 0; i < machineindexes.Count; i++) {
