@@ -510,12 +510,17 @@ namespace ojm.Controllers {
             return Machinelist;
         }
 
-        internal static void AddMachineToProductOrder(List<int> sequence, List<int> machineindexes, int productorderid) {
+        internal static void AddMachinesToProductOrder(List<int> sequence, List<int> machineindexes, int productorderid) {
 
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
- 
+
+                SqlCommand cmd = new SqlCommand("DeleteMachinesFromProductOrderID", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("ProductOrderID", productorderid));
+                cmd.ExecuteNonQuery();
+
                 for (int i = 0; i < machineindexes.Count; i++)
 			        {
                         SqlCommand cmd = new SqlCommand("AddMachineToProductOrder", conn);
@@ -559,25 +564,6 @@ namespace ojm.Controllers {
                 conn.Dispose();
             }
             return machines;
-        }
-
-        internal static void DeleteMachinesFromProductOrderID(int productorderid) {
-
-            SqlConnection conn = new SqlConnection(ConnectionString);
-            try {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("DeleteMachinesFromProductOrderID", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("ProductOrderID", productorderid));
-                cmd.ExecuteNonQuery();
-            }
-            catch (SqlException e) {
-                MessageBox.Show(e.Message);
-            }
-            finally {
-                conn.Close();
-                conn.Dispose();
-            }
         }
 
         #endregion

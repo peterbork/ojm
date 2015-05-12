@@ -247,6 +247,21 @@ namespace ojm.Controllers {
             return materials;
         }
 
+        public List<Machine> GetProductOrderMachines(int productOrderIndex) {
+            System.Windows.MessageBox.Show(productorders[productOrderIndex].Machines.Count + "");
+            return productorders[productOrderIndex].Machines;
+        }
+
+        public List<string> GetProductOrderMachineNames(int index) {
+            List<string> machines = new List<string>();
+
+            foreach (Machine machine in productorders[index].Machines) {
+                machines.Add(machine.Name);
+            }
+
+            return machines;
+        }
+
         public void AddProductOrder(string name, string description, int customerIndex, List<int> materialIndexes) {
             ProductOrder productorder = new ProductOrder(0, name, description, customers[customerIndex]);
             foreach (int i in materialIndexes) {
@@ -294,16 +309,14 @@ namespace ojm.Controllers {
 
         public void AddMachineToProductOrder(List<int> sequence, List<int> machineindexes, int selectedproductorder) {
             List<int> machineids = new List<int>();
+            productorders[selectedproductorder].Machines = new List<Machine>();
             foreach (int index in machineindexes) {
                 machineids.Add(machines[index].ID);
+                productorders[selectedproductorder].Machines.Add(machines[index]);
             }
-            DatabaseFacade.AddMachineToProductOrder(sequence, machineids, productorders[selectedproductorder].ID);
             
-        }
-
-        public List<Machine> GetProductOrderMachines(int productOrderIndex)
-        {
-            return productorders[productOrderIndex].Machines;
+            DatabaseFacade.AddMachinesToProductOrder(sequence, machineids, productorders[selectedproductorder].ID);
+            View.UpdateProductOrders();
         }
         #endregion
     }

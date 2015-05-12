@@ -100,7 +100,7 @@ namespace ojm.Views
                 controller.AddProductOrder(TextBoxProductOrderName.Text, TextBoxProductOrderDescription.Text, ComboBoxCustomers.SelectedIndex, materialkeys);
         }
 
-        internal void SetProductOrder(int selectedProductOrder) {
+        public void SetProductOrder(int selectedProductOrder) {
             this.selectedProductOrder = selectedProductOrder;
 
             Dictionary<string, string> productorder = controller.GetProductOrder(selectedProductOrder);

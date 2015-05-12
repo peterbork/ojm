@@ -36,6 +36,17 @@ namespace ojm.Views {
         }
         internal void SetProductOrder(int selectedProductOrder) {
             this.selectedProductOrder = selectedProductOrder;
+            List<string> selectedMachines = controller.GetProductOrderMachineNames(selectedProductOrder);
+            // Remove Productorders materials from available materials
+            foreach (string machine in selectedMachines) {
+                foreach (KeyValuePair<int, string> amachine in allmachines.Reverse()) {
+                    if (machine == amachine.Value) {
+                        chosenmachines.Add(amachine.Key, amachine.Value);
+                        allmachines.Remove(amachine.Key);
+                    }
+                }
+            }
+            UpdateListViews();
         }
         public void UpdateListViews() {
             ListBoxAllMachines.Items.Clear();
