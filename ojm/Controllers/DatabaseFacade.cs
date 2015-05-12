@@ -426,7 +426,14 @@ namespace ojm.Controllers {
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read()) {
-                    productorders.Add(new ProductOrder(int.Parse(reader["ID"].ToString()), reader["Name"].ToString(), reader["Description"].ToString(), GetCustomerFromID(int.Parse(reader["CustomerID"].ToString())), GetMaterialsFromProductOrderID(int.Parse(reader["ID"].ToString()))));
+                    productorders.Add(new ProductOrder(
+                        int.Parse(reader["ID"].ToString()),
+                        reader["Name"].ToString(),
+                        reader["Description"].ToString(),
+                        GetCustomerFromID(int.Parse(reader["CustomerID"].ToString())),
+                        GetMaterialsFromProductOrderID(int.Parse(reader["ID"].ToString())),
+                        GetMachinesFromProductOrderID(int.Parse(reader["ID"].ToString()))
+                    ));
                 }
                 reader.Close();
 
@@ -526,6 +533,32 @@ namespace ojm.Controllers {
                 conn.Close();
                 conn.Dispose();
             }
+        }
+
+        public static List<Machine> GetMachinesFromProductOrderID(int ProductOrderID) {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            List<Machine> machines = new List<Machine>();
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("GetMachinesFromProductOrderID", conn);
+                cmd.Parameters.Add(new SqlParameter("ProductOrderID", ProductOrderID));
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read()) {
+                    machines.Add(new Machine(int.Parse(reader["MachineID"].ToString()), reader["Name"].ToString(), reader["Type"].ToString()));
+                }
+                reader.Close();
+
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+            return machines;
         }
 
         internal static void DeleteMachinesFromProductOrderID(int productorderid) {
