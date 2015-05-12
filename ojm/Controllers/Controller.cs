@@ -299,10 +299,6 @@ namespace ojm.Controllers {
             DatabaseFacade.AddMachineToProductOrder(sequence, machineids, productorders[selectedproductorder].ID);
             
         }
-
-        public void DeleteMachinesFromProductOrderID(int selectedproductorder) {
-            DatabaseFacade.DeleteMachinesFromProductOrderID(productorders[selectedproductorder].ID);
-        }
         #endregion
     }
 }
