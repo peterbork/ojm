@@ -288,8 +288,6 @@ namespace ojm.Controllers {
         }
 
         #endregion
-
-
         #region Machines
 
         public List<Models.Machine> GetMachines() {
