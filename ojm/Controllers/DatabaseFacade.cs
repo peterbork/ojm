@@ -523,7 +523,7 @@ namespace ojm.Controllers {
 
                 for (int i = 0; i < machineindexes.Count; i++)
 			        {
-                        SqlCommand cmd = new SqlCommand("AddMachineToProductOrder", conn);
+                        cmd = new SqlCommand("AddMachineToProductOrder", conn);
                         cmd.CommandType = CommandType.StoredProcedure;
 			            cmd.Parameters.Add(new SqlParameter("Sequence", sequence[i]));
                         cmd.Parameters.Add(new SqlParameter("ProductOrderID", productorderid));
