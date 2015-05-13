@@ -569,7 +569,7 @@ namespace ojm.Controllers {
         #endregion
         #region QualityControl
 
-        public List<QualityControl> GetQualityControls(int productOrderID, int machineID) {
+        public static List<QualityControl> GetQualityControls(int productOrderID, int machineID) {
             List<QualityControl> qualitycontrols = new List<QualityControl>();
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
@@ -603,7 +603,7 @@ namespace ojm.Controllers {
             return qualitycontrols;
         }
 
-        public void AddQualityControl(QualityControl qualitycontrol) {
+        public static void AddQualityControl(QualityControl qualitycontrol) {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
@@ -627,7 +627,7 @@ namespace ojm.Controllers {
             }
         }
 
-        public void UpdateQualityControl(QualityControl qualitycontrol) {
+        public static void UpdateQualityControl(QualityControl qualitycontrol) {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
