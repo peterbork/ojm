@@ -63,6 +63,9 @@
     <Compile Include="Views\ProductOrderView.xaml.cs">
       <DependentUpon>ProductOrderView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\QualityControl.xaml.cs">
+      <DependentUpon>QualityControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\DeliveryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -103,6 +106,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\QualityControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -134,7 +141,9 @@
   <ItemGroup>
     <Resource Include="Views\ojm.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Views\bullet.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
