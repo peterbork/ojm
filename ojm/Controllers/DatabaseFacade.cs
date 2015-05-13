@@ -631,7 +631,7 @@ namespace ojm.Controllers {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("AddQualityControl", conn);
+                SqlCommand cmd = new SqlCommand("UpdateQualityControl", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("ID", qualitycontrol.ID));
                 cmd.Parameters.Add(new SqlParameter("Name", qualitycontrol.Name));
