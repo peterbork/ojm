@@ -11,34 +11,29 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ojm.Controllers;
 
 namespace ojm.Views {
     /// <summary>
     /// Interaction logic for QualityControl.xaml
     /// </summary>
     public partial class QualityControl : Window {
-        public QualityControl() {
+        Controller controller;
+        public QualityControl(Controller incontroller) {
             InitializeComponent();
-                List<User> items = new List<User>();
-                items.Add(new User() { Name = "John Doe", Age = 42, Sex = 2 });
-                items.Add(new User() { Name = "Jane Doe", Age = 39, Sex = 3 });
-                items.Add(new User() { Name = "Sammy Doe", Age = 13, Sex = 4 });
-                lvUsers.ItemsSource = items;
+            controller = incontroller;
+            
+                List<Models.Machine> items = new List<Models.Machine>();
+                //items.Add(new Models.Machine() { ID = 1, Name = "John Doe", Type = "test"});
+                //items.Add(new Models.Machine() { Name = "Jane Doe", Type = "tes", Sex = 3 });
+                //items.Add(new Models.Machine() { Name = "Sammy Doe", Type = "dsf", Sex = 4 });
+                lvUsers.ItemsSource = controller.GetProductOrders();
 
                 CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvUsers.ItemsSource);
-                PropertyGroupDescription groupDescription = new PropertyGroupDescription("Sex");
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("ID");
                 view.GroupDescriptions.Add(groupDescription);
             }
         
 
-        public class User {
-            public string Name { get; set; }
-
-            public int Age { get; set; }
-
-            public string Mail { get; set; }
-
-            public int Sex { get; set; }
-        }
     }
 }

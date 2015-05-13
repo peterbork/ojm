@@ -224,7 +224,7 @@ namespace ojm {
         }
 
         private void btnOpenControl_Click(object sender, RoutedEventArgs e) {
-            Views.QualityControl window = new Views.QualityControl();
+            Views.QualityControl window = new Views.QualityControl(controller);
             window.Show();
         }
 
