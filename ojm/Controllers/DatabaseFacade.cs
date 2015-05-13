@@ -569,7 +569,86 @@ namespace ojm.Controllers {
         #endregion
         #region QualityControl
 
-        
+        public List<QualityControl> GetQualityControls(int productOrderID, int machineID) {
+            List<QualityControl> qualitycontrols = new List<QualityControl>();
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("AddQualityControl", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("ProductOrderID", productOrderID));
+                cmd.Parameters.Add(new SqlParameter("MachineID", machineID));
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read()) {
+                    qualitycontrols.Add(new QualityControl(
+                        int.Parse(reader["ID"].ToString()),
+                        reader["Name"].ToString(),
+                        reader["Description"].ToString(),
+                        int.Parse(reader["frequency"].ToString()),
+                        decimal.Parse(reader["MinTol"].ToString()),
+                        decimal.Parse(reader["MaxTol"].ToString())
+                    ));
+                }
+                reader.Close();
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+
+            return qualitycontrols;
+        }
+
+        public void AddQualityControl(QualityControl qualitycontrol) {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("AddQualityControl", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("Name", qualitycontrol.Name));
+                cmd.Parameters.Add(new SqlParameter("Description", qualitycontrol.Description));
+                cmd.Parameters.Add(new SqlParameter("Frequency", qualitycontrol.Frequency));
+                cmd.Parameters.Add(new SqlParameter("MinTol", qualitycontrol.MinTol));
+                cmd.Parameters.Add(new SqlParameter("MaxTol", qualitycontrol.MaxTol));
+                cmd.Parameters.Add(new SqlParameter("ProductOrderID", qualitycontrol.ProductOrder.ID));
+                cmd.Parameters.Add(new SqlParameter("MachineID", qualitycontrol.Machine.ID));
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+        }
+
+        public void UpdateQualityControl(QualityControl qualitycontrol) {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("AddQualityControl", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("ID", qualitycontrol.ID));
+                cmd.Parameters.Add(new SqlParameter("Name", qualitycontrol.Name));
+                cmd.Parameters.Add(new SqlParameter("Description", qualitycontrol.Description));
+                cmd.Parameters.Add(new SqlParameter("Frequency", qualitycontrol.Frequency));
+                cmd.Parameters.Add(new SqlParameter("MinTol", qualitycontrol.MinTol));
+                cmd.Parameters.Add(new SqlParameter("MaxTol", qualitycontrol.MaxTol));
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+        }
 
         #endregion
     }

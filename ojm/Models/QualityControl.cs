@@ -14,5 +14,14 @@ namespace ojm.Models {
         public decimal MaxTol { get; set; }
         public ProductOrder ProductOrder { get; set; }
         public Machine Machine { get; set; }
+
+        public QualityControl(int id, string name, string description, int frequency, decimal mintol, decimal maxtol) {
+            ID = id;
+            Name = name;
+            Description = description;
+            Frequency = frequency;
+            MinTol = mintol;
+            MaxTol = maxtol;
+        }
     }
 }
