@@ -248,7 +248,6 @@ namespace ojm.Controllers {
         }
 
         public List<Machine> GetProductOrderMachines(int productOrderIndex) {
-            System.Windows.MessageBox.Show(productorders[productOrderIndex].Machines.Count + "");
             return productorders[productOrderIndex].Machines;
         }
 
