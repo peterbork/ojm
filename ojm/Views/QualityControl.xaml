@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="QualityControl" Height="743.845" Width="705.484">
     <Grid>
-        <ListView Name="lvUsers" Margin="0,0,260.649,0.236">
+        <ListView Name="ListViewMachines" Margin="0,0,260.649,0.236" MouseDoubleClick="ListViewMachines_MouseDoubleClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding ProductOrders.Machines.Machine.ID}" />
-                    <GridViewColumn Header="Maskine navn" Width="192" DisplayMemberBinding="{Binding ProductOrders.Machines.Machine.Name}" />
-                    <GridViewColumn Header="Maskine type" Width="192" DisplayMemberBinding="{Binding ProductOrders.Machines.Machine.Type}" />
+                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="Maskine navn" Width="192" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Maskine type" Width="192" DisplayMemberBinding="{Binding Type}" />
                 </GridView>
             </ListView.View>
 
@@ -22,8 +22,8 @@
                                         <Expander IsExpanded="True">
                                             <Expander.Header>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Gray" FontSize="13" VerticalAlignment="Bottom" />
-                                                    <TextBlock Text="{Binding ItemCount}" FontSize="13" FontWeight="Bold" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="13" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text="{Binding ItemCount}" FontSize="13" Foreground="Gray" Margin="10,0,0,0" VerticalAlignment="Bottom" />
                                                     <TextBlock Text=" Maskine(r)" FontSize="13" Foreground="Gray" VerticalAlignment="Bottom" />
                                                 </StackPanel>
                                             </Expander.Header>
@@ -37,17 +37,19 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <TextBox x:Name="TextBoxName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" Margin="458,71,0,0"/>
-        <Label Content="Navn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="458,45,0,0"/>
-        <TextBox x:Name="TextBoxDescription" HorizontalAlignment="Left" Height="101" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" Margin="458,125,0,0"/>
-        <Label Content="Beskrivelse" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="458,99,0,0"/>
-        <TextBox x:Name="TextBoxFrequency" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" Margin="458,257,0,0"/>
-        <Label Content="Frekvens" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="458,231,0,0"/>
-        <Label Content="Min. Tolerance" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="458,285,0,0"/>
-        <TextBox x:Name="TextBoxMinTol1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" Margin="458,311,0,0"/>
-        <Label Content="Max. Tolerance" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="458,339,0,0"/>
-        <TextBox x:Name="TextBoxMaxTol" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" Margin="458,365,0,0"/>
-        <ComboBox x:Name="ComboBoxQualityControls" HorizontalAlignment="Left" Margin="458,10,0,0" VerticalAlignment="Top" Width="215"/>
-        <Button x:Name="btnAddQualityControl" Content="Tilføj Kontrol" HorizontalAlignment="Left" VerticalAlignment="Top" Width="96" Margin="518,410,0,0"/>
+        <TextBox x:Name="TextBoxName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" Margin="459,90,0,0"/>
+        <Label Content="Navn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="459,64,0,0"/>
+        <TextBox x:Name="TextBoxDescription" HorizontalAlignment="Left" Height="101" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" Margin="459,144,0,0"/>
+        <Label Content="Beskrivelse" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="459,118,0,0"/>
+        <TextBox x:Name="TextBoxFrequency" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" Margin="459,276,0,0"/>
+        <Label Content="Frekvens" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="459,250,0,0"/>
+        <Label Content="Min. Tolerance" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="459,304,0,0"/>
+        <TextBox x:Name="TextBoxMinTol" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" Margin="459,330,0,0"/>
+        <Label Content="Max. Tolerance" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="459,358,0,0"/>
+        <TextBox x:Name="TextBoxMaxTol" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" Margin="459,384,0,0"/>
+        <ComboBox x:Name="ComboBoxQualityControls" HorizontalAlignment="Left" Margin="459,36,0,0" VerticalAlignment="Top" Width="215" SelectionChanged="ComboBoxQualityControls_SelectionChanged"/>
+        <Button x:Name="btnAddQualityControl" Content="Tilføj Kontrol" HorizontalAlignment="Left" VerticalAlignment="Top" Width="96" Margin="519,429,0,0" Click="btnAddQualityControl_Click"/>
+        <Label Content="Antal Kontroller:" HorizontalAlignment="Left" Margin="459,10,0,0" VerticalAlignment="Top"/>
+        <Label Name="LabelControlCount" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="560,10,0,0"/>
     </Grid>
 </Window>

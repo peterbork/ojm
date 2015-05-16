@@ -569,15 +569,45 @@ namespace ojm.Controllers {
         #endregion
         #region QualityControl
 
-        public static List<QualityControl> GetQualityControls(int productOrderID, int machineID) {
+        public static List<QualityControl> GetQualityControls() {
             List<QualityControl> qualitycontrols = new List<QualityControl>();
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("AddQualityControl", conn);
+                SqlCommand cmd = new SqlCommand("GetQualityControls", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("ProductOrderID", productOrderID));
-                cmd.Parameters.Add(new SqlParameter("MachineID", machineID));
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read()) {
+                    qualitycontrols.Add(new QualityControl(
+                        int.Parse(reader["ID"].ToString()),
+                        reader["Name"].ToString(),
+                        reader["Description"].ToString(),
+                        int.Parse(reader["frequency"].ToString()),
+                        decimal.Parse(reader["MinTol"].ToString()),
+                        decimal.Parse(reader["MaxTol"].ToString())
+                    ));
+                }
+                reader.Close();
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+            return qualitycontrols;
+        }
+            public static List<QualityControl> GetQualityControlsFromProductOrderAndMachine(int productorderid, int machineid) {
+            List<QualityControl> qualitycontrols = new List<QualityControl>();
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("GetQualityControlsFromProductOrderAndMachine", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("ProductOrderID", productorderid));
+                cmd.Parameters.Add(new SqlParameter("MachineID", machineid));
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read()) {
@@ -603,7 +633,7 @@ namespace ojm.Controllers {
             return qualitycontrols;
         }
 
-        public static void AddQualityControl(QualityControl qualitycontrol) {
+        public static void AddQualityControl(int productOrderID, int machineID, QualityControl qualitycontrol) {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
@@ -614,8 +644,8 @@ namespace ojm.Controllers {
                 cmd.Parameters.Add(new SqlParameter("Frequency", qualitycontrol.Frequency));
                 cmd.Parameters.Add(new SqlParameter("MinTol", qualitycontrol.MinTol));
                 cmd.Parameters.Add(new SqlParameter("MaxTol", qualitycontrol.MaxTol));
-                cmd.Parameters.Add(new SqlParameter("ProductOrderID", qualitycontrol.ProductOrder.ID));
-                cmd.Parameters.Add(new SqlParameter("MachineID", qualitycontrol.Machine.ID));
+                cmd.Parameters.Add(new SqlParameter("ProductOrderID", productOrderID));
+                cmd.Parameters.Add(new SqlParameter("MachineID", machineID));
                 cmd.ExecuteNonQuery();
             }
             catch (SqlException e) {

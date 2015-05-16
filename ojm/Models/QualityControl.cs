@@ -23,5 +23,12 @@ namespace ojm.Models {
             MinTol = mintol;
             MaxTol = maxtol;
         }
+        public QualityControl(string name, string description, int frequency, decimal mintol, decimal maxtol) {
+            Name = name;
+            Description = description;
+            Frequency = frequency;
+            MinTol = mintol;
+            MaxTol = maxtol;
+        }
     }
 }

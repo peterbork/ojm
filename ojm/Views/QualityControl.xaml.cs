@@ -19,20 +19,66 @@ namespace ojm.Views {
     /// </summary>
     public partial class QualityControl : Window {
         Controller controller;
+        List<Dictionary<string, string>> qualitycontrols;
         public QualityControl(Controller incontroller) {
             InitializeComponent();
             controller = incontroller;
-            
-                List<Models.Machine> items = new List<Models.Machine>();
-                //items.Add(new Models.Machine() { ID = 1, Name = "John Doe", Type = "test"});
-                //items.Add(new Models.Machine() { Name = "Jane Doe", Type = "tes", Sex = 3 });
-                //items.Add(new Models.Machine() { Name = "Sammy Doe", Type = "dsf", Sex = 4 });
-                lvUsers.ItemsSource = controller.GetProductOrders();
 
-                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvUsers.ItemsSource);
-                PropertyGroupDescription groupDescription = new PropertyGroupDescription("ID");
-                view.GroupDescriptions.Add(groupDescription);
+            btnAddQualityControl.IsEnabled = false;
+            ComboBoxQualityControls.IsEnabled = false;
+            ListViewMachines.ItemsSource = controller.GetProductOrderAndMachine();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ListViewMachines.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("ProductOrder.Name");
+            view.GroupDescriptions.Add(groupDescription);
+            
             }
+
+        private void ListViewMachines_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            ComboBoxQualityControls.Items.Clear();
+            qualitycontrols = controller.GetQualityControl(ListViewMachines.SelectedIndex);
+            if (ListViewMachines.SelectedIndex > -1) {
+                btnAddQualityControl.IsEnabled = true;
+                ComboBoxQualityControls.IsEnabled = true;
+                
+                foreach (Dictionary<string, string> dic in qualitycontrols) {
+                    ComboBoxQualityControls.Items.Add(dic["Name"]);
+                }
+            }
+            ComboBoxQualityControls.Items.Add("Ny Kvalitetskontrol");
+            ComboBoxQualityControls.SelectedIndex = ComboBoxQualityControls.Items.Count - 1;
+            LabelControlCount.Content = qualitycontrols.Count;
+        }
+
+        private void btnAddQualityControl_Click(object sender, RoutedEventArgs e) {
+
+            if (ComboBoxQualityControls.SelectedIndex == ComboBoxQualityControls.Items.Count - 1) {
+                controller.AddQualityControl(controller.GetProductOrderAndMachine()[ListViewMachines.SelectedIndex], TextBoxName.Text, TextBoxDescription.Text, TextBoxFrequency.Text, TextBoxMinTol.Text, TextBoxMaxTol.Text);
+                MessageBox.Show("Kvalitetskontrollen er blevet oprettet");
+            }
+            else {
+                controller.UpdateQualityControl(int.Parse(qualitycontrols[ComboBoxQualityControls.SelectedIndex]["ID"]), TextBoxName.Text, TextBoxDescription.Text, TextBoxFrequency.Text, TextBoxMinTol.Text, TextBoxMaxTol.Text);
+                MessageBox.Show("Kvalitetskontrollen er blevet opdateret");
+            }
+        }
+
+        private void ComboBoxQualityControls_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if (ComboBoxQualityControls.SelectedIndex == ComboBoxQualityControls.Items.Count - 1) {
+                TextBoxName.Text = "";
+                TextBoxDescription.Text = "";
+                TextBoxFrequency.Text = "";
+                TextBoxMinTol.Text = "";
+                TextBoxMaxTol.Text = "";
+                btnAddQualityControl.Content = "Tilføj Kontrol";
+            }
+            else {
+                TextBoxName.Text = qualitycontrols[ComboBoxQualityControls.SelectedIndex]["Name"];
+                TextBoxDescription.Text = qualitycontrols[ComboBoxQualityControls.SelectedIndex]["Description"];
+                TextBoxFrequency.Text = qualitycontrols[ComboBoxQualityControls.SelectedIndex]["Frequency"];
+                TextBoxMinTol.Text = qualitycontrols[ComboBoxQualityControls.SelectedIndex]["MinTol"];
+                TextBoxMaxTol.Text = qualitycontrols[ComboBoxQualityControls.SelectedIndex]["MaxTol"];
+                btnAddQualityControl.Content = "Opdater Kontrol";
+            }
+        }
         
 
     }

@@ -12,6 +12,7 @@ namespace ojm.Controllers {
         List<Customer> customers = new List<Customer>();
         List<ProductOrder> productorders = new List<ProductOrder>();
         List<Machine> machines = new List<Machine>();
+        List<QualityControl> qualitycontrols = new List<QualityControl>();
 
         MainView View;
 
@@ -226,6 +227,7 @@ namespace ojm.Controllers {
         }
         public Dictionary<string, string> GetProductOrder(int index) {
             Dictionary<string, string> productorder = new Dictionary<string, string>();
+            productorder.Add("ID", productorders[index].ID.ToString());
             productorder.Add("Name", productorders[index].Name);
             productorder.Add("Description", productorders[index].Description);
             productorder.Add("CompanyName", productorders[index].Customer.CompanyName);
@@ -286,6 +288,18 @@ namespace ojm.Controllers {
             System.Windows.MessageBox.Show("Produktordren er blevet opdateret", "OJM");
         }
 
+        public List<Machine> GetProductOrderAndMachine() {
+            List<Machine> machineswithproductorders = new List<Machine>();
+            foreach (ProductOrder productorder in GetProductOrders())
+	        {
+                foreach (Machine machine in productorder.Machines) {
+                    machine.ProductOrder = productorder;
+                    machineswithproductorders.Add(machine);
+                }
+	        }
+            return machineswithproductorders;
+        }
+
         #endregion
         #region Machines
 
@@ -316,5 +330,36 @@ namespace ojm.Controllers {
             View.UpdateProductOrders();
         }
         #endregion
+        #region QualityControl
+        public void AddQualityControl(Machine machine, string name, string description, string frequency, string mintol, string maxtol) {
+            QualityControl qualitycontrol = new QualityControl(name, description, int.Parse(frequency), Convert.ToDecimal(mintol), Convert.ToDecimal(maxtol));
+            int machineid = machine.ID;
+            int productorderid = machine.ProductOrder.ID;
+            DatabaseFacade.AddQualityControl(productorderid, machineid, qualitycontrol);
+
+        }
+        public void UpdateQualityControl(int id, string name, string description, string frequency, string mintol, string maxtol) {
+            QualityControl qualitycontrol = new QualityControl(id, name, description, int.Parse(frequency), Convert.ToDecimal(mintol), Convert.ToDecimal(maxtol));
+            DatabaseFacade.UpdateQualityControl(qualitycontrol);
+        }
+        public List<Dictionary<string, string>> GetQualityControl(int selectedmachineindex) {
+            List<Dictionary<string, string>> _qualitycontrols = new List<Dictionary<string, string>>();
+           
+            machines = GetProductOrderAndMachine();
+            qualitycontrols = DatabaseFacade.GetQualityControlsFromProductOrderAndMachine(machines[selectedmachineindex].ProductOrder.ID, machines[selectedmachineindex].ID);
+            foreach (QualityControl control in qualitycontrols) {
+                Dictionary<string, string> dic = new Dictionary<string, string>();
+                dic.Add("ID", control.ID.ToString());
+                dic.Add("Name", control.Name.ToString());
+                dic.Add("Description", control.Description);
+                dic.Add("Frequency", control.Frequency.ToString());
+                dic.Add("MinTol", control.MinTol.ToString());
+                dic.Add("MaxTol", control.MaxTol.ToString());
+                _qualitycontrols.Add(dic);
+            }
+            return _qualitycontrols;
+        }
+        #endregion
+
     }
 }

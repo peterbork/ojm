@@ -11,6 +11,7 @@ namespace ojm.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
+        public Models.ProductOrder ProductOrder { get; set; }
 
         public Machine(int id, string name, string type) {
             ID = id;
