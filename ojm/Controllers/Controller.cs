@@ -331,15 +331,20 @@ namespace ojm.Controllers {
         }
         #endregion
         #region QualityControl
-        public void AddQualityControl(Machine machine, string name, string description, string frequency, string mintol, string maxtol) {
+        public void AddQualityControl(string name, string description, string frequency, string mintol, string maxtol, int machineIndex) {
             QualityControl qualitycontrol = new QualityControl(name, description, int.Parse(frequency), Convert.ToDecimal(mintol), Convert.ToDecimal(maxtol));
-            qualitycontrol.Machine = machine;
-            qualitycontrol.ProductOrder = machine.ProductOrder;
+            qualitycontrol.Machine = machines[machineIndex];
+            qualitycontrol.ProductOrder = machines[machineIndex].ProductOrder;
             DatabaseFacade.AddQualityControl(qualitycontrol);
 
         }
-        public void UpdateQualityControl(int id, string name, string description, string frequency, string mintol, string maxtol) {
-            QualityControl qualitycontrol = new QualityControl(id, name, description, int.Parse(frequency), Convert.ToDecimal(mintol), Convert.ToDecimal(maxtol));
+        public void UpdateQualityControl(int index, string name, string description, int frequency, decimal mintol, decimal maxtol) {
+            QualityControl qualitycontrol = qualitycontrols[index];
+            qualitycontrol.Name = name;
+            qualitycontrol.Description = description;
+            qualitycontrol.Frequency = frequency;
+            qualitycontrol.MinTol = mintol;
+            qualitycontrol.MaxTol = maxtol;
             DatabaseFacade.UpdateQualityControl(qualitycontrol);
         }
         public List<Dictionary<string, string>> GetQualityControl(int selectedmachineindex) {

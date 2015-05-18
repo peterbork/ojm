@@ -52,11 +52,11 @@ namespace ojm.Views {
         private void btnAddQualityControl_Click(object sender, RoutedEventArgs e) {
 
             if (ComboBoxQualityControls.SelectedIndex == ComboBoxQualityControls.Items.Count - 1) {
-                controller.AddQualityControl(controller.GetProductOrderAndMachine()[ListViewMachines.SelectedIndex], TextBoxName.Text, TextBoxDescription.Text, TextBoxFrequency.Text, TextBoxMinTol.Text, TextBoxMaxTol.Text);
+                controller.AddQualityControl(TextBoxName.Text, TextBoxDescription.Text, TextBoxFrequency.Text, TextBoxMinTol.Text, TextBoxMaxTol.Text, ListViewMachines.SelectedIndex);
                 MessageBox.Show("Kvalitetskontrollen er blevet oprettet");
             }
             else {
-                controller.UpdateQualityControl(int.Parse(qualitycontrols[ComboBoxQualityControls.SelectedIndex]["ID"]), TextBoxName.Text, TextBoxDescription.Text, TextBoxFrequency.Text, TextBoxMinTol.Text, TextBoxMaxTol.Text);
+                controller.UpdateQualityControl(ComboBoxQualityControls.SelectedIndex, TextBoxName.Text, TextBoxDescription.Text, int.Parse(TextBoxFrequency.Text), decimal.Parse(TextBoxMinTol.Text), decimal.Parse(TextBoxMaxTol.Text));
                 MessageBox.Show("Kvalitetskontrollen er blevet opdateret");
             }
         }
