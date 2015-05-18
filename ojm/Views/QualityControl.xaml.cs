@@ -55,6 +55,16 @@ namespace ojm.Views {
                 // Create QualityControl
                 controller.AddQualityControl(controller.GetProductOrderAndMachine()[ListViewMachines.SelectedIndex], TextBoxName.Text, TextBoxDescription.Text, TextBoxFrequency.Text, TextBoxMinTol.Text, TextBoxMaxTol.Text);
                 MessageBox.Show("Kvalitetskontrollen er blevet oprettet");
+                
+                // All of this to update combobox
+                qualitycontrols = controller.GetQualityControl(ListViewMachines.SelectedIndex);
+                ComboBoxQualityControls.Items.Clear();
+                foreach (Dictionary<string, string> dic in qualitycontrols) {
+                    ComboBoxQualityControls.Items.Add(dic["Name"]);
+                }
+                ComboBoxQualityControls.Items.Add("Ny Kvalitetskontrol");
+                ComboBoxQualityControls.SelectedIndex = ComboBoxQualityControls.Items.Count - 2;
+                LabelControlCount.Content = ComboBoxQualityControls.Items.Count - 1;
             }
             else {
                 // Update QualityControl
