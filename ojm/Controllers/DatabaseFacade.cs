@@ -642,7 +642,7 @@ namespace ojm.Controllers {
                 cmd.Parameters.Add(new SqlParameter("Name", qualitycontrol.Name));
                 cmd.Parameters.Add(new SqlParameter("Description", qualitycontrol.Description));
                 cmd.Parameters.Add(new SqlParameter("Frequency", qualitycontrol.Frequency));
-                cmd.Parameters.Add(new SqlParameter("MinTol", qualitycontrol.MinTol));s
+                cmd.Parameters.Add(new SqlParameter("MinTol", qualitycontrol.MinTol));
                 cmd.Parameters.Add(new SqlParameter("MaxTol", qualitycontrol.MaxTol));
                 cmd.Parameters.Add(new SqlParameter("ProductOrderID", qualitycontrol.ProductOrder.ID));
                 cmd.Parameters.Add(new SqlParameter("MachineID", qualitycontrol.Machine.ID));
