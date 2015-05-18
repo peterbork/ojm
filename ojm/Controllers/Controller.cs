@@ -333,9 +333,9 @@ namespace ojm.Controllers {
         #region QualityControl
         public void AddQualityControl(Machine machine, string name, string description, string frequency, string mintol, string maxtol) {
             QualityControl qualitycontrol = new QualityControl(name, description, int.Parse(frequency), Convert.ToDecimal(mintol), Convert.ToDecimal(maxtol));
-            int machineid = machine.ID;
-            int productorderid = machine.ProductOrder.ID;
-            DatabaseFacade.AddQualityControl(productorderid, machineid, qualitycontrol);
+            qualitycontrol.Machine = machine;
+            qualitycontrol.ProductOrder = machine.ProductOrder;
+            DatabaseFacade.AddQualityControl(qualitycontrol);
 
         }
         public void UpdateQualityControl(int id, string name, string description, string frequency, string mintol, string maxtol) {
