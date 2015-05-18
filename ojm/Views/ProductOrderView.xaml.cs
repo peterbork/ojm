@@ -24,6 +24,7 @@ namespace ojm.Views
         int selectedProductOrder;
         Dictionary<int, string> availablematerials;
         Dictionary<int, string> productordermaterials = new Dictionary<int,string>();
+        List<int> usages = new List<int>();
 
         public ProductOrderView(Controller incontroller)
         {
@@ -64,11 +65,15 @@ namespace ojm.Views
         public void UpdateListViews() {
             ListviewAvailableMaterials.Items.Clear();
             ListviewProductOrderMaterials.Items.Clear();
+            ListviewProductOrderMaterialsUsage.Items.Clear();
             foreach (string material in availablematerials.Values) {
                 ListviewAvailableMaterials.Items.Add(material);
             }
             foreach (string material in productordermaterials.Values) {
                 ListviewProductOrderMaterials.Items.Add(material);
+            }
+            foreach (int usage in usages) {
+                ListviewProductOrderMaterialsUsage.Items.Add(usage + "");
             }
         }
         private void ListviewAvailableMaterials_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
@@ -78,6 +83,10 @@ namespace ojm.Views
             int selectedKey = keylist[ListviewAvailableMaterials.SelectedIndex];
             string selectedValue = valuelist[ListviewAvailableMaterials.SelectedIndex];
             productordermaterials.Add(selectedKey, selectedValue);
+            Dialog dialog = new Dialog();
+            if (dialog.ShowDialog() == true) {
+                usages.Add(int.Parse(dialog.Answer));
+            }
             availablematerials.Remove(selectedKey);
             UpdateListViews();
         }
@@ -89,7 +98,18 @@ namespace ojm.Views
             string selectedValue = valuelist[ListviewProductOrderMaterials.SelectedIndex];
             availablematerials.Add(selectedKey, selectedValue);
             productordermaterials.Remove(selectedKey);
+            /*if (usages.Count >= ListviewProductOrderMaterialsUsage.SelectedIndex) {
+                usages.RemoveAt(ListviewProductOrderMaterials.SelectedIndex);
+            }*/
             UpdateListViews();
+        }
+
+        public void ListviewProductOrderMaterialsUsage_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            Dialog dialog = new Dialog();
+            if (dialog.ShowDialog() == true) {
+                usages[ListviewProductOrderMaterialsUsage.SelectedIndex] = int.Parse(dialog.Answer);
+                UpdateListViews();
+            }
         }
 
         private void BtnAddProductOrder_Click(object sender, RoutedEventArgs e) {

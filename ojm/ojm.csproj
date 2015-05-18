@@ -58,8 +58,14 @@
     </ApplicationDefinition>
     <Compile Include="Models\Machine.cs" />
     <Compile Include="Models\QualityControl.cs" />
+    <Compile Include="Views\Dialog.xaml.cs">
+      <DependentUpon>Dialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MachineView.xaml.cs">
       <DependentUpon>MachineView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProductionView.xaml.cs">
+      <DependentUpon>ProductionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProductOrderView.xaml.cs">
       <DependentUpon>ProductOrderView.xaml</DependentUpon>
@@ -68,6 +74,10 @@
       <DependentUpon>QualityControl.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\DeliveryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -103,6 +113,10 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ProductionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProductOrderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
