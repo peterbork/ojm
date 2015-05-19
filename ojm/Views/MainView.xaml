@@ -89,8 +89,6 @@
                             <GridView>
                                 <GridViewColumn Header="Produktnavn" Width="150" DisplayMemberBinding="{Binding Name}"/>
                                 <GridViewColumn Header="Kunde" Width="213" DisplayMemberBinding="{Binding Customer.CompanyName}"/>
-                                <!--<GridViewColumn Header="Færdiggjorte processor" Width="150" DisplayMemberBinding="{Binding CompanyName}"/>-->
-                                <!--<GridViewColumn Header="Forventet leveringsdato" Width="150"/>-->
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -120,6 +118,22 @@
                     <Button x:Name="btnOpenControl" Content="Kvalitetskontrol" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" Margin="889,529,0,0" Click="btnOpenControl_Click"/>
                     <Button x:Name="btnAddMachines" Content="Tilføj maskiner" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" Margin="889,448,0,0" Click="btnAddMachines_Click"/>
                     <Button x:Name="btnSendToProduction" Content="Send til produktion" HorizontalAlignment="Left" Margin="687,529,0,0" VerticalAlignment="Top" Width="109"/>
+                </Grid>
+            </TabItem>
+            <TabItem Name="TabProduction" Header="Produktioner">
+                <Grid Background="#fff">
+                    <ListView Name="ListViewProductions" HorizontalAlignment="Left" Height="708" VerticalAlignment="Top" Width="668" IsSynchronizedWithCurrentItem="True" Margin="0,0,0,-4.335" MouseDoubleClick="ListViewOrders_MouseDoubleClick_1">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Deadline" Width="auto" DisplayMemberBinding="{Binding Deadline}"/>
+                                <GridViewColumn Header="Produktnavn" Width="auto" DisplayMemberBinding="{Binding ProductOrder.Name}"/>
+                                <GridViewColumn Header="Kunde" Width="auto" DisplayMemberBinding="{Binding ProductOrder.Customer.CompanyName}"/>
+                                <GridViewColumn Header="Antal emner" Width="auto" DisplayMemberBinding="{Binding ProductOrder.Customer.CompanyName}"/>
+                                <GridViewColumn Header="Antal maskiner" Width="auto" DisplayMemberBinding="{Binding MachineSchedules.Count}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
                 </Grid>
             </TabItem>
         </TabControl>
