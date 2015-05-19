@@ -11,14 +11,28 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ojm.Controllers;
 
 namespace ojm.Views {
     /// <summary>
     /// Interaction logic for ProductionView.xaml
     /// </summary>
     public partial class ProductionView : Window {
-        public ProductionView() {
+        Controller controller;
+        public ProductionView(Controller incontroller)
+        {
             InitializeComponent();
+            controller = incontroller;
+        }
+
+        public void SetController(Controller controller)
+        {
+            this.controller = controller;
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
