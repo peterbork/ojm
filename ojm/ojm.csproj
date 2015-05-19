@@ -57,6 +57,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Machine.cs" />
+    <Compile Include="Models\MachineSchedule.cs" />
+    <Compile Include="Models\Production.cs" />
+    <Compile Include="Models\ProductOrderMaterialUsage.cs" />
     <Compile Include="Models\QualityControl.cs" />
     <Compile Include="Views\Dialog.xaml.cs">
       <DependentUpon>Dialog.xaml</DependentUpon>
