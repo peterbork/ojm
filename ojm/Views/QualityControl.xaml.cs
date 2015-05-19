@@ -50,37 +50,27 @@ namespace ojm.Views {
         }
 
         private void btnAddQualityControl_Click(object sender, RoutedEventArgs e) {
+            int comboboxselectedindex = ComboBoxQualityControls.SelectedIndex;
 
             if (ComboBoxQualityControls.SelectedIndex == ComboBoxQualityControls.Items.Count - 1) {
                 // Create QualityControl
                 controller.AddQualityControl(TextBoxName.Text, TextBoxDescription.Text, TextBoxFrequency.Text, TextBoxMinTol.Text, TextBoxMaxTol.Text, ListViewMachines.SelectedIndex);
                 MessageBox.Show("Kvalitetskontrollen er blevet oprettet");
-                
-                // All of this to update combobox
-                qualitycontrols = controller.GetQualityControl(ListViewMachines.SelectedIndex);
-                ComboBoxQualityControls.Items.Clear();
-                foreach (Dictionary<string, string> dic in qualitycontrols) {
-                    ComboBoxQualityControls.Items.Add(dic["Name"]);
-                }
-                ComboBoxQualityControls.Items.Add("Ny Kvalitetskontrol");
-                ComboBoxQualityControls.SelectedIndex = ComboBoxQualityControls.Items.Count - 2;
-                LabelControlCount.Content = ComboBoxQualityControls.Items.Count - 1;
             }
             else {
                 // Update QualityControl
                 controller.UpdateQualityControl(ComboBoxQualityControls.SelectedIndex, TextBoxName.Text, TextBoxDescription.Text, int.Parse(TextBoxFrequency.Text), decimal.Parse(TextBoxMinTol.Text), decimal.Parse(TextBoxMaxTol.Text));
                 MessageBox.Show("Kvalitetskontrollen er blevet opdateret");
-
-                // All this to refresh the combobox
-                int comboboxselectedindex = ComboBoxQualityControls.SelectedIndex;
-                qualitycontrols = controller.GetQualityControl(ListViewMachines.SelectedIndex);
-                ComboBoxQualityControls.Items.Clear();
-                foreach (Dictionary<string, string> dic in qualitycontrols) {
-                    ComboBoxQualityControls.Items.Add(dic["Name"]);
-                }
-                ComboBoxQualityControls.Items.Add("Ny Kvalitetskontrol");
-                ComboBoxQualityControls.SelectedIndex = comboboxselectedindex;
             }
+            //Update combobox
+            qualitycontrols = controller.GetQualityControl(ListViewMachines.SelectedIndex);
+            ComboBoxQualityControls.Items.Clear();
+            foreach (Dictionary<string, string> dic in qualitycontrols) {
+                ComboBoxQualityControls.Items.Add(dic["Name"]);
+            }
+            ComboBoxQualityControls.Items.Add("Ny Kvalitetskontrol");
+            LabelControlCount.Content = ComboBoxQualityControls.Items.Count - 1;
+            ComboBoxQualityControls.SelectedIndex = comboboxselectedindex;
         }
 
         private void ComboBoxQualityControls_SelectionChanged(object sender, SelectionChangedEventArgs e) {
