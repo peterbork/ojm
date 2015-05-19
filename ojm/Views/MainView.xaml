@@ -100,8 +100,9 @@
                     <ListView Name="ListViewProductOrderMaterials" HorizontalAlignment="Left" Height="100" Margin="687,185,0,0" VerticalAlignment="Top" Width="312">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Materiale" Width="187" DisplayMemberBinding="{Binding Name}"/>
-                                <GridViewColumn Header="Tilgængeligt antal" Width="120" DisplayMemberBinding="{Binding InStock}"/>
+                                <GridViewColumn Header="Materiale" Width="127" DisplayMemberBinding="{Binding Material.Name}"/>
+                                <GridViewColumn Header="Bruges" Width="60" DisplayMemberBinding="{Binding Usage}"/>
+                                <GridViewColumn Header="Tilgængeligt antal" Width="120" DisplayMemberBinding="{Binding Material.InStock}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
