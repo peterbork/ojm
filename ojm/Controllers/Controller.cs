@@ -391,6 +391,11 @@ namespace ojm.Controllers {
 
         }
 
+        public void AddProduction(int idindex, int quantity){
+            int productorderindex = productorders[idindex].ID;
+            //DatabaseFacade.AddProduction(productorderindex, quantity);
+        }
+
         #endregion
     }
 }
