@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ojm.Views.ProductionView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ProductionView" Height="300" Width="300">
+        Title="ProductionView" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label x:Name="LabelProductOrderName" Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
 
