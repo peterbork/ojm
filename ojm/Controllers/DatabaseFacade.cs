@@ -713,26 +713,19 @@ namespace ojm.Controllers {
             return productions;
         }
 
-        /*public static void AddProduction(int productorderid, int quantity)
+         public static void AddProduction(Models.ProductOrder productorder, int quantity, DateTime deadline)
         {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("GetProductions", conn);
+                SqlCommand cmd = new SqlCommand("AddProduction", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                SqlDataReader reader = cmd.ExecuteReader();
+                cmd.Parameters.Add(new SqlParameter("Amound", quantity));
+                cmd.Parameters.Add(new SqlParameter("Deadline", deadline));
+                cmd.Parameters.Add(new SqlParameter("ProductOrderID", productorder.ID));
+                cmd.ExecuteNonQuery();
 
-                while (reader.Read())
-                {
-                    productions.Add(new Production(
-                        int.Parse(reader["ID"].ToString()),
-                        decimal.Parse(reader["Amount"].ToString()),
-                        DateTime.Parse(reader["Deadline"].ToString()),
-                        new ProductOrder(int.Parse(reader["ID"].ToString()))
-                    ));
-                }
-                reader.Close();
             }
             catch (SqlException e)
             {
@@ -743,8 +736,7 @@ namespace ojm.Controllers {
                 conn.Close();
                 conn.Dispose();
             }
-            return productions;
-        }*/
+        } 
 
         #endregion
     }
