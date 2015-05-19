@@ -83,7 +83,7 @@ namespace ojm.Views
             int selectedKey = keylist[ListviewAvailableMaterials.SelectedIndex];
             string selectedValue = valuelist[ListviewAvailableMaterials.SelectedIndex];
             productordermaterials.Add(selectedKey, selectedValue);
-            Dialog dialog = new Dialog();
+            Dialog dialog = new Dialog("Hvor mange skal der bruges i produktions ordren?");
             if (dialog.ShowDialog() == true) {
                 usages.Add(int.Parse(dialog.Answer));
             }
@@ -106,7 +106,7 @@ namespace ojm.Views
 
         public void ListviewProductOrderMaterialsUsage_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
             if (ListviewProductOrderMaterialsUsage.SelectedIndex > -1) {
-                Dialog dialog = new Dialog();
+                Dialog dialog = new Dialog("Hvor mange skal der bruges i produktions ordren?");
                 if (dialog.ShowDialog() == true) {
                     usages[ListviewProductOrderMaterialsUsage.SelectedIndex] = int.Parse(dialog.Answer);
                     UpdateListViews();
