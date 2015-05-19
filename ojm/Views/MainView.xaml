@@ -119,7 +119,7 @@
                     </ListView>
                     <Button x:Name="btnOpenControl" Content="Kvalitetskontrol" HorizontalAlignment="Left" VerticalAlignment="Top" Width="102" Margin="897,544,0,0" Click="btnOpenControl_Click"/>
                     <Button x:Name="btnAddMachines" Content="Tilføj Maskiner" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" Margin="895,473,0,0" Click="btnAddMachines_Click"/>
-                    <Button x:Name="btnSendToProduction" Content="Send til produktion" HorizontalAlignment="Left" Margin="687,544,0,0" VerticalAlignment="Top" Width="109"/>
+                    <Button x:Name="btnSendToProduction" Content="Send til produktion" HorizontalAlignment="Left" Margin="687,544,0,0" VerticalAlignment="Top" Width="109" Click="btnSendToProduction_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

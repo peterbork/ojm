@@ -228,6 +228,17 @@ namespace ojm {
             window.Show();
         }
 
+        private void btnSendToProduction_Click(object sender, RoutedEventArgs e)
+        {
+            Views.Dialog dialog = new Views.Dialog("Hvor mange vil du sende til produktion?");
+            int productionquantity;
+            if (dialog.ShowDialog() == true)
+            {
+                productionquantity = int.Parse(dialog.Answer);
+            }
+            //controller.AddProductOrderToProduction(selectedProductOrder, productionquantity);
+        }
+
 
 
     }

@@ -83,7 +83,7 @@ namespace ojm.Views
             int selectedKey = keylist[ListviewAvailableMaterials.SelectedIndex];
             string selectedValue = valuelist[ListviewAvailableMaterials.SelectedIndex];
             productordermaterials.Add(selectedKey, selectedValue);
-            Dialog dialog = new Dialog();
+            Dialog dialog = new Dialog("Hvormange skal bruges pr. produkt?");
             if (dialog.ShowDialog() == true) {
                 usages.Add(int.Parse(dialog.Answer));
             }
@@ -105,7 +105,7 @@ namespace ojm.Views
         }
 
         public void ListviewProductOrderMaterialsUsage_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
-            Dialog dialog = new Dialog();
+            Dialog dialog = new Dialog("Hvormange skal bruges pr. produkt?");
             if (dialog.ShowDialog() == true) {
                 usages[ListviewProductOrderMaterialsUsage.SelectedIndex] = int.Parse(dialog.Answer);
                 UpdateListViews();

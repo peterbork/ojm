@@ -17,9 +17,9 @@ namespace ojm.Views {
     /// Interaction logic for Dialog.xaml
     /// </summary>
     public partial class Dialog : Window {
-        public Dialog() {
+        public Dialog(string question) {
             InitializeComponent();
-            lblQuestion.Content = "Hvormange skal bruges pr. produkt?";
+            lblQuestion.Content = question;
             txtAnswer.Text = "";
         }
         private void btnDialogOk_Click(object sender, RoutedEventArgs e) {
