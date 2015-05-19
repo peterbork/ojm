@@ -13,6 +13,7 @@ namespace ojm.Controllers {
         List<ProductOrder> productorders = new List<ProductOrder>();
         List<Machine> machines = new List<Machine>();
         List<QualityControl> qualitycontrols = new List<QualityControl>();
+        List<Production> productions = new List<Production>();
 
         MainView View;
 
@@ -235,15 +236,15 @@ namespace ojm.Controllers {
             return productorder;
         }
 
-        public List<Material> GetProductOrderMaterials(int index) {
+        public List<ProductOrderMaterialUsage> GetProductOrderMaterials(int index) {
             return productorders[index].Materials;
         }
 
-        public List<string> GetProductOrderMaterialStrings(int index) {
-            List<string> materials = new List<string>();
+        public Dictionary<string, decimal> GetProductOrderMaterialStrings(int index) {
+            Dictionary<string, decimal> materials = new Dictionary<string, decimal>();
 
-            foreach (Material material in productorders[index].Materials) {
-                materials.Add(material.Name);
+            foreach (ProductOrderMaterialUsage material in productorders[index].Materials) {
+                materials.Add(material.Material.Name, material.Usage);
             }
 
             return materials;
@@ -263,24 +264,30 @@ namespace ojm.Controllers {
             return machines;
         }
 
-        public void AddProductOrder(string name, string description, int customerIndex, List<int> materialIndexes) {
+        public void AddProductOrder(string name, string description, int customerIndex, List<int> materialIndexes, List<decimal> materialUsages) {
             ProductOrder productorder = new ProductOrder(0, name, description, customers[customerIndex]);
+            int a = 0;
             foreach (int i in materialIndexes) {
-                productorder.Materials.Add(materials[i]);
+                ProductOrderMaterialUsage m = new ProductOrderMaterialUsage(0, materialUsages[a], materials[i]);
+                productorder.Materials.Add(m);
+                a++;
             }
             DatabaseFacade.AddProductOrder(productorder);
             System.Windows.MessageBox.Show("Produktordren er blevet tilføjet", "OJM");
         }
 
-        public void UpdateProductOrder(int productorderIndex, string name, string description, int customerIndex, List<int> materials) {
+        public void UpdateProductOrder(int productorderIndex, string name, string description, int customerIndex, List<int> materialIndexes, List<decimal> materialUsages) {
             ProductOrder productorder = productorders[productorderIndex];
             productorder.Name = name;
             productorder.Description = description;
             productorder.Customer = customers[customerIndex];
 
-            productorder.Materials = new List<Material>();
-            foreach (int material in materials) {
-                productorder.Materials.Add(this.materials[material]);
+            int a = 0;
+            productorder.Materials = new List<ProductOrderMaterialUsage>();
+            foreach (int i in materialIndexes) {
+                ProductOrderMaterialUsage m = new ProductOrderMaterialUsage(0, materialUsages[a], materials[i]);
+                productorder.Materials.Add(m);
+                a++;
             }
 
             DatabaseFacade.UpdateProductOrder(productorder);
@@ -366,5 +373,24 @@ namespace ojm.Controllers {
         }
         #endregion
 
+        #region Production
+        public List<Production> GetProductions() {
+            productions = DatabaseFacade.GetProductions();
+            foreach (Production production in productions) {
+                foreach (ProductOrder productorder in productorders) {
+                    if (productorder.ID == production.ProductOrder.ID) {
+                        production.ProductOrder.Name = productorder.Name;
+                        production.ProductOrder.Description = productorder.Description;
+                        production.ProductOrder.Customer = productorder.Customer;
+                        production.ProductOrder.Machines = productorder.Machines;
+                        production.ProductOrder.Materials = productorder.Materials;
+                    }
+                }
+            }
+            return productions;
+
+        }
+
+        #endregion
     }
 }

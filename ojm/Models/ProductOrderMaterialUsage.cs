@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ojm.Models
 {
-    class ProductOrderMaterialUsage
+    public class ProductOrderMaterialUsage
     {
         public int ID { get; set; }
         public decimal Usage { get; set; }
@@ -18,6 +18,12 @@ namespace ojm.Models
             ID = id;
             Usage = usage;
             ProductOrder = productOrder;
+            Material = material;
+        }
+
+        public ProductOrderMaterialUsage(int id, decimal usage, Material material) {
+            ID = id;
+            Usage = usage;
             Material = material;
         }
     }

@@ -142,7 +142,6 @@ namespace ojm.Controllers {
 
         #endregion
         #region Materials
-        // STORAGE METHODS
         public static List<Material> GetMaterials()
         {
             List<Material> MaterialsList = new List<Material>();
@@ -355,9 +354,9 @@ namespace ojm.Controllers {
             return materials;
         }
 
-        public static List<Material> GetMaterialsFromProductOrderID(int ProductOrderID) {
+        public static List<ProductOrderMaterialUsage> GetMaterialsFromProductOrderID(int ProductOrderID) {
             SqlConnection conn = new SqlConnection(ConnectionString);
-            List<Material> materials = new List<Material>();
+            List<ProductOrderMaterialUsage> materials = new List<ProductOrderMaterialUsage>();
             try {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("GetMaterialsFromProductOrderID", conn);
@@ -366,7 +365,8 @@ namespace ojm.Controllers {
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read()) {
-                    materials.Add(new Material(int.Parse(reader["MaterialID"].ToString()), reader["Name"].ToString(), int.Parse(reader["InStock"].ToString())));
+                    Material m = new Material(int.Parse(reader["MaterialID"].ToString()), reader["Name"].ToString(), int.Parse(reader["InStock"].ToString()));
+                    materials.Add(new ProductOrderMaterialUsage(int.Parse(reader["ID"].ToString()), decimal.Parse(reader["Usage"].ToString()), m));
                 }
                 reader.Close();
 
@@ -395,12 +395,13 @@ namespace ojm.Controllers {
                 cmd.Parameters.Add(new SqlParameter("CustomerID", productorder.Customer.ID));
                 int newProdID = (int)cmd.ExecuteScalar();
                 
-                foreach (Material m in productorder.Materials)
+                foreach (ProductOrderMaterialUsage m in productorder.Materials)
                 {
                     cmd = new SqlCommand("AddProductOrderMaterial", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("ProductOrderID", newProdID));
-                    cmd.Parameters.Add(new SqlParameter("MaterialID", m.ID));
+                    cmd.Parameters.Add(new SqlParameter("MaterialID", m.Material.ID));
+                    cmd.Parameters.Add(new SqlParameter("Usage", m.Usage));
                     cmd.ExecuteNonQuery();
                 }
 
@@ -465,10 +466,11 @@ namespace ojm.Controllers {
                 cmd.ExecuteNonQuery();
 
                 // Insert all Materials for the product
-                foreach (Material material in productorder.Materials) {
+                foreach (ProductOrderMaterialUsage material in productorder.Materials) {
                     cmd = new SqlCommand("AddProductOrderMaterial", conn);
                     cmd.Parameters.Add(new SqlParameter("ProductOrderID", productorder.ID));
-                    cmd.Parameters.Add(new SqlParameter("MaterialID", material.ID));
+                    cmd.Parameters.Add(new SqlParameter("MaterialID", material.Material.ID));
+                    cmd.Parameters.Add(new SqlParameter("Usage", material.Usage));
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();
                 }
@@ -678,6 +680,37 @@ namespace ojm.Controllers {
                 conn.Close();
                 conn.Dispose();
             }
+        }
+
+        #endregion
+        #region QualityControl
+        public static List<Production> GetProductions() {
+            List<Production> productions = new List<Production>();
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("GetProductions", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read()) {
+                    productions.Add(new Production(
+                        int.Parse(reader["ID"].ToString()),
+                        decimal.Parse(reader["Amount"].ToString()),
+                        DateTime.Parse(reader["Deadline"].ToString()),
+                        new ProductOrder(int.Parse(reader["ID"].ToString()))
+                    ));
+                }
+                reader.Close();
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+            return productions;
         }
 
         #endregion

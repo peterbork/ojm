@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ojm.Models
 {
-    class MachineSchedule
+    public class MachineSchedule
     {
         public int ID { get; set; }
         public DateTime Date { get; set; }

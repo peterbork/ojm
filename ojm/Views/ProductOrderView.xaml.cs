@@ -24,7 +24,7 @@ namespace ojm.Views
         int selectedProductOrder;
         Dictionary<int, string> availablematerials;
         Dictionary<int, string> productordermaterials = new Dictionary<int,string>();
-        List<int> usages = new List<int>();
+        List<decimal> usages = new List<decimal>();
 
         public ProductOrderView(Controller incontroller)
         {
@@ -83,7 +83,7 @@ namespace ojm.Views
             int selectedKey = keylist[ListviewAvailableMaterials.SelectedIndex];
             string selectedValue = valuelist[ListviewAvailableMaterials.SelectedIndex];
             productordermaterials.Add(selectedKey, selectedValue);
-            Dialog dialog = new Dialog("Hvormange skal bruges pr. produkt?");
+            Dialog dialog = new Dialog();
             if (dialog.ShowDialog() == true) {
                 usages.Add(int.Parse(dialog.Answer));
             }
@@ -98,26 +98,28 @@ namespace ojm.Views
             string selectedValue = valuelist[ListviewProductOrderMaterials.SelectedIndex];
             availablematerials.Add(selectedKey, selectedValue);
             productordermaterials.Remove(selectedKey);
-            /*if (usages.Count >= ListviewProductOrderMaterialsUsage.SelectedIndex) {
+            if (usages.Count >= ListviewProductOrderMaterialsUsage.SelectedIndex) {
                 usages.RemoveAt(ListviewProductOrderMaterials.SelectedIndex);
-            }*/
+            }
             UpdateListViews();
         }
 
         public void ListviewProductOrderMaterialsUsage_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
-            Dialog dialog = new Dialog("Hvormange skal bruges pr. produkt?");
-            if (dialog.ShowDialog() == true) {
-                usages[ListviewProductOrderMaterialsUsage.SelectedIndex] = int.Parse(dialog.Answer);
-                UpdateListViews();
+            if (ListviewProductOrderMaterialsUsage.SelectedIndex > -1) {
+                Dialog dialog = new Dialog();
+                if (dialog.ShowDialog() == true) {
+                    usages[ListviewProductOrderMaterialsUsage.SelectedIndex] = int.Parse(dialog.Answer);
+                    UpdateListViews();
+                }
             }
         }
 
         private void BtnAddProductOrder_Click(object sender, RoutedEventArgs e) {
             List<int> materialkeys = productordermaterials.Keys.ToList();
             if (selectedProductOrder > -1)
-                controller.UpdateProductOrder(selectedProductOrder, TextBoxProductOrderName.Text, TextBoxProductOrderDescription.Text, ComboBoxCustomers.SelectedIndex, materialkeys);
+                controller.UpdateProductOrder(selectedProductOrder, TextBoxProductOrderName.Text, TextBoxProductOrderDescription.Text, ComboBoxCustomers.SelectedIndex, materialkeys, usages);
             else
-                controller.AddProductOrder(TextBoxProductOrderName.Text, TextBoxProductOrderDescription.Text, ComboBoxCustomers.SelectedIndex, materialkeys);
+                controller.AddProductOrder(TextBoxProductOrderName.Text, TextBoxProductOrderDescription.Text, ComboBoxCustomers.SelectedIndex, materialkeys, usages);
         }
 
         public void SetProductOrder(int selectedProductOrder) {
@@ -127,17 +129,21 @@ namespace ojm.Views
             ComboBoxCustomers.SelectedItem = productorder["CompanyName"];
             TextBoxProductOrderName.Text = productorder["Name"];
             TextBoxProductOrderDescription.Text = productorder["Description"];
-            List<string> selectedmaterials = controller.GetProductOrderMaterialStrings(selectedProductOrder);
-            BtnAddProductOrder.Content = "Opdater product ordre";
+
+            Dictionary<string, decimal> selectedmaterials = controller.GetProductOrderMaterialStrings(selectedProductOrder);
+            
             // Remove Productorders materials from available materials
-            foreach (string material in selectedmaterials) {
+            foreach (KeyValuePair<string, decimal> material in selectedmaterials) {
                 foreach (KeyValuePair<int, string> amaterial in availablematerials.Reverse()) {
-                    if (material == amaterial.Value) {
+                    if (material.Key == amaterial.Value) {
                         productordermaterials.Add(amaterial.Key, amaterial.Value);
+                        usages.Add(material.Value);
                         availablematerials.Remove(amaterial.Key);
                     }
                 }
             }
+
+            BtnAddProductOrder.Content = "Opdater product ordre";
             UpdateListViews();
         }
     }

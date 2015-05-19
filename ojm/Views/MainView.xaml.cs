@@ -33,7 +33,7 @@ namespace ojm {
             ListviewCustomers.ItemsSource = controller.GetCustomers();
             ListviewStorage.ItemsSource = controller.GetMaterials();
             ListViewOrders.ItemsSource = controller.GetProductOrders();
-
+            ListViewProductions.ItemsSource = controller.GetProductions();
             ComboboxCustomer.ItemsSource = controller.GetCustomerNames();
         }
 
