@@ -13,6 +13,7 @@ namespace ojm.Controllers {
         List<ProductOrder> productorders = new List<ProductOrder>();
         List<Machine> machines = new List<Machine>();
         List<QualityControl> qualitycontrols = new List<QualityControl>();
+        List<Production> productions = new List<Production>();
 
         MainView View;
 
@@ -372,5 +373,24 @@ namespace ojm.Controllers {
         }
         #endregion
 
+        #region Production
+        public List<Production> GetProductions() {
+            productions = DatabaseFacade.GetProductions();
+            foreach (Production production in productions) {
+                foreach (ProductOrder productorder in productorders) {
+                    if (productorder.ID == production.ProductOrder.ID) {
+                        production.ProductOrder.Name = productorder.Name;
+                        production.ProductOrder.Description = productorder.Description;
+                        production.ProductOrder.Customer = productorder.Customer;
+                        production.ProductOrder.Machines = productorder.Machines;
+                        production.ProductOrder.Materials = productorder.Materials;
+                    }
+                }
+            }
+            return productions;
+
+        }
+
+        #endregion
     }
 }

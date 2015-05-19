@@ -683,5 +683,36 @@ namespace ojm.Controllers {
         }
 
         #endregion
+        #region QualityControl
+        public static List<Production> GetProductions() {
+            List<Production> productions = new List<Production>();
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            try {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("GetProductions", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read()) {
+                    productions.Add(new Production(
+                        int.Parse(reader["ID"].ToString()),
+                        decimal.Parse(reader["Amount"].ToString()),
+                        DateTime.Parse(reader["Deadline"].ToString()),
+                        new ProductOrder(int.Parse(reader["ID"].ToString()))
+                    ));
+                }
+                reader.Close();
+            }
+            catch (SqlException e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                conn.Close();
+                conn.Dispose();
+            }
+            return productions;
+        }
+
+        #endregion
     }
 }

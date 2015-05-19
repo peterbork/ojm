@@ -16,6 +16,9 @@ namespace ojm.Models
         public List<Machine> Machines { get; set; }
         public Customer Customer { get; set; }
 
+        public ProductOrder(int id) {
+            ID = id;
+        }
         public ProductOrder(int id, string name, string description, Customer customer)
         {
             ID = id;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ojm.Models
 {
-    class Production
+    public class Production
     {
         public int ID { get; set; }
         public decimal Amount { get; set; }
