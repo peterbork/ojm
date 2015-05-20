@@ -230,19 +230,13 @@ namespace ojm {
 
         private void btnSendToProduction_Click(object sender, RoutedEventArgs e)
         {
-            //Views.Dialog dialog = new Views.Dialog("Hvor mange vil du sende til produktion?");
-            //int productionquantity;
-            //if (dialog.ShowDialog() == true) {
-            //    productionquantity = int.Parse(dialog.Answer);
-            //}
-
             Views.ProductionView window = new Views.ProductionView(controller);
             window.SetProductOrder(selectedProductOrder);
             window.Show();
+        }
 
-
-
-            //controller.AddProductOrderToProduction(selectedProductOrder, productionquantity);
+        private void TabProduction_GotFocus(object sender, RoutedEventArgs e) {
+            ListViewProductions.ItemsSource = controller.GetProductions();
         }
 
 

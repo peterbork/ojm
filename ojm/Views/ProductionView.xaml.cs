@@ -19,20 +19,29 @@ namespace ojm.Views {
     /// </summary>
     public partial class ProductionView : Window {
         Controller controller;
+        int selectedproductorder;
         public ProductionView(Controller incontroller)
         {
             InitializeComponent();
             controller = incontroller;
+
         }
 
-        public void SetController(Controller controller)
+        public void SetProductOrder(int selectedproductorder)
         {
-            this.controller = controller;
+            this.selectedproductorder = selectedproductorder;
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void BtnProduce_Click(object sender, RoutedEventArgs e) {
+            controller.AddProduction(selectedproductorder,  Convert.ToDecimal(TextBoxProductionAmount.Text), Convert.ToDateTime(DatePickerProductionDeadline.SelectedDate));
+            this.Close();
+            MessageBox.Show("Ordren er blevet sat i production");
+            
         }
     }
 }

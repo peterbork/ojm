@@ -713,7 +713,7 @@ namespace ojm.Controllers {
             return productions;
         }
 
-         public static void AddProduction(Models.ProductOrder productorder, int quantity, DateTime deadline)
+         public static void AddProduction(Models.ProductOrder productorder, decimal quantity, DateTime deadline)
         {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try
@@ -721,7 +721,7 @@ namespace ojm.Controllers {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("AddProduction", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("Amound", quantity));
+                cmd.Parameters.Add(new SqlParameter("Amount", quantity));
                 cmd.Parameters.Add(new SqlParameter("Deadline", deadline));
                 cmd.Parameters.Add(new SqlParameter("ProductOrderID", productorder.ID));
                 cmd.ExecuteNonQuery();

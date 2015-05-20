@@ -7,7 +7,8 @@
         <TextBox Name="TextBoxProductionAmount" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="274"/>
         <Label Content="Hvornår er deadline for produktionen?" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top"/>
         <Button Name="BtnCancel" Content="Annuller" HorizontalAlignment="Left" Margin="224,138,0,0" VerticalAlignment="Top" Width="60" Click="BtnCancel_Click"/>
-        <Button Name="BtnProduce" Content="Send til produktion" HorizontalAlignment="Left" Margin="99,138,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Name="BtnProduce" Content="OK" HorizontalAlignment="Left" Margin="159,138,0,0" VerticalAlignment="Top" Width="60
+                " Click="BtnProduce_Click"/>
         <DatePicker Name="DatePickerProductionDeadline" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top"/>
 
     </Grid>

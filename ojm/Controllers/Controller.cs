@@ -391,7 +391,7 @@ namespace ojm.Controllers {
 
         }
 
-        public void AddProduction(int idindex, int quantity, DateTime deadline){
+        public void AddProduction(int idindex, decimal quantity, DateTime deadline){
             Models.ProductOrder productorder = productorders[idindex];
             DatabaseFacade.AddProduction(productorder, quantity, deadline);
         }

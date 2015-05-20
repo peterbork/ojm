@@ -123,16 +123,16 @@
                     <Button x:Name="btnSendToProduction" Content="Send til produktion" HorizontalAlignment="Left" Margin="687,529,0,0" VerticalAlignment="Top" Width="109" Click="btnSendToProduction_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Name="TabProduction" Header="Produktioner">
+            <TabItem Name="TabProduction" Header="Produktioner" Height="23" Margin="-1.995,-2,-2.073,-0.895" VerticalAlignment="Bottom" GotFocus="TabProduction_GotFocus">
                 <Grid Background="#fff">
                     <ListView Name="ListViewProductions" HorizontalAlignment="Left" Height="708" VerticalAlignment="Top" Width="668" IsSynchronizedWithCurrentItem="True" Margin="0,0,0,-4.335" MouseDoubleClick="ListViewOrders_MouseDoubleClick_1">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Deadline" Width="auto" DisplayMemberBinding="{Binding Deadline}"/>
+                                <GridViewColumn Header="Deadline" Width="auto" DisplayMemberBinding="{Binding Deadline, StringFormat='{}{0:dd/MM-yyyy}'}"/>
                                 <GridViewColumn Header="Produktnavn" Width="auto" DisplayMemberBinding="{Binding ProductOrder.Name}"/>
                                 <GridViewColumn Header="Kunde" Width="auto" DisplayMemberBinding="{Binding ProductOrder.Customer.CompanyName}"/>
-                                <GridViewColumn Header="Antal emner" Width="auto" DisplayMemberBinding="{Binding ProductOrder.Customer.CompanyName}"/>
-                                <GridViewColumn Header="Antal maskiner" Width="auto" DisplayMemberBinding="{Binding MachineSchedules.Count}"/>
+                                <GridViewColumn Header="Antal emner" Width="auto" DisplayMemberBinding="{Binding Amount}"/>
+                                <GridViewColumn Header="Antal maskiner" Width="auto" DisplayMemberBinding="{Binding ProductOrder.Machines.Count}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
