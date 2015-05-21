@@ -739,5 +739,57 @@ namespace ojm.Controllers {
         } 
 
         #endregion
+        #region MachineSchedule
+         public static List<MachineSchedule> GetMachineSchedules() {
+             List<MachineSchedule> machineschedules = new List<MachineSchedule>();
+             SqlConnection conn = new SqlConnection(ConnectionString);
+             try {
+                 conn.Open();
+                 SqlCommand cmd = new SqlCommand("GetMachineSchedules", conn);
+                 cmd.CommandType = CommandType.StoredProcedure;
+                 SqlDataReader reader = cmd.ExecuteReader();
+
+                 while (reader.Read()) {
+                     machineschedules.Add(new MachineSchedule(int.Parse(reader["ID"].ToString()), Convert.ToDateTime(reader["Date"]), new Machine(int.Parse(reader["MachineID"].ToString()), reader["Name"].ToString(), reader["Type"].ToString())));
+                 }
+                 reader.Close();
+             }
+             catch (SqlException e) {
+                 MessageBox.Show(e.Message);
+             }
+             finally {
+                 conn.Close();
+                 conn.Dispose();
+             }
+             return machineschedules;
+         }
+
+         public static void AddMachineSchedules(int productorderid, Dictionary<int, List<DateTime>> idanddatetimes) {
+             SqlConnection conn = new SqlConnection(ConnectionString);
+             try {
+                 conn.Open();
+                 SqlCommand cmd = new SqlCommand("AddMachineSchedule", conn);
+                 cmd.CommandType = CommandType.StoredProcedure;
+                 foreach (KeyValuePair<int, List<DateTime>> machine in idanddatetimes) {
+                     foreach (DateTime date in machine.Value) {
+                         cmd = new SqlCommand("AddMachineSchedule", conn);
+                         cmd.CommandType = CommandType.StoredProcedure;
+                         cmd.Parameters.Add(new SqlParameter("ProductionID", productorderid));
+                         cmd.Parameters.Add(new SqlParameter("MachineID", machine.Key));
+                         cmd.Parameters.Add(new SqlParameter("Date", date));
+                         cmd.ExecuteNonQuery();
+                     }
+                 }
+
+             }
+             catch (SqlException e) {
+                 MessageBox.Show(e.Message);
+             }
+             finally {
+                 conn.Close();
+                 conn.Dispose();
+             }
+         }
+        #endregion
     }
 }

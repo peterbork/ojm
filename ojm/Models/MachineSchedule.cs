@@ -20,5 +20,10 @@ namespace ojm.Models
             Machine = machine;
             Production = production;
         }
+        public MachineSchedule(int id, DateTime date, Machine machine) {
+            ID = id;
+            Date = date;
+            Machine = machine;
+        }
     }
 }

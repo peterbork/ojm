@@ -14,6 +14,7 @@ namespace ojm.Controllers {
         List<Machine> machines = new List<Machine>();
         List<QualityControl> qualitycontrols = new List<QualityControl>();
         List<Production> productions = new List<Production>();
+        List<MachineSchedule> machineschedules = new List<MachineSchedule>();
 
         MainView View;
 
@@ -396,6 +397,32 @@ namespace ojm.Controllers {
             DatabaseFacade.AddProduction(productorder, quantity, deadline);
         }
 
+        #endregion
+
+        #region MachineSchedule
+        public List<MachineSchedule> GetMachineSchedules() {
+            machineschedules = DatabaseFacade.GetMachineSchedules();
+            return machineschedules;
+        }
+        public Dictionary<DateTime, string> GetMachineScheduleDateTimeAndName() {
+            GetMachineSchedules();
+            Dictionary<DateTime, string> datetimeandname = new Dictionary<DateTime, string>();
+            foreach (MachineSchedule schedule in machineschedules) {
+                datetimeandname.Add(schedule.Date, schedule.Machine.Name);
+            }
+            return datetimeandname;
+        }
+        public void AddMachineSchedule(int productorderindex, Dictionary<int, List<DateTime>> indexanddatetimes) {
+            List<Machine> machines = GetProductOrderMachines(productorderindex);
+            int productorderid = productorders[productorderindex].ID;
+            Dictionary<int, List<DateTime>> idanddatetimes = new Dictionary<int, List<DateTime>>();
+            foreach (int key in indexanddatetimes.Keys) {
+                idanddatetimes.Add(machines[key].ID, indexanddatetimes[key]);
+            }
+            DatabaseFacade.AddMachineSchedules(productorderid, idanddatetimes);
+
+            //2015-05-23 10:00:00.0000000
+        }
         #endregion
     }
 }
