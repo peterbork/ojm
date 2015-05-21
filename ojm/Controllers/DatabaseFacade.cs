@@ -698,7 +698,7 @@ namespace ojm.Controllers {
                         int.Parse(reader["ID"].ToString()),
                         decimal.Parse(reader["Amount"].ToString()),
                         DateTime.Parse(reader["Deadline"].ToString()),
-                        new ProductOrder(int.Parse(reader["ID"].ToString()))
+                        new ProductOrder(int.Parse(reader["ProductOrderID"].ToString()))
                     ));
                 }
                 reader.Close();
