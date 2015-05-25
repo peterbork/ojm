@@ -18,12 +18,25 @@ namespace ojm.Controllers {
 
         MainView View;
 
+        /// <summary>
+        /// Sets the mainview, so the controller can call it later
+        /// </summary>
+        /// <param name="view"></param>
         public void SetView(MainView view) {
             View = view;
         }
 
         #region Customers
-
+        /// <summary>
+        /// Adds a customer to database
+        /// </summary>
+        /// <param name="companyname"></param>
+        /// <param name="cvr"></param>
+        /// <param name="address"></param>
+        /// <param name="email"></param>
+        /// <param name="phonenumber"></param>
+        /// <param name="contactperson"></param>
+        /// <returns>Returns true if the customer doesn't already exist</returns>
         public bool AddCustomer(string companyname, string cvr, string address, string email, string phonenumber, string contactperson) {
             
             Customer _customer = new Customer(companyname, cvr, address, email, phonenumber, contactperson);
@@ -37,10 +50,25 @@ namespace ojm.Controllers {
                 return false;
             }
         }
+        /// <summary>
+        /// Updates a customer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="companyname"></param>
+        /// <param name="cvr"></param>
+        /// <param name="address"></param>
+        /// <param name="email"></param>
+        /// <param name="phonenumber"></param>
+        /// <param name="contactperson"></param>
         public void UpdateCustomer(int id, string companyname, string cvr, string address, string email, string phonenumber, string contactperson) {
             Customer _customer = new Customer(id, companyname, cvr, address, email, phonenumber, contactperson);
             DatabaseFacade.UpdateCustomer(_customer);
         }
+        /// <summary>
+        /// Checks if the customer already exist in the database
+        /// </summary>
+        /// <param name="cvr"></param>
+        /// <returns></returns>
         public bool IsCustomerExsisting(string cvr) {
             string _cvr = DatabaseFacade.GetCustomerFromCVR(cvr).CVR;
             if (_cvr != null) {
@@ -51,11 +79,18 @@ namespace ojm.Controllers {
             }
 
         }
+        /// <summary>
+        /// Gets all customers from the database
+        /// </summary>
+        /// <returns>List<Customer></returns>
         public List<Models.Customer> GetCustomers() {
             customers = DatabaseFacade.GetCustomers();
             return customers;
         }
-
+        /// <summary>
+        /// Gets the customer names from the already existing list of customers
+        /// </summary>
+        /// <returns>Customer names</returns>
         public List<string> GetCustomerNames() {
             List<string> customerNames = new List<string>();
 
@@ -65,7 +100,11 @@ namespace ojm.Controllers {
 
             return customerNames;
         }
-
+        /// <summary>
+        /// Gets customer from index in the customer list
+        /// </summary>
+        /// <param name="index">Customers index</param>
+        /// <returns>Dictionary with customer info</returns>
         public Dictionary<string, string> GetCustomer(int index) {
             Dictionary<string, string> _customer = new Dictionary<string, string>();
             _customer.Add("ID", customers[index].ID.ToString());
@@ -81,13 +120,20 @@ namespace ojm.Controllers {
 
         #endregion
         #region Materials
-
+        /// <summary>
+        /// Gets materials from database
+        /// </summary>
+        /// <returns>List<Material></returns>
         public List<Models.Material> GetMaterials()
         {
             materials = DatabaseFacade.GetMaterials();
             return materials;
         }
-
+        /// <summary>
+        /// Get material from index in the material list
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns>Dictionary with material info</returns>
         public Dictionary<string, string> GetMaterial(int index)
         {
             Dictionary<string, string> storageItem = new Dictionary<string, string>();
@@ -110,6 +156,16 @@ namespace ojm.Controllers {
 
             return storageItem;
         }
+        /// <summary>
+        /// Updates a material
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="name"></param>
+        /// <param name="instock"></param>
+        /// <param name="type"></param>
+        /// <param name="tolerance"></param>
+        /// <param name="reserved"></param>
+        /// <param name="customerIndex"></param>
         public void UpdateMaterial(int index, string name, int instock,  string type, int tolerance, int reserved, int customerIndex)
         {
             Material material = materials[index];
@@ -124,7 +180,11 @@ namespace ojm.Controllers {
             
             DatabaseFacade.UpdateMaterial(material);
         }
-
+        /// <summary>
+        /// Registers a delivery for a material and updates the stock
+        /// </summary>
+        /// <param name="deliveryIndex"></param>
+        /// <param name="materialIndex"></param>
         public void RegisterDelivery(int deliveryIndex, int materialIndex)
         {
             Material material = materials[materialIndex];
@@ -134,8 +194,15 @@ namespace ojm.Controllers {
             DatabaseFacade.RegisterDelivery(delivery);
             DatabaseFacade.UpdateMaterial(material);
         }
-
-
+        /// <summary>
+        /// Adds a material
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="instock"></param>
+        /// <param name="type"></param>
+        /// <param name="tolerance"></param>
+        /// <param name="reserved"></param>
+        /// <param name="customer"></param>
         public void AddMaterial(string name, int instock, string type, int tolerance, int reserved, int customer)
         {
             Material material;
@@ -151,14 +218,21 @@ namespace ojm.Controllers {
             
             DatabaseFacade.AddMaterial(material);
         }
-
+        /// <summary>
+        /// Gets all deliveries for a material
+        /// </summary>
+        /// <param name="materialIndex">Index of material in materials list</param>
+        /// <returns></returns>
         public List<Delivery> GetMaterialDeliveries(int materialIndex) {
 
             materials[materialIndex].Deliveries = DatabaseFacade.GetMaterialDeliveries(materials[materialIndex].ID);
 
             return materials[materialIndex].Deliveries;
         }
-
+        /// <summary>
+        /// Adds a new delivery for a material
+        /// </summary>
+        /// <param name="materialIndex">index of material in materials list</param>
         public void NewDelivery(int materialIndex) {
             Views.DeliveryView view = new Views.DeliveryView();
             view.Show();
@@ -166,7 +240,11 @@ namespace ojm.Controllers {
             view.SetController(this);
             view.SetMaterial(materialIndex, materials[materialIndex].Name);
         }
-
+        /// <summary>
+        /// Updates a deliveries information
+        /// </summary>
+        /// <param name="materialIndex">index of material in materials list</param>
+        /// <param name="deliveryIndex">index of delivery in deliveries list</param>
         public void UpdateDelivery(int materialIndex, int deliveryIndex) {
             Material material = materials[materialIndex];
             Dictionary<string, string> delivery = new Dictionary<string,string>();
@@ -180,7 +258,12 @@ namespace ojm.Controllers {
             view.SetMaterial(materialIndex, material.Name);
             view.SetDelivery(deliveryIndex, delivery);
         }
-
+        /// <summary>
+        /// Creates a new delivery
+        /// </summary>
+        /// <param name="materialIndex">index of material in materials list</param>
+        /// <param name="deliveryDate"></param>
+        /// <param name="quantity"></param>
         public void OrderMaterial(int materialIndex, DateTime deliveryDate, int quantity) {
             Delivery delivery = new Delivery(0, deliveryDate, quantity);
             materials[materialIndex].Deliveries.Add(delivery);
@@ -189,7 +272,14 @@ namespace ojm.Controllers {
 
             View.UpdateMaterials();
         }
-
+        /// <summary>
+        /// Updates delivery and material if arrived
+        /// </summary>
+        /// <param name="materialIndex">index of material in materials list</param>
+        /// <param name="deliveryIndex">index of delivey in deliveries list</param>
+        /// <param name="deliveryDate"></param>
+        /// <param name="quantity"></param>
+        /// <param name="Arrived"></param>
         public void UpdateMaterialDelivery(int materialIndex, int deliveryIndex, DateTime deliveryDate, int quantity, bool Arrived)
         {
             Material material = materials[materialIndex];
@@ -208,6 +298,11 @@ namespace ojm.Controllers {
 
             View.UpdateMaterials();
         }
+        /// <summary>
+        /// Gets materials of a customer
+        /// </summary>
+        /// <param name="customerIndex">index of customer in customers list</param>
+        /// <returns>Dictionary with index of materials and name</returns>
         public Dictionary<int, string> GetMaterialsFromCustomerIndex(int customerIndex) {
             Dictionary<int, string> _materials = new Dictionary<int, string>();
             int i = 0;
@@ -222,11 +317,19 @@ namespace ojm.Controllers {
 
         #endregion
         #region ProductOrders
-
+        /// <summary>
+        ///  Gets all productOrders from database
+        /// </summary>
+        /// <returns>List<ProductOrder></returns>
         public List<Models.ProductOrder> GetProductOrders() { 
             productorders = DatabaseFacade.GetProductOrders();
             return productorders;
         }
+        /// <summary>
+        /// Gets a productOrder from productOrders list
+        /// </summary>
+        /// <param name="index">index of productOrder in productOrders list</param>
+        /// <returns>Dictionary with productOrder info</returns>
         public Dictionary<string, string> GetProductOrder(int index) {
             Dictionary<string, string> productorder = new Dictionary<string, string>();
             productorder.Add("ID", productorders[index].ID.ToString());
@@ -236,11 +339,19 @@ namespace ojm.Controllers {
 
             return productorder;
         }
-
+        /// <summary>
+        /// Gets all materials for a productOrder
+        /// </summary>
+        /// <param name="index">index of productOrder in productOrders list</param>
+        /// <returns>List of Materials and its usage</returns>
         public List<ProductOrderMaterialUsage> GetProductOrderMaterials(int index) {
             return productorders[index].Materials;
         }
-
+        /// <summary>
+        /// Gets all materials as strings for a productOrder
+        /// </summary>
+        /// <param name="index">index of productOrder in ProductOrders list</param>
+        /// <returns>Dictionary with materials name and usage for its productOrder</returns>
         public Dictionary<string, decimal> GetProductOrderMaterialStrings(int index) {
             Dictionary<string, decimal> materials = new Dictionary<string, decimal>();
 
@@ -250,11 +361,19 @@ namespace ojm.Controllers {
 
             return materials;
         }
-
+        /// <summary>
+        /// Gets all machines for ProductOrder
+        /// </summary>
+        /// <param name="productOrderIndex">index of productOrder in ProductOrders list</param>
+        /// <returns>List<Machine></returns>
         public List<Machine> GetProductOrderMachines(int productOrderIndex) {
             return productorders[productOrderIndex].Machines;
         }
-
+        /// <summary>
+        /// Gets machine names for productOrder
+        /// </summary>
+        /// <param name="index">index of productOrder in ProductOrders list</param>
+        /// <returns>List with machine names</returns>
         public List<string> GetProductOrderMachineNames(int index) {
             List<string> machines = new List<string>();
 
@@ -264,7 +383,14 @@ namespace ojm.Controllers {
 
             return machines;
         }
-
+        /// <summary>
+        /// Creates new ProductOrder
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="customerIndex"></param>
+        /// <param name="materialIndexes"></param>
+        /// <param name="materialUsages"></param>
         public void AddProductOrder(string name, string description, int customerIndex, List<int> materialIndexes, List<decimal> materialUsages) {
             ProductOrder productorder = new ProductOrder(0, name, description, customers[customerIndex]);
             int a = 0;
@@ -276,7 +402,15 @@ namespace ojm.Controllers {
             DatabaseFacade.AddProductOrder(productorder);
             System.Windows.MessageBox.Show("Produktordren er blevet tilføjet", "OJM");
         }
-
+        /// <summary>
+        /// Updates a productOrder
+        /// </summary>
+        /// <param name="productorderIndex"></param>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="customerIndex"></param>
+        /// <param name="materialIndexes"></param>
+        /// <param name="materialUsages"></param>
         public void UpdateProductOrder(int productorderIndex, string name, string description, int customerIndex, List<int> materialIndexes, List<decimal> materialUsages) {
             ProductOrder productorder = productorders[productorderIndex];
             productorder.Name = name;
@@ -295,7 +429,10 @@ namespace ojm.Controllers {
             View.UpdateProductOrders();
             System.Windows.MessageBox.Show("Produktordren er blevet opdateret", "OJM");
         }
-
+        /// <summary>
+        /// Gets machines with their productOrder
+        /// </summary>
+        /// <returns>List<Machine></returns>
         public List<Machine> GetProductOrderAndMachine() {
             List<Machine> machineswithproductorders = new List<Machine>();
             foreach (ProductOrder productorder in GetProductOrders())
@@ -310,22 +447,34 @@ namespace ojm.Controllers {
 
         #endregion
         #region Machines
-
-        public List<Models.Machine> GetMachines() {
+        /// <summary>
+        /// Gets all machines from the database
+        /// </summary>
+        /// <returns>List<Machine></returns>
+        public List<Machine> GetMachines() {
 
             machines = DatabaseFacade.GetMachines();
             return machines;
         }
+        /// <summary>
+        /// Gets machine names and their index
+        /// </summary>
+        /// <returns>Dictionary with machine index and name</returns>
         public Dictionary<int, string> GetMachineNames() {
             Dictionary<int, string> machinenames = new Dictionary<int, string>();
             int i = 0;
             foreach (Machine machine in machines) {
-                machinenames.Add(i, machine.Name);
+                machinenames.Add(i, machine.Name + " | " + machine.Type);
                 i++;
             }
             return machinenames;
         }
-
+        /// <summary>
+        /// Adds a machine to a productOrder
+        /// </summary>
+        /// <param name="sequence"></param>
+        /// <param name="machineindexes"></param>
+        /// <param name="selectedproductorder"></param>
         public void AddMachineToProductOrder(List<int> sequence, List<int> machineindexes, int selectedproductorder) {
             List<int> machineids = new List<int>();
             productorders[selectedproductorder].Machines = new List<Machine>();
@@ -339,6 +488,15 @@ namespace ojm.Controllers {
         }
         #endregion
         #region QualityControl
+        /// <summary>
+        /// Creates a new qualityControl and saves to database
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="frequency"></param>
+        /// <param name="mintol"></param>
+        /// <param name="maxtol"></param>
+        /// <param name="machineIndex"></param>
         public void AddQualityControl(string name, string description, string frequency, string mintol, string maxtol, int machineIndex) {
             QualityControl qualitycontrol = new QualityControl(name, description, int.Parse(frequency), Convert.ToDecimal(mintol), Convert.ToDecimal(maxtol));
             qualitycontrol.Machine = machines[machineIndex];
@@ -346,6 +504,15 @@ namespace ojm.Controllers {
             DatabaseFacade.AddQualityControl(qualitycontrol);
 
         }
+        /// <summary>
+        /// Updates a qualityControl
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="frequency"></param>
+        /// <param name="mintol"></param>
+        /// <param name="maxtol"></param>
         public void UpdateQualityControl(int index, string name, string description, int frequency, decimal mintol, decimal maxtol) {
             QualityControl qualitycontrol = qualitycontrols[index];
             qualitycontrol.Name = name;
@@ -355,7 +522,12 @@ namespace ojm.Controllers {
             qualitycontrol.MaxTol = maxtol;
             DatabaseFacade.UpdateQualityControl(qualitycontrol);
         }
-        public List<Dictionary<string, string>> GetQualityControl(int selectedmachineindex) {
+        /// <summary>
+        /// Gets a qualityControls from the database by machine
+        /// </summary>
+        /// <param name="selectedmachineindex"></param>
+        /// <returns>List of dictionary with qualityControl info</returns>
+        public List<Dictionary<string, string>> GetQualityControls(int selectedmachineindex) {
             List<Dictionary<string, string>> _qualitycontrols = new List<Dictionary<string, string>>();
            
             machines = GetProductOrderAndMachine();
@@ -375,6 +547,10 @@ namespace ojm.Controllers {
         #endregion
 
         #region Production
+        /// <summary>
+        /// Get productions from the database
+        /// </summary>
+        /// <returns>List<Production></returns>
         public List<Production> GetProductions() {
             productions = DatabaseFacade.GetProductions();
             foreach (Production production in productions) {
@@ -391,7 +567,12 @@ namespace ojm.Controllers {
             return productions;
 
         }
-
+        /// <summary>
+        /// Creates new Production
+        /// </summary>
+        /// <param name="idindex"></param>
+        /// <param name="quantity"></param>
+        /// <param name="deadline"></param>
         public void AddProduction(int idindex, decimal quantity, DateTime deadline){
             Models.ProductOrder productorder = productorders[idindex];
             DatabaseFacade.AddProduction(productorder, quantity, deadline);
@@ -400,10 +581,18 @@ namespace ojm.Controllers {
         #endregion
 
         #region MachineSchedule
+        /// <summary>
+        /// Gets all machineSchedules
+        /// </summary>
+        /// <returns>List<MachineSchedule></returns>
         public List<MachineSchedule> GetMachineSchedules() {
             machineschedules = DatabaseFacade.GetMachineSchedules();
             return machineschedules;
         }
+        /// <summary>
+        /// Gets MachineSchedules dates and names
+        /// </summary>
+        /// <returns>Dictionary with dates and names</returns>
         public Dictionary<DateTime, string> GetMachineScheduleDateTimeAndName() {
             GetMachineSchedules();
             Dictionary<DateTime, string> datetimeandname = new Dictionary<DateTime, string>();
@@ -412,6 +601,11 @@ namespace ojm.Controllers {
             }
             return datetimeandname;
         }
+        /// <summary>
+        /// Creates a new MachineSchedule
+        /// </summary>
+        /// <param name="productorderindex"></param>
+        /// <param name="indexanddatetimes"></param>
         public void AddMachineSchedule(int productorderindex, Dictionary<int, List<DateTime>> indexanddatetimes) {
             List<Machine> machines = GetProductOrderMachines(productorderindex);
             int productorderid = productorders[productorderindex].ID;

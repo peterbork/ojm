@@ -517,12 +517,12 @@ namespace ojm.Controllers {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
                 conn.Open();
-
+                // Deletes all machines for the productOrder
                 SqlCommand cmd = new SqlCommand("DeleteMachinesFromProductOrderID", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("ProductOrderID", productorderid));
                 cmd.ExecuteNonQuery();
-
+                // Insert all machines
                 for (int i = 0; i < machineindexes.Count; i++)
 			        {
                         cmd = new SqlCommand("AddMachineToProductOrder", conn);

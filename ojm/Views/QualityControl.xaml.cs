@@ -35,7 +35,7 @@ namespace ojm.Views {
 
         private void ListViewMachines_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
             ComboBoxQualityControls.Items.Clear();
-            qualitycontrols = controller.GetQualityControl(ListViewMachines.SelectedIndex);
+            qualitycontrols = controller.GetQualityControls(ListViewMachines.SelectedIndex);
             if (ListViewMachines.SelectedIndex > -1) {
                 btnAddQualityControl.IsEnabled = true;
                 ComboBoxQualityControls.IsEnabled = true;
@@ -63,7 +63,7 @@ namespace ojm.Views {
                 MessageBox.Show("Kvalitetskontrollen er blevet opdateret");
             }
             //Update combobox
-            qualitycontrols = controller.GetQualityControl(ListViewMachines.SelectedIndex);
+            qualitycontrols = controller.GetQualityControls(ListViewMachines.SelectedIndex);
             ComboBoxQualityControls.Items.Clear();
             foreach (Dictionary<string, string> dic in qualitycontrols) {
                 ComboBoxQualityControls.Items.Add(dic["Name"]);
