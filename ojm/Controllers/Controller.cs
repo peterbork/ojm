@@ -545,7 +545,6 @@ namespace ojm.Controllers {
             return _qualitycontrols;
         }
         #endregion
-
         #region Production
         /// <summary>
         /// Get productions from the database
@@ -579,7 +578,6 @@ namespace ojm.Controllers {
         }
 
         #endregion
-
         #region MachineSchedule
         /// <summary>
         /// Gets all machineSchedules
