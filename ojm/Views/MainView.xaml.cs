@@ -24,11 +24,32 @@ namespace ojm {
         int SelectedCustomerIndex = -1;
         int SelectedCustomerID;
         int selectedProductOrder;
-        public MainView() {
+        public MainView(int auth, Controller controller) {
             InitializeComponent();
-            
-            controller = new Controller();
-            controller.SetView(this);
+
+            this.controller = controller;
+
+            switch (auth)
+            {
+                // Eksempelarbejder 1
+                case 1:
+                    CustomerTab.Visibility = Visibility.Visible;
+                    TabVarelager.Visibility = Visibility.Visible;
+                    break;
+                // Eksempelarbejder 2
+                case 2:
+                    TabOrders.Visibility = Visibility.Visible;
+                    TabProduction.Visibility = Visibility.Visible;
+                    break;
+                // Administrator
+                case 3:
+                    CustomerTab.Visibility = Visibility.Visible;
+                    TabVarelager.Visibility = Visibility.Visible;
+                    TabOrders.Visibility = Visibility.Visible;
+                    TabProduction.Visibility = Visibility.Visible;
+                    break;
+
+            }
 
             ListviewCustomers.ItemsSource = controller.GetCustomers();
             ListviewStorage.ItemsSource = controller.GetMaterials();
@@ -36,7 +57,6 @@ namespace ojm {
             ListViewProductions.ItemsSource = controller.GetProductions();
             ComboboxCustomer.ItemsSource = controller.GetCustomerNames();
         }
-
         // Customer
         private void BtnAddCustomer_Click(object sender, RoutedEventArgs e) {
             if (SelectedCustomerIndex != -1) {

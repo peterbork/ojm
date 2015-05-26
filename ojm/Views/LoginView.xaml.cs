@@ -57,7 +57,8 @@ namespace ojm.Views {
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e) {
-
+            Controllers.Controller controller = new Controllers.Controller();
+            controller.CheckLogin(UsernameBox.Text, PasswordBox.Password, this);
         }
 
         private void LoginButton_MouseEnter(object sender, MouseEventArgs e) {
@@ -68,10 +69,10 @@ namespace ojm.Views {
             LoginButton.Background = Brushes.Green;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
+        /*private void Button_Click(object sender, RoutedEventArgs e) {
             MainView MainView = new MainView();
             MainView.Show();
             this.Close();
-        }
+        }*/
     }
 }

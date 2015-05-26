@@ -4,7 +4,7 @@
         Title="MainWindow" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="736" VerticalAlignment="Top" Width="1014">
-            <TabItem Name="CustomerTab" Header="Kunder">
+            <TabItem Name="CustomerTab" Header="Kunder" Visibility="Hidden">
                 <Grid Background="#fff">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="23*"/>
@@ -40,7 +40,7 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Name="TabVarelager" Header="Materialelager">
+            <TabItem Name="TabVarelager" Header="Materialelager" Visibility="Hidden">
                 <Grid Background="#fff">
 
                     <ListView Name="ListviewStorage" HorizontalAlignment="Left" Height="708" VerticalAlignment="Top" Width="772" MouseDoubleClick="ListviewStorage_MouseDoubleClick" IsSynchronizedWithCurrentItem="True">
@@ -82,7 +82,7 @@
                     <Button x:Name="BtnOrderStorageItem" Content="Bestil" HorizontalAlignment="Left" Margin="859,338,0,0" IsEnabled="False" VerticalAlignment="Top" Width="62" Click="BtnOrderStorageItem_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Name="TabOrders" Header="Ordrer">
+            <TabItem Name="TabOrders" Header="Ordrer" Visibility="Hidden">
                 <Grid Background="#fff">
                     <ListView Name="ListViewOrders" HorizontalAlignment="Left" Height="708" VerticalAlignment="Top" Width="668" IsSynchronizedWithCurrentItem="True" Margin="0,0,0,-4.335" MouseDoubleClick="ListViewOrders_MouseDoubleClick_1">
                         <ListView.View>
@@ -123,7 +123,7 @@
                     <Button x:Name="btnSendToProduction" Content="Send til produktion" HorizontalAlignment="Left" Margin="687,529,0,0" VerticalAlignment="Top" Width="109" Click="btnSendToProduction_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Name="TabProduction" Header="Produktioner" Height="23" Margin="-1.995,-2,-2.073,-0.895" VerticalAlignment="Bottom" GotFocus="TabProduction_GotFocus">
+            <TabItem Name="TabProduction" Header="Produktioner" Visibility="Hidden" Height="23" Margin="-1.995,-2,-2.073,-0.895" VerticalAlignment="Bottom" GotFocus="TabProduction_GotFocus">
                 <Grid Background="#fff">
                     <ListView Name="ListViewProductions" HorizontalAlignment="Left" Height="708" VerticalAlignment="Top" Width="668" IsSynchronizedWithCurrentItem="True" Margin="0,0,0,-4.335" MouseDoubleClick="ListViewOrders_MouseDoubleClick_1">
                         <ListView.View>

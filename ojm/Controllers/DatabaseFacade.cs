@@ -791,5 +791,40 @@ namespace ojm.Controllers {
              }
          }
         #endregion
+        #region Login
+         public static int CheckLogin(string username, string password)
+         {
+             int Authentication = 0;
+             
+             SqlConnection conn = new SqlConnection(ConnectionString);
+             try
+             {
+                 conn.Open();
+                 SqlCommand cmd = new SqlCommand("CheckLogin", conn);
+                 cmd.CommandType = CommandType.StoredProcedure;
+                 cmd.Parameters.Add(new SqlParameter("@Username", username));
+                 cmd.Parameters.Add(new SqlParameter("@Password", password));
+                 SqlDataReader reader = cmd.ExecuteReader();
+
+                 while (reader.Read())
+                 {
+                     Authentication = int.Parse(reader["Authentication"].ToString());
+                 }
+                 reader.Close();
+
+             }
+             catch (SqlException e)
+             {
+                 MessageBox.Show(e.Message);
+             }
+             finally
+             {
+                 conn.Close();
+                 conn.Dispose();
+             }
+
+             return Authentication;
+         }
+        #endregion
     }
 }
