@@ -596,7 +596,7 @@ namespace ojm.Controllers {
         /// </summary>
         /// <param name="productorderindex"></param>
         /// <param name="indexanddatetimes"></param>
-        public void AddMachineSchedule(int productorderindex, Dictionary<int, List<DateTime>> indexanddatetimes) {
+        public void AddMachineSchedules(int productorderindex, Dictionary<int, List<DateTime>> indexanddatetimes) {
             List<Machine> machines = GetProductOrderMachines(productorderindex);
             int productorderid = productorders[productorderindex].ID;
             Dictionary<int, List<DateTime>> idanddatetimes = new Dictionary<int, List<DateTime>>();

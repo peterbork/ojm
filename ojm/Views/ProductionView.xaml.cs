@@ -120,7 +120,7 @@ namespace ojm.Views {
         }
 
         private void BtnProduce_Click(object sender, RoutedEventArgs e) {
-            controller.AddMachineSchedule(selectedproductorder, indexanddatetime);
+            controller.AddMachineSchedules(selectedproductorder, indexanddatetime);
             controller.AddProduction(selectedproductorder,  Convert.ToDecimal(TextBoxProductionAmount.Text), Convert.ToDateTime(DatePickerProductionDeadline.SelectedDate));
             this.Close();
             MessageBox.Show("Ordren er blevet sat i production");
