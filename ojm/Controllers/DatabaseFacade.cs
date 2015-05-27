@@ -9,7 +9,7 @@ using System.Data;
 using System.Windows;
 
 namespace ojm.Controllers {
-    static class DatabaseFacade {
+    public static class DatabaseFacade {
         static string ConnectionString = "Server=ealdb1.eal.local;" + "Database=ejl26_db;" + "User Id=ejl26_usr;" + "Password=Baz1nga26";
 
 
@@ -382,8 +382,9 @@ namespace ojm.Controllers {
         }
         #endregion
         #region ProductOrder
-        public static void AddProductOrder(ProductOrder productorder)
+        public static int AddProductOrder(ProductOrder productorder)
         {
+            int newProdID = 0;
             SqlConnection conn = new SqlConnection(ConnectionString);
             try
             {
@@ -393,7 +394,7 @@ namespace ojm.Controllers {
                 cmd.Parameters.Add(new SqlParameter("Name", productorder.Name));
                 cmd.Parameters.Add(new SqlParameter("Description", productorder.Description));
                 cmd.Parameters.Add(new SqlParameter("CustomerID", productorder.Customer.ID));
-                int newProdID = (int)cmd.ExecuteScalar();
+                newProdID = (int)cmd.ExecuteScalar();
                 
                 foreach (ProductOrderMaterialUsage m in productorder.Materials)
                 {
@@ -415,6 +416,8 @@ namespace ojm.Controllers {
                 conn.Close();
                 conn.Dispose();
             }
+
+            return newProdID;
         }
         public static List<ProductOrder> GetProductOrders()
         {
@@ -523,15 +526,14 @@ namespace ojm.Controllers {
                 cmd.Parameters.Add(new SqlParameter("ProductOrderID", productorderid));
                 cmd.ExecuteNonQuery();
                 // Insert all machines
-                for (int i = 0; i < machineindexes.Count; i++)
-			        {
-                        cmd = new SqlCommand("AddMachineToProductOrder", conn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-			            cmd.Parameters.Add(new SqlParameter("Sequence", sequence[i]));
-                        cmd.Parameters.Add(new SqlParameter("ProductOrderID", productorderid));
-                        cmd.Parameters.Add(new SqlParameter("MachineID", machineindexes[i]));
-                        cmd.ExecuteNonQuery();
-			        }
+                for (int i = 0; i < machineindexes.Count; i++) {
+                    cmd = new SqlCommand("AddMachineToProductOrder", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+			        cmd.Parameters.Add(new SqlParameter("Sequence", sequence[i]));
+                    cmd.Parameters.Add(new SqlParameter("ProductOrderID", productorderid));
+                    cmd.Parameters.Add(new SqlParameter("MachineID", machineindexes[i]));
+                    cmd.ExecuteNonQuery();
+			    }
             }
             catch (SqlException e) {
                 MessageBox.Show(e.Message);
@@ -601,7 +603,7 @@ namespace ojm.Controllers {
             }
             return qualitycontrols;
         }
-            public static List<QualityControl> GetQualityControlsFromProductOrderAndMachine(int productorderid, int machineid) {
+        public static List<QualityControl> GetQualityControlsFromProductOrderAndMachine(int productorderid, int machineid) {
             List<QualityControl> qualitycontrols = new List<QualityControl>();
             SqlConnection conn = new SqlConnection(ConnectionString);
             try {
@@ -713,7 +715,7 @@ namespace ojm.Controllers {
             return productions;
         }
 
-         public static void AddProduction(Models.ProductOrder productorder, decimal quantity, DateTime deadline)
+         public static void AddProduction(ProductOrder productorder, decimal quantity, DateTime deadline)
         {
             SqlConnection conn = new SqlConnection(ConnectionString);
             try
