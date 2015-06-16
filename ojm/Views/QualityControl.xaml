@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ojm.Views.QualityControl"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="QualityControl" Height="743.845" Width="705.484">
+        Title="Kvalitetskontrol" Height="743.845" Width="705.484" Icon="ojm.ico">
     <Grid>
         <ListView Name="ListViewMachines" Margin="0,0,260.649,0.236" MouseDoubleClick="ListViewMachines_MouseDoubleClick">
             <ListView.View>

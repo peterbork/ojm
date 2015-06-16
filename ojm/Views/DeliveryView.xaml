@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ojm.Views.DeliveryView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="DeliveryView" Height="300" Width="277" WindowStartupLocation="CenterScreen">
+        Title="Bestillinger" Height="300" Width="277" WindowStartupLocation="CenterScreen" Icon="ojm.ico">
     <Grid>
         <DatePicker x:Name="DeliveryDate" HorizontalAlignment="Center" Margin="0,67,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="Quantity" Width="102" Height="25" HorizontalAlignment="Center" Margin="0,122,0,126.424"/>

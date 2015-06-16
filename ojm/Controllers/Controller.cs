@@ -464,7 +464,7 @@ namespace ojm.Controllers {
             Dictionary<int, string> machinenames = new Dictionary<int, string>();
             int i = 0;
             foreach (Machine machine in machines) {
-                machinenames.Add(i, machine.Name + " | " + machine.Type);
+                machinenames.Add(i, machine.Name);
                 i++;
             }
             return machinenames;

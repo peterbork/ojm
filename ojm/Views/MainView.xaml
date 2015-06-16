@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ojm.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
+        Title="OJM" Height="768" Width="1024" WindowStartupLocation="CenterScreen" Icon="ojm.ico">
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="736" VerticalAlignment="Top" Width="1014">
             <TabItem Name="CustomerTab" Header="Kunder">
@@ -123,9 +123,9 @@
                     <Button x:Name="btnSendToProduction" Content="Send til produktion" HorizontalAlignment="Left" Margin="687,529,0,0" VerticalAlignment="Top" Width="109" Click="btnSendToProduction_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Name="TabProduction" Header="Produktioner" Height="23" Margin="-1.995,-2,-2.073,-0.895" VerticalAlignment="Bottom" GotFocus="TabProduction_GotFocus">
+            <TabItem Name="TabProduction" Header="Produktioner" Height="23" GotFocus="TabProduction_GotFocus">
                 <Grid Background="#fff">
-                    <ListView Name="ListViewProductions" HorizontalAlignment="Left" Height="708" VerticalAlignment="Top" Width="668" IsSynchronizedWithCurrentItem="True" Margin="0,0,0,-4.335" MouseDoubleClick="ListViewOrders_MouseDoubleClick_1">
+                    <ListView Name="ListViewProductions" HorizontalAlignment="Left" Height="708" VerticalAlignment="Top" Width="1008" IsSynchronizedWithCurrentItem="True" Margin="0,0,0,-3" MouseDoubleClick="ListViewOrders_MouseDoubleClick_1">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Deadline" Width="auto" DisplayMemberBinding="{Binding Deadline, StringFormat='{}{0:dd/MM-yyyy}'}"/>
