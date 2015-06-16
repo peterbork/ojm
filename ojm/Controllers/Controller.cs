@@ -18,14 +18,6 @@ namespace ojm.Controllers {
 
         MainView View;
 
-        /// <summary>
-        /// Sets the mainview, so the controller can call it later
-        /// </summary>
-        /// <param name="view"></param>
-        public void SetView(MainView view) {
-            View = view;
-        }
-
         #region Customers
         /// <summary>
         /// Adds a customer to database
@@ -604,7 +596,7 @@ namespace ojm.Controllers {
         /// </summary>
         /// <param name="productorderindex"></param>
         /// <param name="indexanddatetimes"></param>
-        public void AddMachineSchedule(int productorderindex, Dictionary<int, List<DateTime>> indexanddatetimes) {
+        public void AddMachineSchedules(int productorderindex, Dictionary<int, List<DateTime>> indexanddatetimes) {
             List<Machine> machines = GetProductOrderMachines(productorderindex);
             int productorderid = productorders[productorderindex].ID;
             Dictionary<int, List<DateTime>> idanddatetimes = new Dictionary<int, List<DateTime>>();
@@ -616,5 +608,25 @@ namespace ojm.Controllers {
             //2015-05-23 10:00:00.0000000
         }
         #endregion
+        #region Login
+        public void CheckLogin(string username, string password, Views.LoginView loginview)
+        {
+            int Authentication = DatabaseFacade.CheckLogin(username, password);
+
+            if (Authentication != 0)
+            {
+                MainView MainView = new MainView(Authentication, this);
+                MainView.Show();
+                View = MainView;
+                loginview.Close();
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Forkert login");
+            }
+        }
+
+        #endregion
+
     }
 }

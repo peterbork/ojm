@@ -10,7 +10,6 @@
         <PasswordBox Name="PasswordBox" PasswordChar="*"        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="10,108,0,0" VerticalAlignment="Top" FontSize="16" LostFocus="PasswordBox_LostFocus" KeyDown="PasswordBox_KeyDown" Width="274"/>
         <TextBox Name="PasswordPlaceholder" IsReadOnly="True"   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="40" Margin="0,108,0,0" TextWrapping="Wrap" Text="Kodeord" VerticalAlignment="Top" Width="274" GotFocus="PasswordPlaceholder_GotFocus" FontSize="16" Foreground="#FFBBBBBB"/>
         <Button Name="LoginButton" Content="Log ind" HorizontalAlignment="Center" Margin="0,157,0,0" VerticalAlignment="Top" Width="274" Height="40" FontSize="16" Click="LoginButton_Click" />
-        <Button Content="Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
 
 
     </Grid>

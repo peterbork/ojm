@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ojm.Models {
-    class QualityControl {
+    public class QualityControl {
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
